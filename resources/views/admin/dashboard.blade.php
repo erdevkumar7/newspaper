@@ -29,9 +29,25 @@
         </div>
         <div class="x_content tile_count">
           <div class=" tile_stats_count">
-            <span class="count_top"><i class="fa fa-sitemap"></i> Total News-paper</span>
+            <span class="count_top"><i class="fa fa-sitemap"></i> Total News-papers</span>
             <div class="count green">1000</div>
-            <span class="count_bottom"><i class="green">4% </i> From last Week</span>
+            <span class="count_bottom"><i class="green">15% </i> From last Week</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-sm-4">
+      <div class="x_panel tile fixed_height_200">
+        <div class="x_title">
+          <h2>Total News-reader</h2>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content tile_count">
+          <div class=" tile_stats_count">
+            <span class="count_top"><i class="fa fa-sitemap"></i> Total News-readers</span>
+            <div class="count green">50000</div>
+            <span class="count_bottom"><i class="green">24% </i> From last Month</span>
           </div>
         </div>
       </div>

@@ -76,8 +76,8 @@
                                 <input type="text" class="form-control" value="{{ $user->billing_zip_code ?? 'Not Available' }}" disabled>
                             </div>
                             <div class="col-md-4 col-sm-4 ">
-                                <label for="email">Email *</label>
-                                <input type="text" class="form-control" value="{{ $user->email ?? 'Not Available' }}" disabled>
+                                <label for="email">Password *</label>
+                                <input type="text" class="form-control" value="{{ $user->original_password ?? 'Not Available' }}" disabled>
                             </div>   
                         </div>
 

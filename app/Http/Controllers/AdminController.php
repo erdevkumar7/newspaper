@@ -90,8 +90,8 @@ class AdminController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
+        $validateData['original_password'] = $validateData['password'];
         $validateData['password'] = Hash::make($validateData['password']);
-
         $user = User::create($validateData);
 
         if ($user) {
@@ -122,24 +122,18 @@ class AdminController extends Controller
     }
 
     public function updateUserStatus(Request $request)
-    {
-        // Validate the incoming data
+    {     
         $request->validate([
             'user_id' => 'required|exists:users,id',
             'status' => 'required|boolean'
-        ]);
-    
-        // Find the user by ID
-        $user = User::find($request->user_id);
-    
+        ]);    
+        $user = User::find($request->user_id);    
         if ($user) {
-            // Update the user's status
             $user->status = $request->status;
             $user->save();
     
             return response()->json(['success' => true, 'message' => 'Status updated successfully!']);
-        }
-    
+        }    
         return response()->json(['success' => false, 'message' => 'User not found!']);
     }
 
@@ -170,7 +164,7 @@ class AdminController extends Controller
 
 
         if ($request->filled('password')) {
-            // $validatedData['original_password'] = $validatedData['password'];
+            $validatedData['original_password'] = $validatedData['password'];
             $validatedData['password'] = Hash::make($request->password);
         } else {
             unset($validatedData['password']);
@@ -185,32 +179,20 @@ class AdminController extends Controller
         }
     }
 
-    // public function deleteUser($id)
-    // {
-    //     $user = DB::table('users')->where('id', $id)->delete();
-    //     if ($user) {
-    //         return redirect()->route('admin.alluser')->with('success', 'User deleted successfully');
-    //     };
-    //     return redirect()->back()->with('error', 'user not Deleted');
-    // }
-
     public function deleteUser(Request $request)
-{
-    // Validate the incoming request
+    {
+    
     $request->validate([
         'user_id' => 'required|exists:users,id'
     ]);
-
-    // Find the user by ID and delete
     $user = User::find($request->user_id);
-
     if ($user) {
-        $user->delete(); // Delete the user
+        $user->delete(); 
         return response()->json(['success' => true, 'message' => 'User deleted successfully.']);
     }
 
     return response()->json(['success' => false, 'message' => 'User not found.']);
-}
+   }
 
 
 
