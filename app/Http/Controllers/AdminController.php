@@ -121,6 +121,28 @@ class AdminController extends Controller
         return view('admin-user-manage.edit-user', compact('user'));
     }
 
+    public function updateUserStatus(Request $request)
+    {
+        // Validate the incoming data
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'status' => 'required|boolean'
+        ]);
+    
+        // Find the user by ID
+        $user = User::find($request->user_id);
+    
+        if ($user) {
+            // Update the user's status
+            $user->status = $request->status;
+            $user->save();
+    
+            return response()->json(['success' => true, 'message' => 'Status updated successfully!']);
+        }
+    
+        return response()->json(['success' => false, 'message' => 'User not found!']);
+    }
+
 
     public function editUserSubmit(Request $request, $user_id)
     {
