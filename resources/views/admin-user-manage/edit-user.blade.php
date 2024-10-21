@@ -178,9 +178,8 @@
                         {{-- submit --}}
                         <div class="item form-group">
                             <div class="col-md-4 col-sm-4 offset-md-4 mt-3">
-                                <a href=""> <button class="btn btn-primary"
+                                <a href="{{route('admin.alluser')}}"> <button class="btn btn-primary"
                                         type="button">Cancel</button></a>
-                                <button class="btn btn-primary" type="reset">Reset</button>
                                 <button type="submit" class="btn btn-success">Submit</button>
                             </div>
                         </div>

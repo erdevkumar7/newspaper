@@ -11,9 +11,9 @@
                           @if (Auth::guard('admin')->user()->image !== null)
                           <img src="{{ asset('/public/images/profile_img') . '/' . Auth::guard('admin')->user()->image }}" alt="">
                           @else
-                          <img src="{{ asset('/images/static_img/admin1.jpg') }}" alt="">
+                          <img src="{{ asset('/public/images/static_img/admin1.jpg') }}" alt="">
                           @endif
-                          John Doe
+                          {{Auth::guard('admin')->user()->name}}
                       </a>
                       <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                           <a class="dropdown-item" href="javascript:;"> Profile</a>
