@@ -30,3 +30,6 @@
 <link href="{{asset('public/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css')}}" rel="stylesheet">
 <!-- Custom Theme Style -->
 <link href="{{asset('public/build/css/custom.min.css')}}" rel="stylesheet">
+
+{{-- backend CSS file --}}
+<link rel="stylesheet" href="{{ asset('public/backend.css') }}" >

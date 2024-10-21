@@ -39,7 +39,7 @@
                                         <tbody>
                                             @if ($allusers->isEmpty())
                                                 <tr>
-                                                    <td colspan="7" class="text-center">No data available</td>
+                                                    <td colspan="8" class="text-center">No data available</td>
                                                 </tr>
                                             @else
                                                 @foreach ($allusers as $user)
@@ -64,23 +64,19 @@
                                                         </td>
                                                         <td>
                                                             <a href="{{ route('admin.edituser', $user->id) }}">
-                                                                <button data-toggle="tooltip" data-placement="top"
-                                                                    title="Edit">
+                                                                <button class="btn btn-info btn-sm" data-toggle="tooltip"
+                                                                    data-placement="top" title="Edit">
                                                                     <i class="fa fa-edit"></i>
                                                                 </button>
                                                             </a>
 
-                                                            <button data-bs-toggle="modal"
-                                                                data-bs-target="#deleteConfirmModal"
-                                                                data-deleted-id="{{ $user->id }}"
-                                                                class="delete-escort-btn" title="Delete">
+                                                            <button class="btn btn-danger btn-sm delete-user"
+                                                                data-toggle="tooltip" data-placement="top"
+                                                                data-delete-id="{{ $user->id }}" title="Delete">
                                                                 <i class="fa fa-minus-circle"></i>
                                                             </button>
-                                                            <form id="deleteConfirmForm" method="POST"
-                                                                style="display: none">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                            </form>
+
+
                                                         </td>
 
                                                         <td>
@@ -101,42 +97,68 @@
             </div>
         </div>
 
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         {{-- sweetalert2 JS --}}
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
 
-        {{-- delete confirm  script --}}
+        {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                document.body.addEventListener('click', function(event) {
-                    if (event.target.closest('.delete-escort-btn')) {
-                        const deleteId = event.target.closest('.delete-escort-btn').getAttribute(
-                            'data-deleted-id');
-
-                        // Show SweetAlert confirmation dialog
-                        Swal.fire({
-                            title: 'Are you sure?',
-                            text: "You won't be able to revert this!",
-                            icon: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#d33',
-                            cancelButtonColor: '#3085d6',
-                            confirmButtonText: 'Yes, delete it!'
-                        }).then((result) => {
-                            console.log('rrrrrr', result)
-                            if (result.isConfirmed) {
-                                // If confirmed, submit the delete form
-                                const deleteForm = document.getElementById('deleteConfirmForm');
-                                deleteForm.action = `/admin/delete-user/${deleteId}`;
-                                deleteForm.submit();
+            $(document).on('click', '.delete-user', function(e) {
+                e.preventDefault();
+                var userId = $(this).data('delete-id');
+                var row = $(this).closest('tr'); // Get the row of the clicked delete button
+        
+                // Show SweetAlert confirmation
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "{{ route('admin.deleteuser') }}",
+                            type: "DELETE",
+                            data: {
+                                _token: "{{ csrf_token() }}",
+                                user_id: userId
+                            },
+                            success: function(response) {
+                                if (response.success) {
+                                    Swal.fire({
+                                        title: "Deleted!",
+                                        text: "The user has been deleted.",
+                                        icon: "success"
+                                    }).then(() => {
+                                        row.remove(); // Remove the row from the table
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        title: "Error!",
+                                        text: response.message,
+                                        icon: "error"
+                                    });
+                                }
+                            },
+                            error: function(xhr) {
+                                Swal.fire({
+                                    title: "Error!",
+                                    text: "An error occurred while deleting the user.",
+                                    icon: "error"
+                                });
                             }
                         });
                     }
                 });
             });
         </script>
+        
 
+        {{-- Update user status active/Inactive --}}
         {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
             $(document).on('click', '.update-status', function() {
                 var userId = $(this).data('id');
@@ -162,7 +184,15 @@
                                     'btn-warning').text('Inactive');
                             }
                             $('button[data-id="' + userId + '"]').data('status',
-                            newStatus); // Update the data-status attribute
+                                newStatus); // Update the data-status attribute
+
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: "Status updated successfully",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
                         }
                     },
                     error: function(xhr) {

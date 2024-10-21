@@ -1,0 +1,7 @@
+.eye-icon-position{
+    position: absolute;
+    top: 60%; 
+    right: 6%; 
+    cursor: pointer;
+    font-size: 14px;
+}

@@ -185,14 +185,33 @@ class AdminController extends Controller
         }
     }
 
-    public function deleteUser($id)
-    {
-        $user = DB::table('users')->where('id', $id)->delete();
-        if ($user) {
-            return redirect()->route('admin.alluser')->with('success', 'User deleted successfully');
-        };
-        return redirect()->back()->with('error', 'user not Deleted');
+    // public function deleteUser($id)
+    // {
+    //     $user = DB::table('users')->where('id', $id)->delete();
+    //     if ($user) {
+    //         return redirect()->route('admin.alluser')->with('success', 'User deleted successfully');
+    //     };
+    //     return redirect()->back()->with('error', 'user not Deleted');
+    // }
+
+    public function deleteUser(Request $request)
+{
+    // Validate the incoming request
+    $request->validate([
+        'user_id' => 'required|exists:users,id'
+    ]);
+
+    // Find the user by ID and delete
+    $user = User::find($request->user_id);
+
+    if ($user) {
+        $user->delete(); // Delete the user
+        return response()->json(['success' => true, 'message' => 'User deleted successfully.']);
     }
+
+    return response()->json(['success' => false, 'message' => 'User not found.']);
+}
+
 
 
     public function logout()
