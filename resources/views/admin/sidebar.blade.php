@@ -39,6 +39,9 @@
                     <li><a href="{{route('admin.alluser')}}"><i class="fa fa-users"></i> Users <span
                                 class="fa fa-chevron-right"></span></a>
                     </li>
+                    <li><a href=""><i class="fa fa-file-text-o"></i></i> News Paper <span
+                        class="fa fa-chevron-right"></span></a>
+            </li>
                 </ul>
             </div>
 

@@ -19,8 +19,13 @@ class AdminController extends Controller
     public function registerSubmit(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|unique:admins',
+            'name' => [
+                'required',
+                'string',
+                'max:70',
+                'regex:/^[\pL\s\-]+$/u',
+            ],
+            'email' => 'required|string|email:rfc,dns|unique:admins',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
@@ -84,7 +89,7 @@ class AdminController extends Controller
             'state' => 'required',
             'city' => 'required',
             'zip_code' => 'required|numeric',
-    
+
             'billing_name' => [
                 'required',
                 'string',
@@ -95,22 +100,22 @@ class AdminController extends Controller
             'billing_state' => 'required',
             'billing_city' => 'required',
             'billing_zip_code' => 'required|numeric',
-    
+
             'email' => 'required|string|email:rfc,dns|max:150|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
-    
+
         $validateData['original_password'] = $validateData['password'];
         $validateData['password'] = Hash::make($validateData['password']);
         $user = User::create($validateData);
-    
+
         if ($user) {
             return redirect()->route('admin.alluser')->with('success', 'User Added Successfully!');
         } else {
             return redirect()->back()->with('error', 'Failed to add User. Please try again.');
         }
     }
-    
+
 
     public function viewUser($user_id)
     {
@@ -133,18 +138,18 @@ class AdminController extends Controller
     }
 
     public function updateUserStatus(Request $request)
-    {     
+    {
         $request->validate([
             'user_id' => 'required|exists:users,id',
             'status' => 'required|boolean'
-        ]);    
-        $user = User::find($request->user_id);    
+        ]);
+        $user = User::find($request->user_id);
         if ($user) {
             $user->status = $request->status;
             $user->save();
-    
+
             return response()->json(['success' => true, 'message' => 'Status updated successfully!']);
-        }    
+        }
         return response()->json(['success' => false, 'message' => 'User not found!']);
     }
 
@@ -161,7 +166,7 @@ class AdminController extends Controller
                 'required',
                 'string',
                 'max:70',
-                'regex:/^[\pL\s\-]+$/u', 
+                'regex:/^[\pL\s\-]+$/u',
             ],
             'address' => 'required|string|max:100',
             'state' => 'required',
@@ -172,7 +177,7 @@ class AdminController extends Controller
                 'required',
                 'string',
                 'max:70',
-                'regex:/^[\pL\s\-]+$/u', 
+                'regex:/^[\pL\s\-]+$/u',
             ],
             'billing_address' => 'required|string|max:100',
             'billing_state' => 'required',
@@ -202,20 +207,17 @@ class AdminController extends Controller
 
     public function deleteUser(Request $request)
     {
-    
-    $request->validate([
-        'user_id' => 'required|exists:users,id'
-    ]);
-    $user = User::find($request->user_id);
-    if ($user) {
-        $user->delete(); 
-        return response()->json(['success' => true, 'message' => 'User deleted successfully.']);
+        $request->validate([
+            'user_id' => 'required|exists:users,id'
+        ]);
+        $user = User::find($request->user_id);
+        if ($user) {
+            $user->delete();
+            return response()->json(['success' => true, 'message' => 'User deleted successfully.']);
+        }
+
+        return response()->json(['success' => false, 'message' => 'User not found.']);
     }
-
-    return response()->json(['success' => false, 'message' => 'User not found.']);
-   }
-
-
 
     public function logout()
     {

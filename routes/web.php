@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminNewspaperController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -32,6 +33,11 @@ Route::prefix('admin')->group(function () {
         Route::post('/user/update-status', [AdminController::class, 'updateUserStatus'])->name('admin.updateuserstatus');
         Route::delete('/delete-user', [AdminController::class, 'deleteUser'])->name('admin.deleteuser');
         Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
+    });
+
+    Route::middleware('admin')->group(function(){
+        Route::get('add-newspaper', [AdminNewspaperController::class, 'addNewsPaper'])->name('admin.addnewspaper');
+        Route::post('add-newspaper', [AdminNewspaperController::class, 'addNewsPaperSubmit'])->name('admin.addnewspapersubmit');
     });
 });
 
