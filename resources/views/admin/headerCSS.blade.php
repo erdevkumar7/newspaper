@@ -33,3 +33,8 @@
 
 {{-- backend CSS file --}}
 <link rel="stylesheet" href="{{ asset('public/backend.css') }}" >
+
+ <!-- bootstrap-daterangepicker -->
+ <link href="{{asset('public/vendors/bootstrap-daterangepicker/daterangepicker.css')}}" rel="stylesheet">
+ <!-- bootstrap-datetimepicker -->
+ <link href="{{asset('public/vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css')}}" rel="stylesheet">

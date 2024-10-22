@@ -10,7 +10,8 @@
                         <h2>All Newspaper</h2>
                         <div class="nav navbar-right panel_toolbox">
                             <a href="{{ route('admin.addnewspaper') }}">
-                                <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Add Newspaper">
+                                <button class="btn btn-success" data-toggle="tooltip" data-placement="top"
+                                    title="Add Newspaper">
                                     Add Newspaper
                                 </button>
                             </a>
@@ -46,9 +47,18 @@
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>{{ $paper->title ?? 'Not Available' }}</td>
                                                         <td>{{ $paper->author ?? 'Not Available' }} </td>
-                                                        <td>{{ $paper->publication_date ?? 'Not Available' }} </td>
-                                                        <td>{{ $paper->pdf_upload ?? 'Not Available' }}</td>
-                                                    
+                                                        <td >{{ $paper->publication_date ?? 'Not Available' }} </td>
+                                                        <td style="text-align: center">
+                                                            @if ($paper->pdf_upload)
+                                                                <a href="" target="_blank">
+                                                                    <i class="fa fa-file-pdf-o"
+                                                                        style="font-size: 20px; color: red;"></i>
+                                                                </a>
+                                                            @else
+                                                                Not Available
+                                                            @endif
+                                                        </td>
+
                                                         <td>
                                                             <a href="">
                                                                 <button class="btn btn-info btn-sm" data-toggle="tooltip"
@@ -82,7 +92,7 @@
                     </div>
                 </div>
             </div>
-        </div>  
+        </div>
 
     </div>
 

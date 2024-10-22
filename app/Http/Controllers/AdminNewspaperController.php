@@ -24,7 +24,7 @@ class AdminNewspaperController extends Controller
                 'max:70',
                 'regex:/^[\pL\s\-]+$/u',
             ],
-            'publication_date' => 'required',
+            'publication_date' => 'required|date',
             'pdf_upload' => 'required|file|mimes:pdf|max:2048',
         ]);
        
@@ -39,7 +39,7 @@ class AdminNewspaperController extends Controller
         $validatedData['pdf_upload'] = $pdfName;
         Newspaper::create($validatedData);
 
-        return redirect()->route('admin.dashboard')->with('success', 'Newspaper created successfully');
+        return redirect()->route('admin.allnewspaper')->with('success', 'Newspaper created successfully');
     }
 
 

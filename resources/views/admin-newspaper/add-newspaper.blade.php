@@ -38,14 +38,15 @@
 
                                 <div class="col-md-4 col-sm-4 ">
                                     <label for="publication_date">Publication Date *</label>
-                                    <div class='input-group date' id='myDatepicker'>
-                                        <input type='text' class="form-control" name="publication_date" />
+                                    <div class='input-group date' id='myDatepicker2'>
+                                        <input type='text' class="form-control" name="publication_date"
+                                        value="{{ old('publication_date') }}" oninput="removeError('publication_dateErr')" />
                                         <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
+                                           <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                     </div>
                                     @error('publication_date')
-                                        <span class="text-danger" id="authorErr">{{ $message }}</span>
+                                        <span class="text-danger" id="publication_dateErr">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
@@ -73,7 +74,7 @@
                             {{-- submit --}}
                             <div class="item form-group">
                                 <div class="col-md-4 col-sm-4 offset-md-4 mt-3">
-                                    <a href="{{ route('admin.alluser') }}"> <button class="btn btn-primary"
+                                    <a href="{{ route('admin.allnewspaper') }}"> <button class="btn btn-primary"
                                             type="button">Cancel</button></a>
                                     <button type="submit" class="btn btn-success">Submit</button>
                                 </div>
