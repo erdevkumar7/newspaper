@@ -128,13 +128,14 @@
                             },
                             success: function(response) {
                                 if (response.success) {
-                                    Swal.fire({
-                                        title: "Deleted!",
-                                        text: "The user has been deleted.",
-                                        icon: "success"
-                                    }).then(() => {
-                                        row.remove(); // Remove the row from the table
-                                    });
+                                    row.remove(); 
+                                    // Swal.fire({
+                                    //     title: "Deleted!",
+                                    //     text: "The user has been deleted.",
+                                    //     icon: "success"
+                                    // }).then(() => {
+                                    //     row.remove(); 
+                                    // });
                                 } else {
                                     Swal.fire({
                                         title: "Error!",

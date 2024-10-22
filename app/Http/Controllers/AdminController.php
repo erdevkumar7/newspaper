@@ -74,32 +74,43 @@ class AdminController extends Controller
     public function adduserSubmit(Request $request)
     {
         $validateData = $request->validate([
-            'name' => 'required|string|max:70',
+            'name' => [
+                'required',
+                'string',
+                'max:70',
+                'regex:/^[\pL\s\-]+$/u', // Allows letters, spaces, and dashes, and prevents numbers
+            ],
             'address' => 'required|string|max:100',
             'state' => 'required',
             'city' => 'required',
             'zip_code' => 'required|numeric',
-
-            'billing_name' => 'required|string|max:70',
+    
+            'billing_name' => [
+                'required',
+                'string',
+                'max:70',
+                'regex:/^[\pL\s\-]+$/u', // Same rule as 'name'
+            ],
             'billing_address' => 'required|string|max:100',
             'billing_state' => 'required',
             'billing_city' => 'required',
             'billing_zip_code' => 'required|numeric',
-
-            'email' => 'required|string|email|max:255|unique:users',
+    
+            'email' => 'required|string|email:rfc,dns|max:150|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
-
+    
         $validateData['original_password'] = $validateData['password'];
         $validateData['password'] = Hash::make($validateData['password']);
         $user = User::create($validateData);
-
+    
         if ($user) {
             return redirect()->route('admin.alluser')->with('success', 'User Added Successfully!');
         } else {
             return redirect()->back()->with('error', 'Failed to add User. Please try again.');
         }
     }
+    
 
     public function viewUser($user_id)
     {
@@ -146,19 +157,29 @@ class AdminController extends Controller
         }
 
         $validatedData = $request->validate([
-            'name' => 'required|string|max:70',
+            'name' => [
+                'required',
+                'string',
+                'max:70',
+                'regex:/^[\pL\s\-]+$/u', 
+            ],
             'address' => 'required|string|max:100',
             'state' => 'required',
             'city' => 'required',
             'zip_code' => 'required|numeric',
 
-            'billing_name' => 'required|string|max:70',
+            'billing_name' => [
+                'required',
+                'string',
+                'max:70',
+                'regex:/^[\pL\s\-]+$/u', 
+            ],
             'billing_address' => 'required|string|max:100',
             'billing_state' => 'required',
             'billing_city' => 'required',
             'billing_zip_code' => 'required|numeric',
 
-            'email' => 'required|unique:users,email,' . $user->id,
+            'email' => 'required|string|email:rfc,dns|max:255|unique:users,email,' . $user->id,
             'password' => 'nullable|min:8|confirmed', // Password is optional during updates
         ]);
 
