@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Newspaper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminNewspaperController extends Controller
 {
@@ -26,11 +27,7 @@ class AdminNewspaperController extends Controller
             'publication_date' => 'required',
             'pdf_upload' => 'required|file|mimes:pdf|max:2048',
         ]);
-
-        // Handle file upload
-        // if ($request->hasFile('pdf_upload')) {
-        //     $pdfPath = $request->file('pdf_upload')->store('pdfs', 'public'); // Store the PDF in the 'storage/app/public/pdfs' directory
-        // }
+       
         if ($request->hasFile('pdf_upload')) {
             $pdf = $request->file('pdf_upload');
             $pdfName = time() . '_' . $pdf->getClientOriginalName();
@@ -44,4 +41,11 @@ class AdminNewspaperController extends Controller
 
         return redirect()->route('admin.dashboard')->with('success', 'Newspaper created successfully');
     }
+
+
+    public function allNewsPaper(){
+        $allnewspaper = DB::table('newspapers')->orderBy('created_at', 'desc')->get();
+        return view('admin-newspaper.all-newspaper', compact('allnewspaper'));
+    }
+
 }

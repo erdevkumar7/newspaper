@@ -18,7 +18,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/login', [AdminController::class, 'loginSubmit'])->name('admin.loginSubmit');
 
    
-   
+   // Admin User Functionality
     Route::middleware('admin')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard'); 
         Route::get('/all-user', [AdminController::class, 'allUser'])->name('admin.alluser');
@@ -34,10 +34,12 @@ Route::prefix('admin')->group(function () {
         Route::delete('/delete-user', [AdminController::class, 'deleteUser'])->name('admin.deleteuser');
         Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
     });
-
+ // Admin Newspaper Functionality
     Route::middleware('admin')->group(function(){
         Route::get('add-newspaper', [AdminNewspaperController::class, 'addNewsPaper'])->name('admin.addnewspaper');
         Route::post('add-newspaper', [AdminNewspaperController::class, 'addNewsPaperSubmit'])->name('admin.addnewspapersubmit');
+
+        Route::get('all-newspaper', [AdminNewspaperController::class, 'allNewsPaper'])->name('admin.allnewspaper');
     });
 });
 
