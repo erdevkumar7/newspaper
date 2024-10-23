@@ -23,10 +23,12 @@ class AdminController extends Controller
                 'required',
                 'string',
                 'max:70',
-                'regex:/^[\pL\s\-]+$/u',
+                'regex:/^[\pL\s]+$/u',
             ],
             'email' => 'required|string|email:rfc,dns|unique:admins',
             'password' => 'required|string|min:8|confirmed',
+        ], [
+            'name.regex' => 'Name field must contain only letters and spaces',
         ]);
 
         $admin = new Admin();
@@ -65,15 +67,25 @@ class AdminController extends Controller
         return view('admin.dashboard', compact('totalUsers'));
     }
 
-    public function adduser()
-    {
-        return view('admin-user-manage.add-user');
-    }
-
     public function allUser()
     {
         $allusers = DB::table('users')->orderBy('created_at', 'desc')->get();
         return view('admin-user-manage.all-user', compact('allusers'));
+    }
+
+    public function viewUser($user_id)
+    {
+        $user = User::find($user_id);
+        if (!$user) {
+            return redirect()->back()->with('error', 'No User Found!');
+        }
+
+        return view('admin-user-manage.view-user', compact('user'));
+    }
+
+    public function adduser()
+    {
+        return view('admin-user-manage.add-user');
     }
 
     public function adduserSubmit(Request $request)
@@ -83,7 +95,7 @@ class AdminController extends Controller
                 'required',
                 'string',
                 'max:70',
-                'regex:/^[\pL\s\-]+$/u', // Allows letters, spaces, and dashes, and prevents numbers
+                'regex:/^[\pL\s]+$/u',
             ],
             'address' => 'required|string|max:100',
             'state' => 'required',
@@ -94,7 +106,7 @@ class AdminController extends Controller
                 'required',
                 'string',
                 'max:70',
-                'regex:/^[\pL\s\-]+$/u', // Same rule as 'name'
+                'regex:/^[\pL\s]+$/u',
             ],
             'billing_address' => 'required|string|max:100',
             'billing_state' => 'required',
@@ -103,6 +115,9 @@ class AdminController extends Controller
 
             'email' => 'required|string|email:rfc,dns|max:150|unique:users',
             'password' => 'required|string|min:8|confirmed',
+        ], [
+            'name.regex' => 'Name field must contain only letters and spaces',
+            'billing_name.regex' => 'Name field must contain only letters and spaces',
         ]);
 
         $validateData['original_password'] = $validateData['password'];
@@ -116,18 +131,7 @@ class AdminController extends Controller
         }
     }
 
-
-    public function viewUser($user_id)
-    {
-        $user = User::find($user_id);
-        if (!$user) {
-            return redirect()->back()->with('error', 'No User Found!');
-        }
-
-        return view('admin-user-manage.view-user', compact('user'));
-    }
-
-    //todo: admin edit_user_form
+     //todo: admin edit_user_form
     public function editUser($user_id)
     {
         $user = User::find($user_id);
@@ -136,23 +140,6 @@ class AdminController extends Controller
         }
         return view('admin-user-manage.edit-user', compact('user'));
     }
-
-    public function updateUserStatus(Request $request)
-    {
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'status' => 'required|boolean'
-        ]);
-        $user = User::find($request->user_id);
-        if ($user) {
-            $user->status = $request->status;
-            $user->save();
-
-            return response()->json(['success' => true, 'message' => 'Status updated successfully!']);
-        }
-        return response()->json(['success' => false, 'message' => 'User not found!']);
-    }
-
 
     public function editUserSubmit(Request $request, $user_id)
     {
@@ -166,7 +153,7 @@ class AdminController extends Controller
                 'required',
                 'string',
                 'max:70',
-                'regex:/^[\pL\s\-]+$/u',
+                'regex:/^[\pL\s]+$/u',
             ],
             'address' => 'required|string|max:100',
             'state' => 'required',
@@ -177,7 +164,7 @@ class AdminController extends Controller
                 'required',
                 'string',
                 'max:70',
-                'regex:/^[\pL\s\-]+$/u',
+                'regex:/^[\pL\s]+$/u',
             ],
             'billing_address' => 'required|string|max:100',
             'billing_state' => 'required',
@@ -186,6 +173,9 @@ class AdminController extends Controller
 
             'email' => 'required|string|email:rfc,dns|max:255|unique:users,email,' . $user->id,
             'password' => 'nullable|min:8|confirmed', // Password is optional during updates
+        ],[
+            'name.regex' => 'Name field must contain only letters and spaces',
+            'billing_name.regex' => 'Name field must contain only letters and spaces',
         ]);
 
 
@@ -203,6 +193,22 @@ class AdminController extends Controller
         } else {
             return redirect()->back()->with('error', 'Failed to add User. Please try again.');
         }
+    }
+
+    public function updateUserStatus(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'status' => 'required|boolean'
+        ]);
+        $user = User::find($request->user_id);
+        if ($user) {
+            $user->status = $request->status;
+            $user->save();
+
+            return response()->json(['success' => true, 'message' => 'Status updated successfully!']);
+        }
+        return response()->json(['success' => false, 'message' => 'User not found!']);
     }
 
     public function deleteUser(Request $request)

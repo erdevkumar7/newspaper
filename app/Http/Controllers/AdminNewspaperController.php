@@ -16,18 +16,27 @@ class AdminNewspaperController extends Controller
     public function addNewsPaperSubmit(Request $request)
     {
         $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
+            'title' => [
+                'required',
+                'string',
+                'min:3',
+                'max:255',
+                'regex:/^[\pL\s\-]+$/u', // Only allows letters, spaces, and hyphens
+            ],
             'description' => 'required|min:20',
             'author' => [
                 'required',
                 'string',
                 'max:70',
-                'regex:/^[\pL\s\-]+$/u',
+                'regex:/^[\pL\s]+$/u',
             ],
             'publication_date' => 'required|date',
             'pdf_upload' => 'required|file|mimes:pdf|max:2048',
+        ], [
+            'title.regex' => 'The title field must contain only letters, spaces, and hyphens.',
+            'author.regex' => 'Author name field must contain only letters and spaces',
         ]);
-       
+
         if ($request->hasFile('pdf_upload')) {
             $pdf = $request->file('pdf_upload');
             $pdfName = time() . '_' . $pdf->getClientOriginalName();
@@ -43,9 +52,10 @@ class AdminNewspaperController extends Controller
     }
 
 
-    public function allNewsPaper(){
+
+    public function allNewsPaper()
+    {
         $allnewspaper = DB::table('newspapers')->orderBy('created_at', 'desc')->get();
         return view('admin-newspaper.all-newspaper', compact('allnewspaper'));
     }
-
 }
