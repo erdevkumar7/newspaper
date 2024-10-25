@@ -36,10 +36,10 @@
                                 class="fa fa-chevron-right"></span></a>
                     </li>
                     {{-- user --}}
-                    <li><a href="{{route('admin.alluser')}}"><i class="fa fa-users"></i> Users <span
+                    <li><a href="{{route('admin.alluser')}}"><i class="fa fa-users"></i> User Management <span
                                 class="fa fa-chevron-right"></span></a>
                     </li>
-                    <li><a href="{{route('admin.allnewspaper')}}"><i class="fa fa-file-text-o"></i></i> News Paper <span
+                    <li><a href="{{route('admin.allnewspaper')}}"><i class="fa fa-file-text-o"></i></i> News-paper Management<span
                         class="fa fa-chevron-right"></span></a>
             </li>
                 </ul>

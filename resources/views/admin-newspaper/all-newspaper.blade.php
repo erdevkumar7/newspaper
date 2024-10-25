@@ -47,20 +47,23 @@
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>{{ $paper->title ?? 'Not Available' }}</td>
                                                         <td>{{ $paper->author ?? 'Not Available' }} </td>
-                                                        <td >{{ $paper->publication_date ?? 'Not Available' }} </td>
+                                                        <td>{{ $paper->publication_date ?? 'Not Available' }} </td>
                                                         <td style="text-align: center">
                                                             @if ($paper->pdf_upload)
-                                                                <a href="" target="_blank">
+                                                                <a href="{{route('admin.newspaper.download', $paper->id)}}">
                                                                     <i class="fa fa-file-pdf-o"
                                                                         style="font-size: 20px; color: red;"></i>
                                                                 </a>
                                                             @else
-                                                                Not Available
+                                                                <a>
+                                                                    <i class="fa fa-file-pdf-o"
+                                                                        style="font-size: 20px;"></i>
+                                                                </a>
                                                             @endif
                                                         </td>
 
                                                         <td>
-                                                            <a href="">
+                                                            <a href="{{ route('admin.editnewspaper', $paper->id) }}">
                                                                 <button class="btn btn-info btn-sm" data-toggle="tooltip"
                                                                     data-placement="top" title="Edit">
                                                                     <i class="fa fa-edit"></i>
@@ -77,7 +80,7 @@
                                                         </td>
 
                                                         <td>
-                                                            <a href="">
+                                                            <a href="{{ route('admin.viewnewspaper', $paper->id) }}">
                                                                 <button type="button"
                                                                     class="btn btn-primary">view</button></a>
                                                         </td>
@@ -94,6 +97,56 @@
             </div>
         </div>
 
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        {{-- sweetalert2 JS --}}
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            $(document).on('click', '.delete-paper', function(e) {
+                e.preventDefault();
+                var paperId = $(this).data('delete-id');
+                var row = $(this).closest('tr'); // Get the row of the clicked delete button
+
+                // Show SweetAlert confirmation
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "{{ route('admin.deleteNeswPaper') }}",
+                            type: "DELETE",
+                            data: {
+                                _token: "{{ csrf_token() }}",
+                                paper_id: paperId
+                            },
+                            success: function(response) {
+                                if (response.success) {
+                                    row.remove();
+                                } else {
+                                    Swal.fire({
+                                        title: "Error!",
+                                        text: response.message,
+                                        icon: "error"
+                                    });
+                                }
+                            },
+                            error: function(xhr) {
+                                Swal.fire({
+                                    title: "Error!",
+                                    text: "An error occurred while deleting the paper.",
+                                    icon: "error"
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
     </div>
 
 @endsection
