@@ -21,7 +21,7 @@
                                 <div class="col-md-4 col-sm-4 ">
                                     <label for="title"> Title * </label>
                                     <input type="text" class="form-control" name="title" id="title"
-                                        value="{{$paper->title ?? ""}}" oninput="removeError('titleErr')">
+                                        value="{{ old('title', $paper->title)}}" oninput="removeError('titleErr')">
                                     @error('title')
                                         <span class="text-danger" id="titleErr">{{ $message }}</span>
                                     @enderror
@@ -30,7 +30,7 @@
                                 <div class="col-md-4 col-sm-4 ">
                                     <label for="author">Author * </label>
                                     <input type="text" class="form-control" id="author" name="author"
-                                        value="{{ $paper->author }}" oninput="removeError('authorErr')">
+                                        value="{{ old('author', $paper->author) }}" oninput="removeError('authorErr')">
                                     @error('author')
                                         <span class="text-danger" id="authorErr">{{ $message }}</span>
                                     @enderror
@@ -40,7 +40,7 @@
                                     <label for="publication_date">Publication Date *</label>
                                     <div class='input-group date' id='myDatepicker2'>
                                         <input type='text' class="form-control" name="publication_date"
-                                        value="{{ $paper->publication_date }}" oninput="removeError('publication_dateErr')" />
+                                        value="{{ old('publication_date', $paper->publication_date) }}" oninput="removeError('publication_dateErr')" />
                                         <span class="input-group-addon">
                                            <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
@@ -54,7 +54,7 @@
                             <div class="item form-group">
                                 <div class="col-md-8 col-sm-8 ">
                                     <label for="description">Description *</label>
-                                    <textarea class="form-control" id="description" name="description" oninput="removeError('descriptionErr')">{{ $paper->description }}</textarea>
+                                    <textarea class="form-control" id="description" name="description" oninput="removeError('descriptionErr')">{{ old('description', $paper->description) }}</textarea>
                                     @error('description')
                                         <span class="text-danger" id="descriptionErr">{{ $message }}</span>
                                     @enderror

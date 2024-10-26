@@ -10,16 +10,16 @@
         <div class="profile clearfix">
             <div class="profile_pic">
                 @if (Auth::guard('admin')->user()->image !== null)
-                <img src="{{ asset('/public/images/profile_img') . '/' . Auth::guard('admin')->user()->image }}"
-                    alt="..." class="img-circle profile_img">
+                    <img src="{{ asset('/public/images/profile_img') . '/' . Auth::guard('admin')->user()->image }}"
+                        alt="..." class="img-circle profile_img">
                 @else
-                <img src="{{ asset('/public/images/static_img/admin1.jpg') }}" alt="..."
-                    class="img-circle profile_img">
+                    <img src="{{ asset('/public/images/static_img/admin1.jpg') }}" alt="..."
+                        class="img-circle profile_img">
                 @endif
             </div>
             <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>{{Auth::guard('admin')->user()->name}}</h2>
+                <h2>{{ Auth::guard('admin')->user()->name }}</h2>
             </div>
         </div>
         <!-- /menu profile quick info -->
@@ -32,16 +32,28 @@
                 <h3>General</h3>
                 <ul class="nav side-menu">
                     {{-- home --}}
-                    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard <span
-                                class="fa fa-chevron-right"></span></a>
+                    <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard <span
+                                class="fa fa-chevron-down"></span></a>
                     </li>
                     {{-- user --}}
-                    <li><a href="{{route('admin.alluser')}}"><i class="fa fa-users"></i> User Management <span
-                                class="fa fa-chevron-right"></span></a>
+                    <li><a><i class="fa fa-users"></i> User Management <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="{{ route('admin.alluser') }}">All Users</a></li>
+                            <li><a href="{{ route('admin.adduser') }}">Add User</a></li>
+                        </ul>
                     </li>
-                    <li><a href="{{route('admin.allnewspaper')}}"><i class="fa fa-file-text-o"></i></i> News-paper Management<span
-                        class="fa fa-chevron-right"></span></a>
-            </li>
+                    {{-- <li class="new-manage"><a href="{{ route('admin.allnewspaper') }}"><i
+                                class="fa fa-file-text-o"></i></i> News-paper Management<span
+                                class="fa fa-chevron-right"></span></a>
+                    </li> --}}
+
+                    <li class="new-manage"><a><i class="fa fa-file-text-o"></i> News-paper Management <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="{{ route('admin.allnewspaper') }}">All News-paper</a></li>
+                            <li><a href="{{ route('admin.addnewspaper') }}">Add News-paper</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
 

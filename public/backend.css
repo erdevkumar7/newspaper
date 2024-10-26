@@ -5,3 +5,7 @@
     cursor: pointer;
     font-size: 14px;
 }
+
+li.new-manage span.fa.fa-chevron-down {
+    margin-top: -14px !important;
+}
