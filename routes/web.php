@@ -60,6 +60,8 @@ Route::prefix('admin')->group(function () {
 
         Route::get('/page/{page_id}/edit-page', [AdminPageController::class, 'editPage'])->name('admin.editpage');
         Route::post('/page/{page_id}/edit-page', [AdminPageController::class, 'updatePage'])->name('admin.updatepagesubmit');
+
+        Route::post('/page/update-status', [AdminPageController::class, 'updatePageStatus'])->name('admin.updatepagestatus');
     });
 });
 

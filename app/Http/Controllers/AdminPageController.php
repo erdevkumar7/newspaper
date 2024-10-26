@@ -88,4 +88,20 @@ class AdminPageController extends Controller
         }
         return redirect()->route('admin.allpage')->with('success', 'Page updated successfully');
     }
+
+    public function updatePageStatus(Request $request)
+    {
+        $request->validate([
+            'page_id' => 'required|exists:pages,id',
+            'status' => 'required|boolean'
+        ]);
+        $page = Page::find($request->page_id);
+        if ($page) {
+            $page->status = $request->status;
+            $page->save();
+
+            return response()->json(['success' => true, 'message' => 'Status updated successfully!']);
+        }
+        return response()->json(['success' => false, 'message' => 'Page not found!']);
+    }
 }

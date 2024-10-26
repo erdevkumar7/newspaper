@@ -29,6 +29,7 @@
                                                 <th>#</th>
                                                 <th>Title</th>
                                                 <th>Description</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                                 <th>View </th>
                                             </tr>
@@ -45,7 +46,19 @@
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>{{ $page->title ?? 'Not Available' }}</td>
                                                         <td>{{ $page->description ?? 'Not Available' }} </td>                                                       
-
+                                                        <td>
+                                                            @if ($page->status == 1)
+                                                                <button type="button"
+                                                                    class="btn btn-success btn-sm update-status"
+                                                                    data-id="{{ $page->id }}"
+                                                                    data-status="1">Active</button>
+                                                            @else
+                                                                <button type="button"
+                                                                    class="btn btn-warning btn-sm update-status"
+                                                                    data-id="{{ $page->id }}"
+                                                                    data-status="0">Inactive</button>
+                                                            @endif
+                                                        </td>
                                                         <td>
                                                             <a href="{{route('admin.editpage', $page->id)}}">
                                                                 <button class="btn btn-info btn-sm" data-toggle="tooltip"
@@ -72,6 +85,52 @@
                 </div>
             </div>
         </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        {{-- sweetalert2 JS --}}
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+
+        <script>
+            $(document).on('click', '.update-status', function() {
+                var pageId = $(this).data('id');
+                var currentStatus = $(this).data('status');
+                var newStatus = currentStatus == 1 ? 0 : 1; // Toggle status
+
+                $.ajax({
+                    url: "{{ route('admin.updatepagestatus') }}",
+                    type: "POST",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        page_id: pageId,
+                        status: newStatus
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            // Toggle the button text and class based on the new status
+                            if (newStatus == 1) {
+                                $('button[data-id="' + pageId + '"]').removeClass('btn-warning').addClass(
+                                    'btn-success').text('Active');
+                            } else {
+                                $('button[data-id="' + pageId + '"]').removeClass('btn-success').addClass(
+                                    'btn-warning').text('Inactive');
+                            }
+                            $('button[data-id="' + pageId + '"]').data('status',
+                                newStatus); // Update the data-status attribute
+
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: "Status updated successfully",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.responseText); // Handle any errors
+                    }
+                });
+            });
+        </script>
     </div>
 
 @endsection
