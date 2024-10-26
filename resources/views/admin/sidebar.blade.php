@@ -42,17 +42,21 @@
                             <li><a href="{{ route('admin.adduser') }}">Add User</a></li>
                         </ul>
                     </li>
-                    {{-- <li class="new-manage"><a href="{{ route('admin.allnewspaper') }}"><i
-                                class="fa fa-file-text-o"></i></i> News-paper Management<span
-                                class="fa fa-chevron-right"></span></a>
-                    </li> --}}
-
+                    {{-- News-paper --}}
                     <li class="new-manage"><a><i class="fa fa-file-text-o"></i> News-paper Management <span
                                 class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="{{ route('admin.allnewspaper') }}">All News-paper</a></li>
+                            <li><a href="{{ route('admin.allnewspaper') }}">All News-papers</a></li>
                             <li><a href="{{ route('admin.addnewspaper') }}">Add News-paper</a></li>
                         </ul>
+                    </li>
+                    {{-- Content --}}
+                    <li>
+                        <a><i class="fa fa-columns"></i>Content Management <span
+                            class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="{{route('admin.allpage')}}">Page List</a></li>                                
+                            </ul>
                     </li>
                 </ul>
             </div>

@@ -23,7 +23,7 @@
                                 <div class="col-md-4 col-sm-4 ">
                                     <label for="name"> Name * </label>
                                     <input type="text" class="form-control" name="name" id="name"
-                                        value="{{ $user->name }}" oninput="removeError('nameErr')">
+                                        value="{{ old('name', $user->name) }}" oninput="removeError('nameErr')">
                                     @error('name')
                                         <span class="text-danger" id="nameErr">{{ $message }}</span>
                                     @enderror
@@ -32,7 +32,7 @@
                                 <div class="col-md-4 col-sm-4 ">
                                     <label for="address">Address </label>
                                     <input type="text" class="form-control" id="address" name="address"
-                                        value="{{ $user->address }}" oninput="removeError('addressErr')">
+                                        value="{{ old('address', $user->address) }}" oninput="removeError('addressErr')">
                                     @error('address')
                                         <span class="text-danger" id="addressErr">{{ $message }}</span>
                                     @enderror
@@ -73,7 +73,7 @@
                                 <div class="col-md-4 col-sm-4 ">
                                     <label for="zip_code">Zip Code</label>
                                     <input type="text" class="form-control" name="zip_code" id="zip_code"
-                                        value="{{ $user->zip_code }}" oninput="removeError('zip_codeErr')">
+                                        value="{{ old('zip_code',$user->zip_code) }}" oninput="removeError('zip_codeErr')">
                                     @error('zip_code')
                                         <span class="text-danger" id="zip_codeErr">{{ $message }}</span>
                                     @enderror
@@ -87,7 +87,7 @@
                                 <div class="col-md-4 col-sm-4 ">
                                     <label for="billing_name"> Name * </label>
                                     <input type="text" class="form-control" name="billing_name" id="billing_name"
-                                        value="{{ $user->billing_name }}" oninput="removeError('billing_nameErr')">
+                                        value="{{ old('billing_name', $user->billing_name) }}" oninput="removeError('billing_nameErr')">
                                     @error('billing_name')
                                         <span class="text-danger" id="billing_nameErr">{{ $message }}</span>
                                     @enderror
@@ -96,7 +96,7 @@
                                 <div class="col-md-4 col-sm-4 ">
                                     <label for="billing_address">Address </label>
                                     <input type="text" class="form-control" id="billing_address" name="billing_address"
-                                        value="{{ $user->billing_address }}" oninput="removeError('billing_addressErr')">
+                                        value="{{ old('billing_address', $user->billing_address) }}" oninput="removeError('billing_addressErr')">
                                     @error('billing_address')
                                         <span class="text-danger" id="billing_addressErr">{{ $message }}</span>
                                     @enderror
@@ -141,7 +141,7 @@
                                 <div class="col-md-4 col-sm-4 ">
                                     <label for="billing_zip_code">Zip Code</label>
                                     <input type="text" class="form-control" name="billing_zip_code"
-                                        id="billing_zip_code" value="{{ $user->billing_zip_code }}"
+                                        id="billing_zip_code" value="{{ old('billing_zip_code', $user->billing_zip_code) }}"
                                         oninput="removeError('billing_zip_codeErr')">
                                     @error('billing_zip_code')
                                         <span class="text-danger" id="billing_zip_codeErr">{{ $message }}</span>
@@ -155,7 +155,7 @@
                                 <div class="col-md-4 col-sm-4 ">
                                     <label for="email">Email *</label>
                                     <input type="email" class="form-control" name="email" id="email"
-                                        value="{{ $user->email }}" oninput="removeError('emailErr')">
+                                        value="{{ old('email', $user->email) }}" oninput="removeError('emailErr')">
                                     @error('email')
                                         <span class="text-danger" id="emailErr">{{ $message }}</span>
                                     @enderror

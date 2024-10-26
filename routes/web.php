@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminNewspaperController;
+use App\Http\Controllers\AdminPageController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -48,6 +49,17 @@ Route::prefix('admin')->group(function () {
         Route::delete('/delete-newspaper', [AdminNewspaperController::class, 'deleteNeswPaper'])->name('admin.deleteNeswPaper');
         Route::get('/newspaper/{paper_id}/download', [AdminNewspaperController::class, 'downloadPDF'])->name('admin.newspaper.download');
 
+    });
+
+    Route::middleware('admin')->group(function(){
+        Route::get('/all-page', [AdminPageController::class, 'allPage'])->name('admin.allpage');
+        Route::get('/page/{page_id}/view',[AdminPageController::class, 'viewPage'])->name('admin.viewpage');
+
+        Route::get('/add-page', [AdminPageController::class, 'addPage'])->name('admin.addpage');
+        Route::post('/add-page', [AdminPageController::class, 'addPageSubmit'])->name('admin.addPageSubmit');
+
+        Route::get('/page/{page_id}/edit-page', [AdminPageController::class, 'editPage'])->name('admin.editpage');
+        Route::post('/page/{page_id}/edit-page', [AdminPageController::class, 'updatePage'])->name('admin.updatepagesubmit');
     });
 });
 
