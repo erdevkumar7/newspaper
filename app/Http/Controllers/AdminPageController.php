@@ -39,10 +39,26 @@ class AdminPageController extends Controller
                 'max:50',
                 'regex:/^[\pL\s\-\.\,\!\?\&\(\)]+$/u'
             ],
+            'image' => 'required|mimes:jpeg,png,jpg,gif,svg,jfif|max:10240',
+            'logo_img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,jfif|max:2048',
             'description' => 'required|min:50',
         ], [
             'title.regex' => 'The title field contains invalid characters.',
         ]);
+
+        if ($request->hasFile('image')) {           
+            $img = $request->file('image');
+            $imgName = time() . '_' . $img->getClientOriginalName();
+            $img->move(public_path('images/static_img'), $imgName);
+            $validatedData['images'] = $imgName;
+        }
+
+        if ($request->hasFile('logo_img')) {           
+            $img = $request->file('logo_img');
+            $imgName = time() . '_' . $img->getClientOriginalName();
+            $img->move(public_path('images/static_img'), $imgName);
+            $validatedData['logo_img'] = $imgName;
+        }
 
         $page = Page::create($validatedData);
         if (!$page) {
@@ -78,9 +94,36 @@ class AdminPageController extends Controller
                 'regex:/^[\pL\s\-\.\,\!\?\&\(\)]+$/u'
             ],
             'description' => 'required|min:50',
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif,svg,jfif|max:10240',
+            'logo_img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,jfif|max:2048',
         ], [
             'title.regex' => 'The title field contains invalid characters.',
         ]);
+        if ($request->hasFile('image')) {  
+            if ($page->images) {
+                $oldPaperPath = public_path('images/static_img') . '/' . $page->images;
+                if (file_exists($oldPaperPath)) {
+                    unlink($oldPaperPath);
+                }
+            }            
+            $img = $request->file('image');
+            $imgName = time() . '_' . $img->getClientOriginalName();
+            $img->move(public_path('images/static_img'), $imgName);
+            $validatedData['images'] = $imgName;
+        }
+
+        if ($request->hasFile('logo_img')) {  
+            if ($page->logo_img) {
+                $oldPaperPath = public_path('images/static_img') . '/' . $page->logo_img;
+                if (file_exists($oldPaperPath)) {
+                    unlink($oldPaperPath);
+                }
+            }         
+            $img = $request->file('logo_img');
+            $imgName = time() . '_' . $img->getClientOriginalName();
+            $img->move(public_path('images/static_img'), $imgName);
+            $validatedData['logo_img'] = $imgName;
+        }
 
         $updatePage = $page->update($validatedData);
         if (!$updatePage) {

@@ -13,7 +13,7 @@
                 <div class="x_panel">
                     <div class="x_content">
                         <br />
-                        <form action="{{route('admin.addPageSubmit')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.addPageSubmit') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="item form-group">
                                 <div class="col-md-4 col-sm-4">
@@ -24,11 +24,31 @@
                                         <span class="text-danger" id="titleErr">{{ $message }}</span>
                                     @enderror
                                 </div>
+
+                                <div class="col-md-4 col-sm-4 ">
+                                    <label for="image"> Image *</label>
+                                    <input type="file" class="form-control" id="image" name="image"
+                                        accept="image/*" oninput="removeError('imageErr')">
+                                    @error('image')
+                                        <span class="text-danger" id="imageErr">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-4 col-sm-4 ">
+                                    <label for="logo_img">Logo </label>
+                                    <input type="file" class="form-control" id="logo_img" name="logo_img"
+                                        accept="image/*" oninput="removeError('logo_imgErr')">
+                                    @error('logo_img')
+                                        <span class="text-danger" id="logo_imgErr">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
                             </div>
                             <div class="item form-group">
                                 <div class="col-md-12 col-sm-12 ">
                                     <label for="description">Description *</label>
-                                    <textarea class="form-control" id="description" style="height: 200px;" name="description" oninput="removeError('descriptionErr')">{{ old('description') }}</textarea>
+                                    <textarea class="form-control" id="description" style="height: 200px;" name="description"
+                                        oninput="removeError('descriptionErr')">{{ old('description') }}</textarea>
                                     @error('description')
                                         <span class="text-danger" id="descriptionErr">{{ $message }}</span>
                                     @enderror
@@ -44,7 +64,7 @@
                             {{-- submit --}}
                             <div class="item form-group">
                                 <div class="col-md-4 col-sm-4 offset-md-4 mt-3">
-                                    <a href="{{route('admin.allpage')}}"> <button class="btn btn-primary"
+                                    <a href="{{ route('admin.allpage') }}"> <button class="btn btn-primary"
                                             type="button">Cancel</button></a>
                                     <button type="submit" class="btn btn-success">Submit</button>
                                 </div>

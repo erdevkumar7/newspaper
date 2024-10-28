@@ -19,8 +19,31 @@
                                     <label for="title"> Title * </label>
                                     <input type="text" class="form-control" name="title" value="{{ $page->title }}"
                                         disabled>
+                                </div>                      
+                            </div>
+
+                            <div class="item form-group">
+                                <div class="col-md-4 col-sm-4">
+                                    <label for="image">Image</label>
+                                    <div style="text-align: center; padding:4px;  border: 1px solid #e9ecef">
+                                        <img src="{{ asset('public/images/static_img') . '/' . $page->images }}"
+                                            alt="Page" width="50px" height="50px">
+                                    </div>
+                                    {{-- <div>
+                                        <img src="{{ asset('public/images/static_img') . '/' . $page->images }}" width="50px"
+                                            height="50px" alt="content_img">
+                                    </div> --}}
+                                </div>
+
+                                <div class="col-md-4 col-sm-4">
+                                    <label for="logo_img">Logo</label>
+                                    <div style="text-align: center; padding:4px;  border: 1px solid #e9ecef">
+                                        <img src="{{ asset('public/images/static_img') . '/' . $page->logo_img }}"
+                                            width="50px" height="50px">
+                                    </div>
                                 </div>
                             </div>
+
                             <div class="item form-group">
                                 <div class="col-md-12 col-sm-12 ">
                                     <label for="description">Description *</label>

@@ -18,10 +18,10 @@ Route::prefix('admin')->group(function () {
     Route::get('/login', [AdminController::class, 'login'])->name('admin.login');
     Route::post('/login', [AdminController::class, 'loginSubmit'])->name('admin.loginSubmit');
 
-   
-   // Admin User Functionality
+
+    // Admin User Functionality
     Route::middleware('admin')->group(function () {
-        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard'); 
+        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
         Route::get('/all-user', [AdminController::class, 'allUser'])->name('admin.alluser');
         Route::get('/add-user', [AdminController::class, 'adduser'])->name('admin.adduser');
         Route::post('/add-user', [AdminController::class, 'adduserSubmit'])->name('admin.adduserSubmit');
@@ -35,8 +35,8 @@ Route::prefix('admin')->group(function () {
         Route::delete('/delete-user', [AdminController::class, 'deleteUser'])->name('admin.deleteuser');
         Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
     });
- // Admin Newspaper Functionality
-    Route::middleware('admin')->group(function(){
+    // Admin Newspaper Functionality
+    Route::middleware('admin')->group(function () {
         Route::get('/all-newspaper', [AdminNewspaperController::class, 'allNewsPaper'])->name('admin.allnewspaper');
         Route::get('/newspaper/{paper_id}/view', [AdminNewspaperController::class, 'viewNewsPaper'])->name('admin.viewnewspaper');
 
@@ -45,15 +45,14 @@ Route::prefix('admin')->group(function () {
 
         Route::get('/newspaper/{paper_id}/edit-paper', [AdminNewspaperController::class, 'editNewsPaper'])->name('admin.editnewspaper');
         Route::put('/newspaper/{paper_id}/edit-paper', [AdminNewspaperController::class, 'editNewsPaperSubmit'])->name('admin.editNewsPaperSubmit');
-        
+
         Route::delete('/delete-newspaper', [AdminNewspaperController::class, 'deleteNeswPaper'])->name('admin.deleteNeswPaper');
         Route::get('/newspaper/{paper_id}/download', [AdminNewspaperController::class, 'downloadPDF'])->name('admin.newspaper.download');
-
     });
-
-    Route::middleware('admin')->group(function(){
+    // page(content) management functionality
+    Route::middleware('admin')->group(function () {
         Route::get('/all-page', [AdminPageController::class, 'allPage'])->name('admin.allpage');
-        Route::get('/page/{page_id}/view',[AdminPageController::class, 'viewPage'])->name('admin.viewpage');
+        Route::get('/page/{page_id}/view', [AdminPageController::class, 'viewPage'])->name('admin.viewpage');
 
         Route::get('/add-page', [AdminPageController::class, 'addPage'])->name('admin.addpage');
         Route::post('/add-page', [AdminPageController::class, 'addPageSubmit'])->name('admin.addPageSubmit');
@@ -64,5 +63,3 @@ Route::prefix('admin')->group(function () {
         Route::post('/page/update-status', [AdminPageController::class, 'updatePageStatus'])->name('admin.updatepagestatus');
     });
 });
-
-

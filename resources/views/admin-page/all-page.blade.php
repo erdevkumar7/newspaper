@@ -8,14 +8,14 @@
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>All Pages</h2>
-                        {{-- <div class="nav navbar-right panel_toolbox">
+                        <div class="nav navbar-right panel_toolbox">
                             <a href="{{ route('admin.addpage') }}">
                                 <button class="btn btn-success" data-toggle="tooltip" data-placement="top"
                                     title="Add-Page">
                                     Add Page
                                 </button>
                             </a>
-                        </div> --}}
+                        </div>
                         <div class="clearfix"></div>
                     </div>  
                     <div class="x_content">
@@ -38,7 +38,7 @@
                                         <tbody>
                                             @if ($allpages->isEmpty())
                                                 <tr>
-                                                    <td colspan="5" class="text-center">No data available</td>
+                                                    <td colspan="6" class="text-center">No data available</td>
                                                 </tr>
                                             @else
                                                 @foreach ($allpages as $page)
