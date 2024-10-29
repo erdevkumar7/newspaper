@@ -179,6 +179,24 @@ class AdminPageController extends Controller
         }
     }
 
+    public function DeleteBanner(Request $request, $banner_id)
+    {
+        $media = Banner::where('id', $banner_id)->first();
+
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+        ]);
+
+        $mediaToDelete = $validatedData['name'];
+      
+        $imagePath = public_path('images/static_img/banner_img') . '/' . $mediaToDelete;
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+        $media->delete();
+        return redirect()->back()->with('success', 'Image deleted successfully.');
+    }
+
     public function updatePageStatus(Request $request)
     {
         $request->validate([

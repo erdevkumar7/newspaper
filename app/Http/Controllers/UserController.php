@@ -10,7 +10,11 @@ class UserController extends Controller
 {
     public function indexPage()
     {
+        $allbanner = DB::table('banners')
+        ->orderBy("updated_at", "desc")
+        ->get();
+  
         $page = Page::where('title', 'Home')->first();        
-        return view('user.index', compact('page'));
+        return view('user.index', compact('page','allbanner'));
     }
 }

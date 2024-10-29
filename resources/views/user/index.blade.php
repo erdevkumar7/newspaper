@@ -8,6 +8,7 @@
         <!-- Carousel Start -->
         <div class="container-fluid p-0 mb-5">
             <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
+                @if ($allbanner->isEmpty())
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img class="w-100" src="{{ asset('/public/assets/img/bg-1.png') }}" alt="Image">
@@ -68,6 +69,32 @@
                         </div>
                     </div>
                 </div>
+                @else
+                <div class="carousel-inner">
+                    @foreach ($allbanner as $banner)
+                    <div class="carousel-item active">
+                        <img class="w-100" src="{{ asset('/public/images/static_img/banner_img').'/'.$banner->name }}" alt="Image">
+                        <div class="carousel-caption d-flex align-items-center">
+                            <div class="container">
+                                <div class="row align-items-center justify-content-center justify-content-lg-start">
+                                    <div class="col-10 col-lg-7 text-center text-lg-start text-slides">
+                                        <h1 class="display-3 text-black mb-2 pb-2 animated slideInDown">Get help
+                                            from the expert consultants.</h1>
+                                        <p class="text-black mt-2 mb-4">With lots of unique blocks, you can easily
+                                            build a page without coding. Build your next consultancy website within
+                                            few minutes.</p>
+                                        <a href=""
+                                            class="btn btn-primary py-3 px-5 animated slideInDown">Read More<i
+                                                class="fa fa-arrow-right ms-3"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    @endforeach                             
+                </div>
+                @endif
+               
                 <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
                     data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
