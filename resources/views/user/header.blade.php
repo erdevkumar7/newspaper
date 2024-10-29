@@ -17,7 +17,11 @@
             <a href="index.html" class="logo d-flex align-items-center">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
-                <img src="{{ asset('/public/assets/img/logo-new.png') }}" alt="">
+                @if ($page->logo_img)
+                    <img src="{{ asset('/public/images/static_img') . '/' . $page->logo_img }}" alt="">
+                @else
+                    <img src="{{ asset('/public/assets/img/logo-new.png') }}" alt="">
+                @endif
             </a>
         </div>
 

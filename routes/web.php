@@ -3,13 +3,12 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminNewspaperController;
 use App\Http\Controllers\AdminPageController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', function () {
-    return view('user.index');
-});
+Route::get('/', [UserController::class, 'indexPage'])->name('user.index');
 
 Route::prefix('admin')->group(function () {
     Route::get('/register', [AdminController::class, 'register'])->name(('admin.register'));

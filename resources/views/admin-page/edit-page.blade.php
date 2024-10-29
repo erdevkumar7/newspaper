@@ -20,7 +20,7 @@
                                 <div class="col-md-4 col-sm-4">
                                     <label for="title"> Title * </label>
                                     <input type="text" class="form-control" name="title" id="title"
-                                        value="{{ old('title', $page->title) }}" oninput="removeError('titleErr')">
+                                        value="{{ old('title', $page->title) }}" oninput="removeError('titleErr')" disabled>
                                     @error('title')
                                         <span class="text-danger" id="titleErr">{{ $message }}</span>
                                     @enderror
