@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use App\Models\Page;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -100,7 +101,7 @@ class AdminPageController extends Controller
             'title.regex' => 'The title field contains invalid characters.',
         ]);
 
-       
+
 
         if ($request->hasFile('image')) {
             if ($page->images) {
@@ -133,6 +134,49 @@ class AdminPageController extends Controller
             return redirect()->back()->with('error', 'Failed to Update the page. Please try again.');
         }
         return redirect()->route('admin.allpage')->with('success', 'Page updated successfully');
+    }
+
+    public function AddBanner()
+    {
+        $pictures = DB::table('banners')->orderBy('created_at', 'desc')->get();
+        return view('admin-page.add-banner', compact('pictures'));
+    }
+
+    public function AddBannerSubmit(Request $request)
+    {
+        $request->validate([
+            'pictures' => 'required|array',
+            'pictures.*' => 'file|mimes:jpeg,png,jpg,gif,svg,jfif|max:2048', // Validate each file in the array         
+        ]);
+
+        try {
+            // Check if the 'pictures' field is an array (multiple files uploaded)
+            if (is_array($request->file('pictures'))) {
+                // Handle multiple files          
+                foreach ($request->file('pictures') as $image) {
+                    $originalImageName = $image->getClientOriginalName();
+                    $imageName = time() . '_' . $originalImageName;
+
+                    // Try moving the image to the public path
+                    $uploadSuccess = $image->move(public_path('images/static_img/banner_img'), $imageName);
+
+                    // Check if the upload succeeded
+                    if ($uploadSuccess) {
+                        // Save the media record if upload is successful
+                        Banner::create([
+                            'name' => $imageName,
+                        ]);
+                    } else {
+                        return redirect()->back()->withErrors(['error' => 'Failed to upload picture ']);
+                    }
+                }
+            }
+
+            return redirect()->back()->with('success', 'Image uploaded successfully.');
+        } catch (\Exception $e) {
+            // Handle any exception that might occur during the process
+            return redirect()->back()->withErrors(['error' => 'An error occurred while uploading your pictures. Please try again.']);
+        }
     }
 
     public function updatePageStatus(Request $request)
