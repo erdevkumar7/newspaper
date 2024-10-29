@@ -10,6 +10,21 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [UserController::class, 'indexPage'])->name('user.index');
 
+Route::prefix('user')->group(function () {
+    Route::get('/register', [UserController::class, 'register'])->name(('user.register'));
+    Route::post('/register', [UserController::class, 'registerSubmit'])->name(('user.registerSubmit'));
+
+    Route::get('/login', [UserController::class, 'login'])->name('user.login');
+    Route::post('/login', [UserController::class, 'loginSubmit'])->name('user.loginSubmit');
+
+    Route::middleware(['user'])->group(function () {
+        Route::get('/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');  
+
+        Route::post('/logout', [UserController::class, 'logout'])->name('user.logout');
+   
+    });
+});
+
 Route::prefix('admin')->group(function () {
     Route::get('/register', [AdminController::class, 'register'])->name(('admin.register'));
     Route::post('/register', [AdminController::class, 'registerSubmit'])->name('admin.registerSubmit');
