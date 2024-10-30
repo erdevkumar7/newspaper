@@ -95,7 +95,8 @@ class UserController extends Controller
 
     public function dashboard()
     {
-        return view('user.dashboard');
+        $page = Page::where('title', 'Home')->first();
+        return view('user.dashboard',compact('page'));
     }
 
     public function logout()

@@ -203,6 +203,13 @@
         </div>
 
     </section><!-- /Membership Section -->
-
+    <script>
+        function removeError(id) {
+            var errElement = document.getElementById(id);
+            if (errElement) {
+                errElement.style.display = 'none'
+            }
+        }
+    </script>
 </main>
 @endsection
