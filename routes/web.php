@@ -79,5 +79,11 @@ Route::prefix('admin')->group(function () {
         Route::delete('/delete/{banner_id}/banner', [AdminPageController::class, 'DeleteBanner'])->name('admin.DeleteBanner');
 
         Route::post('/page/update-status', [AdminPageController::class, 'updatePageStatus'])->name('admin.updatepagestatus');
+
+        Route::get('/all-page-setting', [AdminPageController::class, 'allPageSetting'])->name('admin.allPageSetting');
+        Route::put('/all-page-setting', [AdminPageController::class, 'upadteAllPageSetting'])->name('admin.upadteAllPageSetting');
+        
+        Route::get('/add-page-setting', [AdminPageController::class, 'addPageSetting'])->name('admin.addPageSetting');
+        Route::post('/add-page-setting', [AdminPageController::class, 'addPageSettingSubmit'])->name('admin.addPageSettingSubmit');
     });
 });

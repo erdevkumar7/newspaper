@@ -3,7 +3,8 @@
     <div class="topbar d-flex align-items-center">
         <div class="container d-flex justify-content-center justify-content-md-between">
             <div class="contact-info d-flex align-items-center">
-                <a href="{{route('user.register')}}">Login | Register</a>
+                <a href="{{route('user.login')}}">Login | </a>
+                <a href="{{route('user.register')}}"> Register</a>
             </div>
             <div class="social-links d-none d-md-flex align-items-center">
                 <a href="#" class="twitter"><i class="bi bi-cart-fill"></i></a>
@@ -31,7 +32,7 @@
         <div class="container d-flex justify-content-center">
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li class="current--menu"><a href="#hero" class="active">Home<br></a></li>
+                    <li class="current--menu"><a href="{{route('user.index')}}" class="active">Home<br></a></li>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Subscribe</a></li>
                     <li><a href="#">Archives</a></li>

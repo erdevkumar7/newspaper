@@ -59,10 +59,20 @@
                                 <li><a href="{{route('admin.addBanner')}}">Banner Menu</a></li>                               
                             </ul>
                     </li>
+
+                    <li><a href="{{route('admin.allPageSetting')}}"><i class="fa fa-cogs"></i> Settings <span
+                        class="fa fa-chevron-down"></span></a>
+
+                    {{-- <li><a><i class="fa fa-cogs"></i> Settings <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="{{route('admin.allPageSetting')}}">All Setting</a></li>
+                            <li><a href="{{route('admin.addPageSetting')}}">Add Setting</a></li>
+                        </ul>
+                    </li> --}}
                 </ul>
             </div>
 
         </div>
-        <!-- /sidebar menu -->
+        <!-- /sidebar menu  -->
     </div>
 </div>

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\Page;
+use App\Models\PageSettings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class AdminPageController extends Controller
 {
@@ -188,7 +190,7 @@ class AdminPageController extends Controller
         ]);
 
         $mediaToDelete = $validatedData['name'];
-      
+
         $imagePath = public_path('images/static_img/banner_img') . '/' . $mediaToDelete;
         if (file_exists($imagePath)) {
             unlink($imagePath);
@@ -211,5 +213,87 @@ class AdminPageController extends Controller
             return response()->json(['success' => true, 'message' => 'Status updated successfully!']);
         }
         return response()->json(['success' => false, 'message' => 'Page not found!']);
+    }
+
+    public function allPageSetting()
+    {
+        $logo = DB::table('page_settings')->where('name', 'logo')->first();
+        $address = DB::table('page_settings')->where('name', 'address')->first();
+        $email = DB::table('page_settings')->where('name', 'email')->first();
+        $telephone = DB::table('page_settings')->where('name', 'telephone')->first();
+        $payment_option = DB::table('page_settings')->where('name', 'payment_option')->first();
+        $connect = DB::table('page_settings')->where('name', 'connect')->first();
+        return view('admin-page-setting.all-setting', compact('logo', 'address', 'email', 'telephone', 'payment_option', 'connect'));
+    }
+
+    public function upadteAllPageSetting(Request $request)
+    {
+        // Validate the input data
+        $validatedData = $request->validate([
+            'email' => [
+                'required',
+                'max:150',
+            ],
+            'telephone' => 'required|max:20',
+            'address' => 'required|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,jfif|max:2048',
+            'payment_option' => 'required',
+            'connect' => 'required'
+        ]);
+    
+        // Update the logo if a new file is uploaded
+        if ($request->hasFile('image')) {
+            $img = $request->file('image');
+            $imgName = time() . '_' . $img->getClientOriginalName();
+            $img->move(public_path('images/static_img'), $imgName);
+            $validatedData['image'] = $imgName;
+            DB::table('page_settings')->where('name', 'logo')->update(['image' => $validatedData['image']]);
+        } 
+    
+        // Update other settings
+        DB::table('page_settings')->where('name', 'address')->update(['content' => $validatedData['address']]);
+        DB::table('page_settings')->where('name', 'email')->update(['content' => $validatedData['email']]);
+        DB::table('page_settings')->where('name', 'telephone')->update(['content' => $validatedData['telephone']]);
+        DB::table('page_settings')->where('name', 'payment_option')->update(['content' => $validatedData['payment_option']]);
+        DB::table('page_settings')->where('name', 'connect')->update(['content' => $validatedData['connect']]);
+
+        return redirect()->back()->with('success', 'Settings updated successfully');
+    }
+
+    public function addPageSetting()
+    {
+        return view('admin-page-setting.add-setting');
+    }
+
+    public function addPageSettingSubmit(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => [
+                'required',
+                'string',
+                'min:3',
+                'max:50',
+                // 'regex:/^[\pL\s\-\.\,\!\?\&\(\)]+$/u'
+            ],
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif,svg,jfif|max:10240',
+            'content' => 'nullable',
+        ], [
+            'name.regex' => 'The title field contains invalid characters.',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $img = $request->file('image');
+            $imgName = time() . '_' . $img->getClientOriginalName();
+            $img->move(public_path('images/static_img'), $imgName);
+            $validatedData['image'] = $imgName;
+        }
+
+
+        $page = PageSettings::create($validatedData);
+        if (!$page) {
+            return redirect()->back()->with('error', 'Failed to create the page. Please try again.');
+        }
+
+        return redirect()->route('admin.allPageSetting')->with('success', 'Page created successfully');
     }
 }
