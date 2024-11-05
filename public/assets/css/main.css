@@ -663,8 +663,12 @@ h6 {
 }
 
 .footer .social-links a:hover {
-  color: var(--accent-color);
-  border-color: var(--accent-color);
+  color: #ffd700;
+  border-color: #ffd700;
+}
+
+.footer .footer-links ul a:hover {
+    color: #ffd700 !important;
 }
 
 .footer h4 {
@@ -1124,7 +1128,6 @@ section,
   border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);
   padding: 0px;
   transition: all ease-in-out 0.3s;
-  height: 100%;
 }
 
 .services .service-item .icon {
@@ -1843,27 +1846,27 @@ section.services.section {
 }
 .services .service-item .image img {
     width: 100%;
+	height: 500px;
     object-fit: cover;
     object-position: top;
-	border-radius: 35px;
 }
 .services .service-item {
     border: 2px solid #000000;
 }
-.services .service-item {
+/*.services .service-item {
     border-top-right-radius: 35px;
     border-top-left-radius: 35px;
-	    border-bottom-left-radius: 35px;
+	border-bottom-left-radius: 35px;
     border-bottom-right-radius: 35px;
 }
 .services .service-item .contents {
     background: #000000;
     padding: 15px;
-	    position: absolute;
+	position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
+}*/
 .services .service-item .contents h3 {
     margin: 0px !important;
     color: #ffffff !important;
@@ -1871,10 +1874,14 @@ section.services.section {
 .my-title h2 {
     color: #000000;
     border-bottom: 1px solid #000000;
-    padding-bottom: 20px;
+    text-align: center;
+    display: inline-block;
+    margin: 0 auto;
+	    font-size: 38px;
 }
 .my-title {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
+	    text-align: center;
 }
 .newsissue-item .contents {
     text-align: center;
@@ -1885,10 +1892,11 @@ section.services.section {
 }
 .newsissue-item {
     border: 2px solid #000000;
-    border-radius: 35px;
 }
 .newsissue-item .image img {
-    border-radius: 35px;
+	height: 500px;
+	object-fit: cover;
+    object-position: top;
 }
 .newsissue-item .contents h3 {
     color: #000;
@@ -1896,15 +1904,15 @@ section.services.section {
     font-size: 22px;
     margin-bottom: 0px;
 }
-.dwnload {
+/*.dwnload {
 	padding: 10px;
-	    border: 2px solid #000;
+	border: 2px solid #000;
 }
 .subscribed {
     padding: 10px;
-	    border: 2px solid #000;
+	border: 2px solid #000;
 	margin-bottom: 15px;
-}
+}*/
 .dwnload h3 {
     color: #000000 !important;
 }
@@ -1928,7 +1936,6 @@ section.services.section {
     bottom: 0;
     left: 0;
     background: linear-gradient(to bottom, transparent 0%, transparent 18%, rgba(0, 0, 0, 0.8) 99%, rgba(0, 0, 0, 0.8) 100%);
-	border-radius: 20px;
 }
 .my-membership .block-2-item .image {
     position: relative;
@@ -1940,10 +1947,9 @@ section.services.section {
     -webkit-transition: .3s all ease-in-out;
     -o-transition: .3s all ease-in-out;
     transition: .3s all ease-in-out;
-	height: 500px;
+	height: 400px;
     width: 100%;
     object-fit: cover;
-	border-radius: 20px;
 }
 .my-membership .block-2-item .text {
     z-index: 2;
@@ -1952,6 +1958,7 @@ section.services.section {
 	padding-right: 35px;
     position: absolute;
     width: 100%;
+	text-align: center;
 }
 .my-membership .block-2-item .text > span {
     font-size: 12px;
@@ -1994,4 +2001,178 @@ section.services.section {
     margin-right: 0px;
 }
 
+
+.paper-blocks .contents {
+    text-align: center;	
+}
+.paper-blocks .contents h3 {
+    color: #000000;
+    margin-top: .5rem;
+	    font-size: 24px;
+}
+.newsissue .contents {
+    text-align: center;
+	margin-top: .5rem;
+}
+.newsissue .contents h3 {
+    color: #000000;
+	    font-size: 24px;
+}
+
+ul.list-flex {
+    display: flex;
+    justify-content: space-between;
+}
+nav#navmenu {
+    width: 100%;
+}
+
+.forms-set {
+    width: 500px;
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+    -o-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+    -ms-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+    padding: 0px;
+    margin: 0 auto;
+    margin-top: 35px;
+}
+.login_form h1 {
+    font-size: 30px;
+    color: #fff;
+    line-height: 1.2;
+    text-align: center;
+    display: block;
+    width: 100%;
+    background-color: #000000;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-bottom: 0px;
+}
+.forms-set form {
+    padding-top: 25px;
+	padding-left: 25px;
+    padding-right: 25px;
+	padding-bottom: 25px;
+}
+.forms-set .form-control {
+    font-size: 15px;
+    color: #333;
+    line-height: 1.2;
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 48px;
+    background: #f5f5f5;
+    border-radius: 27px;
+    padding: 0 35px 0 35px;
+}
+.forms-set label {
+    margin-bottom: 5px;
+    color: #000000;
+}
+p.change_link {
+    color: #000000;
+}
+p.change_link a.to_register {
+    color: #000000;
+}
+.forms-set .item .button.btn {
+    background-color: #FFD700 !important;
+}
+.forms-set button.btn {
+    background: #FFD700;
+    border-color: #FFD700;
+    color: #000000;
+	    width: 100%;
+    height: 48px;
+    border-radius: 27px;
+    padding: 0 35px 0 35px;
+}
+.forms-set .item.btn-form {
+    text-align: center;
+}
+.forms-set .form-control:focus {
+    box-shadow: none;
+    outline: none;
+    border-color: #000;
+}
+
+footer#footer {
+    /*background-image: url("https://votivelaravel.in/remnant/public/assets/img/gold-black.jpg");
+    padding-top: 65px;
+	height: 500px;*/
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;    
+	border-top: 0px;
+}
+.container-fluid.copyright {
+    background: #000000;
+    margin-top: 0px !important;
+    padding: 15px;
+}
+.container-fluid.copyright p {
+    margin-bottom: 0px;
+    color: #ffffff;
+}
+
+
+
+@media (max-width: 767px) {
+	ul.list-flex {
+    display: none;
+}
+    .cust-slider .carousel-inner .carousel-item img {
+        height: 350px;
+        object-fit: cover;
+    }
+	.cust-slider .carousel-caption {
+        width: 80%;
+        padding-top: 0px;
+    }
+	.cust-slider .carousel-caption h1 {
+        font-size: 26px;
+        line-height: 28px;
+		margin-bottom: 0px !important;
+    }
+	#header-carousel .carousel-caption {
+    position: absolute;
+    padding-bottom: 1.25rem;
+    color: #000000;
+    text-align: left;
+    bottom: auto;
+    left: 0%;
+    right: 0%;
+	top: 8%;
+}
+.cust-slider .carousel-caption p.text-black {
+    line-height: 18px;
+}
+.my-membership.section {
+    padding-top: 0px;
+	padding-bottom: 20px;
+}
+.mobile-nav-toggle {
+    color: #ffffff;
+}
+nav#navmenu {
+    display: flex;
+    justify-content: center;
+}
+.mymenu {
+    padding: 8px;
+}
+.mymenu .navmenu a {
+    color: #000;
+}
+.header .logo img {
+    width: 100%;
+    margin: 0 auto;
+}
+}
 

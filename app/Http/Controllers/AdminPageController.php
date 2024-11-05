@@ -240,9 +240,18 @@ class AdminPageController extends Controller
             'payment_option' => 'required',
             'connect' => 'required'
         ]);
+
+        $logo = DB::table('page_settings')->where('name', 'logo')->first();
     
         // Update the logo if a new file is uploaded
         if ($request->hasFile('image')) {
+            if ($logo->image) {
+                $oldImagePath = public_path('images/static_img') . '/' . $logo->image;
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
+
             $img = $request->file('image');
             $imgName = time() . '_' . $img->getClientOriginalName();
             $img->move(public_path('images/static_img'), $imgName);

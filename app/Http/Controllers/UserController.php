@@ -17,14 +17,12 @@ class UserController extends Controller
             ->orderBy("updated_at", "desc")
             ->get();
 
-        $page = Page::where('title', 'Home')->first();
-        return view('user.index', compact('page', 'allbanner'));
+        return view('user.index', compact('allbanner'));
     }
 
     public function register()
     {
-        $page = Page::where('title', 'Home')->first();
-        return view('user.register', compact('page'));
+        return view('user.register');
     }
 
     public function registerSubmit(Request $request)
@@ -72,8 +70,7 @@ class UserController extends Controller
 
     public function login()
     {
-        $page = Page::where('title', 'Home')->first();
-        return view('user.login', compact('page'));
+        return view('user.login');
     }
 
     public function loginSubmit(Request $request)

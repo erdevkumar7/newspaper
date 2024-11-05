@@ -24,15 +24,28 @@
                             <i class="bi bi-geo-alt"></i>
                         </div>
                         <div class="icn-cont">
-                            <p>Remant Review</p>
-                            <p>P.O. Box 1134</p>
-                            <p>Battle Creek, MI 49014</p>
+                            @if ($address_setting !== null)
+                                <p>{{ $address_setting }}</p>
+                            @else
+                                <p>Remant Review</p>
+                                <p>P.O. Box 1134</p>
+                                <p>Battle Creek, MI 49014</p>
+                            @endif
                         </div>
                     </div>
                     <p class="mt-3"><i class="bi bi-telephone"></i> <strong>Tel:</strong>
-                        <span>1844.707.1844</span>
+                        @if ($telephone_setting !== null)
+                            <span>{{ $telephone_setting }}</span>
+                        @else
+                            <span>1844.707.1844</span>
+                        @endif
                     </p>
-                    <p><i class="bi bi-envelope"></i> <strong>Email:</strong> <span>support@remnantreview.co</span>
+                    <p><i class="bi bi-envelope"></i> <strong>Email:</strong>
+                        @if ($email_setting !== null)
+                            <span>{{ $email_setting }}</span>
+                        @else
+                            <span>support@remnantreview.co</span>
+                        @endif
                     </p>
                 </div>
             </div>
@@ -49,7 +62,7 @@
                 <div class="footer-contact">
                     CONNECT WITH US
                     <div class="social-links d-flex mt-3">
-                        <a href=""><i class="bi bi-twitter-x"></i></a>
+                        <a href="{{$connect_setting ?? ''}}"><i class="bi bi-twitter-x"></i></a>
                     </div>
                 </div>
             </div>
