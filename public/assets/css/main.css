@@ -755,7 +755,7 @@ h6 {
   top: calc(50% - 30px);
   left: calc(50% - 30px);
   border: 6px solid #ffffff;
-  border-color: var(--accent-color) transparent var(--accent-color) transparent;
+  border-color: #ffd700 transparent #ffd700 transparent;
   border-radius: 50%;
   width: 60px;
   height: 60px;
@@ -1779,7 +1779,7 @@ section,
 #header-carousel .carousel-caption {
     position: absolute;
     right: 15%;
-    bottom: 100px;
+    bottom: 75px;
     left: 15%;
     padding-top: 1.25rem;
     padding-bottom: 1.25rem;
@@ -2041,7 +2041,7 @@ nav#navmenu {
     margin: 0 auto;
     margin-top: 35px;
 }
-.login_form h1 {
+.forms-set h1 {
     font-size: 30px;
     color: #fff;
     line-height: 1.2;
@@ -2178,4 +2178,26 @@ nav#navmenu {
 
 nav#navmenu ul {
     justify-content: space-between;
+}
+.reg-col-form {
+    display: flex;
+	justify-content: space-between;
+}
+.register__form .forms-set.regis_form {
+    width: 600px;
+}
+.left-reg-col span.sub-title h4 {
+    color: #ffd700;
+    font-size: 22px;
+    text-decoration: underline;
+    margin-bottom: 20px;
+}
+.right-reg-col span.sub-title h4 {
+    color: #ffd700;
+    font-size: 22px;
+    text-decoration: underline;
+	margin-bottom: 20px;
+}
+.contact-info a:last-child {
+    margin-left: 5px;
 }
