@@ -17,11 +17,19 @@ Route::prefix('user')->group(function () {
     Route::get('/login', [UserController::class, 'login'])->name('user.login');
     Route::post('/login', [UserController::class, 'loginSubmit'])->name('user.loginSubmit');
 
+    // Forgot Password
+    Route::get('/forgot-password', [UserController::class, 'showForgotPasswordForm'])->name('user.password.request');
+    Route::post('/forgot-password', [UserController::class, 'sendResetLinkEmail'])->name('user.password.email');
+
+    // Reset Password
+    Route::get('/reset-password/{token}', [UserController::class, 'showResetPasswordForm'])->name('password.reset');
+    Route::post('/reset-password', [UserController::class, 'resetPassword'])->name('user.password.update');
+
+
     Route::middleware(['user'])->group(function () {
-        Route::get('/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');  
+        Route::get('/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
 
         Route::post('/logout', [UserController::class, 'logout'])->name('user.logout');
-   
     });
 });
 
@@ -82,7 +90,7 @@ Route::prefix('admin')->group(function () {
 
         Route::get('/all-page-setting', [AdminPageController::class, 'allPageSetting'])->name('admin.allPageSetting');
         Route::put('/all-page-setting', [AdminPageController::class, 'upadteAllPageSetting'])->name('admin.upadteAllPageSetting');
-        
+
         Route::get('/add-page-setting', [AdminPageController::class, 'addPageSetting'])->name('admin.addPageSetting');
         Route::post('/add-page-setting', [AdminPageController::class, 'addPageSettingSubmit'])->name('admin.addPageSettingSubmit');
     });

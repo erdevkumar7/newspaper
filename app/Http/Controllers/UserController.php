@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
 
 class UserController extends Controller
 {
@@ -93,7 +94,55 @@ class UserController extends Controller
     public function dashboard()
     {
         $page = Page::where('title', 'Home')->first();
-        return view('user.dashboard',compact('page'));
+        return view('user.dashboard', compact('page'));
+    }
+
+    public function showForgotPasswordForm()
+    {
+        return view('user.forgot-password');
+    }
+
+    public function sendResetLinkEmail(Request $request)
+    {
+        $request->validate(['email' => 'required|email']);
+
+        $status = Password::broker('users')->sendResetLink(
+            $request->only('email')
+        );
+        // 
+        return $status === Password::RESET_LINK_SENT
+            ? redirect()->route('user.login')->with('success', 'A reset link has been sent to your email')
+            : back()->withErrors(['email' => __($status)]);
+    }
+
+    public function showResetPasswordForm(Request $request, $token)
+    {
+        return view('user.reset-password', [
+            'token' => $token,
+            'email' => $request->email
+        ]);
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:8|confirmed',
+        ]);
+
+        $status = Password::broker('users')->reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user, $password) {
+                $user->original_password = $password;
+                $user->password = Hash::make($password);
+                $user->save();
+            }
+        );
+
+        return $status === Password::PASSWORD_RESET
+            ? redirect()->route('user.login')->with('success', __($status))
+            : back()->withErrors(['email' => [__($status)]]);
     }
 
     public function logout()

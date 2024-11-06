@@ -25,7 +25,7 @@
                         </div>
                         <div class="icn-cont">
                             @if ($address_setting !== null)
-                                <p>{{ $address_setting }}</p>
+                                <p>{!! nl2br(e($address_setting)) !!}</p>
                             @else
                                 <p>Remant Review</p>
                                 <p>P.O. Box 1134</p>
@@ -53,8 +53,12 @@
             <div class="col-lg-4 col-md-3 footer-links">
                 <h4>PAYMENT OPTIONS</h4>
                 <div class="footer-contact ">
-                    <p>Credit Card, Debit Card, Internet Banking,<br>
-                        Wallets, DD & Cheque, NEFT/RTGS, UPI</p>
+                    @if ($payment_option_setting !== null)
+                        <p>{!! nl2br(e($payment_option_setting)) !!}</p>
+                    @else
+                        <p>Credit Card, Debit Card, Internet Banking,<br>
+                            Wallets, DD & Cheque, NEFT/RTGS, UPI</p>
+                    @endif
                 </div>
                 <div class="footer-pay pt-3">
 
@@ -62,7 +66,7 @@
                 <div class="footer-contact">
                     CONNECT WITH US
                     <div class="social-links d-flex mt-3">
-                        <a href="{{$connect_setting ?? ''}}"><i class="bi bi-twitter-x"></i></a>
+                        <a href="{{ $connect_setting ?? '' }}"><i class="bi bi-twitter-x"></i></a>
                     </div>
                 </div>
             </div>

@@ -9,3 +9,14 @@
 li.new-manage span.fa.fa-chevron-down {
     margin-top: -14px !important;
 }
+
+.admin-escort-pics img {
+    margin-top: -25px;
+    width: -webkit-fill-available;
+}
+.admin-escort-pics button.btn {
+    float: right;
+    margin-right: 0;
+    z-index: 1;
+    position: relative;
+}
