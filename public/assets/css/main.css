@@ -2176,3 +2176,6 @@ nav#navmenu {
 }
 }
 
+nav#navmenu ul {
+    justify-content: space-between;
+}

@@ -12,15 +12,6 @@ use Illuminate\Support\Facades\Password;
 
 class UserController extends Controller
 {
-    public function indexPage()
-    {
-        $allbanner = DB::table('banners')
-            ->orderBy("updated_at", "desc")
-            ->get();
-
-        return view('user.index', compact('allbanner'));
-    }
-
     public function register()
     {
         return view('user.register');

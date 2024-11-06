@@ -1,5 +1,4 @@
 <header id="header" class="header sticky-top">
-
     <div class="topbar d-flex align-items-center">
         <div class="container d-flex justify-content-center justify-content-md-between">
             <div class="contact-info d-flex align-items-center">
@@ -13,9 +12,8 @@
     </div><!-- End Top Bar -->
 
     <div class="branding d-flex align-items-center">
-
         <div class="container position-relative d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="{{ route('home') }}" class="logo d-flex align-items-center">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
                 {{--  --}}
@@ -26,40 +24,41 @@
                 @endif
             </a>
         </div>
-
     </div>
 
     <div class="mymenu d-flex align-items-center">
         <div class="container d-flex justify-content-center">
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li class="current--menu"><a href="{{ route('user.index') }}" class="active">Home<br></a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Subscribe</a></li>
-                    <li><a href="#">Archives</a></li>
-                    <li><a href="#">Store</a></li>
-                    <!--<li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-          <ul>
-            <li><a href="#">Dropdown 1</a></li>
-            <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
-                <li><a href="#">Deep Dropdown 1</a></li>
-                <li><a href="#">Deep Dropdown 2</a></li>
-                <li><a href="#">Deep Dropdown 3</a></li>
-                <li><a href="#">Deep Dropdown 4</a></li>
-                <li><a href="#">Deep Dropdown 5</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Dropdown 2</a></li>
-            <li><a href="#">Dropdown 3</a></li>
-            <li><a href="#">Dropdown 4</a></li>
-          </ul>
-        </li>-->
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="{{ route('home') }}" class="menu-link">Home</a></li>
+                    <li><a href="{{ route('aboutUs') }}" class="menu-link">About</a></li>
+                    <li><a href="/subscribe" class="menu-link">Subscribe</a></li>
+                    <li><a href="/archives" class="menu-link">Archives</a></li>
+                    <li><a href="/store" class="menu-link">Store</a></li>
+                    <li><a href="{{ route('contactUs') }}" class="menu-link">Contact</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
         </div>
-    </div><!-- End Top Bar -->
+    </div>
 
+    <script>
+        // JavaScript to add 'active' class to the current menu item
+        document.addEventListener('DOMContentLoaded', () => {
+            const normalizePath = (path) => path.endsWith('/') && path.length > 1 ? path.slice(0, -1) : path;
+
+            const currentPath = normalizePath(window.location.pathname);
+            const menuLinks = document.querySelectorAll('.menu-link');
+
+            menuLinks.forEach(link => {
+                const linkPath = normalizePath(new URL(link.href).pathname);
+                if (linkPath === currentPath || (linkPath === '/' && currentPath === '')) {
+                    link.classList.add('active');
+                    link.parentElement.classList.add('current--menu'); // Adds class to the parent <li>
+                }
+            });
+        });
+    </script>
+
+    <!-- End Top Bar -->
 </header>

@@ -3,12 +3,15 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminNewspaperController;
 use App\Http\Controllers\AdminPageController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', [UserController::class, 'indexPage'])->name('user.index');
+Route::get('/', [PageController::class, 'home'])->name('home');
+Route::get('/about-us', [PageController::class, 'aboutUs'])->name('aboutUs');
+Route::get('/contact-us', [PageController::class, 'contactUs'])->name('contactUs');
 
 Route::prefix('user')->group(function () {
     Route::get('/register', [UserController::class, 'register'])->name(('user.register'));
@@ -23,8 +26,7 @@ Route::prefix('user')->group(function () {
 
     // Reset Password
     Route::get('/reset-password/{token}', [UserController::class, 'showResetPasswordForm'])->name('password.reset');
-    Route::post('/reset-password', [UserController::class, 'resetPassword'])->name('user.password.update');
-
+    Route::post('/reset-password', [UserController::class, 'resetPassword'])->name('user.password.update');  
 
     Route::middleware(['user'])->group(function () {
         Route::get('/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
