@@ -107,11 +107,11 @@
                                     <select class="form-control" id="billing_state" name="billing_state"
                                         oninput="removeError('billing_stateErr')">
                                         <option value="">Select state</option>
-                                        <option value="billing_state1"
-                                            {{ $user->billing_state === 'billing_state1' ? 'selected' : '' }}>state1
+                                        <option value="state1"
+                                            {{ $user->billing_state === 'state1' ? 'selected' : '' }}>state1
                                         </option>
-                                        <option value="billing_state2"
-                                            {{ $user->billing_state === 'billing_state2' ? 'selected' : '' }}>state2
+                                        <option value="state2"
+                                            {{ $user->billing_state === 'state2' ? 'selected' : '' }}>state2
                                         </option>
                                     </select>
                                     @error('billing_state')
@@ -127,11 +127,11 @@
                                     <select class="form-control" id="billing_city" name="billing_city"
                                         oninput="removeError('billing_cityErr')">
                                         <option value="">Select city</option>
-                                        <option value="billing_city1"
-                                            {{ $user->billing_city === 'billing_city1' ? 'selected' : '' }}>city1
+                                        <option value="city1"
+                                            {{ $user->billing_city === 'city1' ? 'selected' : '' }}>city1
                                         </option>
-                                        <option value="billing_city2"
-                                            {{ $user->billing_city === 'billing_city2' ? 'selected' : '' }}>city2
+                                        <option value="city2"
+                                            {{ $user->billing_city === 'city2' ? 'selected' : '' }}>city2
                                         </option>
                                     </select>
                                     @error('billing_city')

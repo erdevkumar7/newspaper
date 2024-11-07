@@ -2179,9 +2179,8 @@ nav#navmenu {
 nav#navmenu ul {
     justify-content: space-between;
 }
-.reg-col-form {
-    display: flex;
-	justify-content: space-between;
+.right-reg-col {
+    margin-top: 35px;
 }
 .register__form .forms-set.regis_form {
     width: 600px;

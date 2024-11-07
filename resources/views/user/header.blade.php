@@ -32,7 +32,7 @@
                 <ul>
                     <li><a href="{{ route('home') }}" class="menu-link">Home</a></li>
                     <li><a href="{{ route('aboutUs') }}" class="menu-link">About</a></li>
-                    <li><a href="/subscribe" class="menu-link">Subscribe</a></li>
+                    <li><a href="{{ route('subscribe')}}" class="menu-link">Subscribe</a></li>
                     <li><a href="/archives" class="menu-link">Archives</a></li>
                     <li><a href="/store" class="menu-link">Store</a></li>
                     <li><a href="{{ route('contactUs') }}" class="menu-link">Contact</a></li>

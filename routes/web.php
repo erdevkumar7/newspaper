@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/about-us', [PageController::class, 'aboutUs'])->name('aboutUs');
 Route::get('/contact-us', [PageController::class, 'contactUs'])->name('contactUs');
+Route::get('/subscribe', [PageController::class, 'subscribe'])->name('subscribe');
 
 Route::prefix('user')->group(function () {
     Route::get('/register', [UserController::class, 'register'])->name(('user.register'));
@@ -30,7 +31,6 @@ Route::prefix('user')->group(function () {
 
     Route::middleware(['user'])->group(function () {
         Route::get('/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
-
         Route::post('/logout', [UserController::class, 'logout'])->name('user.logout');
     });
 });

@@ -23,4 +23,8 @@ class PageController extends Controller
     public function contactUs(){
         return view('user.contact-us');
     }
+
+    public function subscribe(){
+        return view('user.subscribe');
+    }
 }

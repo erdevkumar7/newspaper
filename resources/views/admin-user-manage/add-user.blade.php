@@ -53,7 +53,6 @@
                             </div>
 
                             <div class="item form-group">
-
                                 <div class="col-md-4 col-sm-4 ">
                                     <label for="city">City *</label>
                                     <select class="form-control" id="city" name="city"
@@ -79,7 +78,16 @@
                             </div>
 
                             <br />
-                            <span class="section">Billing Address</span>
+                            <span class="section">
+                                Billing Address
+                                <div class="form-check form-check-inline">
+                                    <small>
+                                        <input type="checkbox" class="form-check-input" id="same-details"
+                                            onclick="copyMailingDetails()">
+                                        <label class="form-check-label" for="same-details">Same as Mailing Address</label>
+                                    </small>
+                                </div>
+                            </span>
                             <div class="item form-group">
                                 {{-- name --}}
                                 <div class="col-md-4 col-sm-4 ">
@@ -105,11 +113,11 @@
                                     <select class="form-control" id="billing_state" name="billing_state"
                                         oninput="removeError('billing_stateErr')">
                                         <option value="">Select state</option>
-                                        <option value="billing_state1"
-                                            {{ old('billing_state') == 'billing_state1' ? 'selected' : '' }}>state1
+                                        <option value="state1" {{ old('billing_state') == 'state1' ? 'selected' : '' }}>
+                                            state1
                                         </option>
-                                        <option value="billing_state2"
-                                            {{ old('billing_state') == 'billing_state2' ? 'selected' : '' }}>state2
+                                        <option value="state2" {{ old('billing_state') == 'state2' ? 'selected' : '' }}>
+                                            state2
                                         </option>
                                     </select>
                                     @error('billing_state')
@@ -125,11 +133,11 @@
                                     <select class="form-control" id="billing_city" name="billing_city"
                                         oninput="removeError('billing_cityErr')">
                                         <option value="">Select city</option>
-                                        <option value="billing_city1"
-                                            {{ old('billing_city') == 'billing_city1' ? 'selected' : '' }}>city1
+                                        <option value="city1" {{ old('billing_city') == 'city1' ? 'selected' : '' }}>
+                                            city1
                                         </option>
-                                        <option value="billing_city2"
-                                            {{ old('billing_city') == 'billing_city2' ? 'selected' : '' }}>city2
+                                        <option value="city2" {{ old('billing_city') == 'city2' ? 'selected' : '' }}>
+                                            city2
                                         </option>
                                     </select>
                                     @error('billing_city')
@@ -229,6 +237,33 @@
                     icon.classList.add('fa-eye');
                 }
             });
+        </script>
+
+        <script>
+            function copyMailingDetails() {
+                const isChecked = document.getElementById("same-details").checked;
+
+                if (isChecked) {
+                    // Copy values from Mailing Address to Billing Address
+                    document.getElementById("billing_name").value = document.getElementById("name").value;
+                    document.getElementById("billing_address").value = document.getElementById("address").value;
+                    document.getElementById("billing_zip_code").value = document.getElementById("zip_code").value;
+
+                    const mailingState = document.getElementById("state").value;
+                    document.getElementById("billing_state").value = mailingState;
+
+                    const mailingCity = document.getElementById("city").value;
+                    document.getElementById("billing_city").value = mailingCity;
+
+                } else {
+                    // Clear Billing Address fields if unchecked
+                    document.getElementById("billing_name").value = "";
+                    document.getElementById("billing_address").value = "";
+                    document.getElementById("billing_state").value = "";
+                    document.getElementById("billing_city").value = "";
+                    document.getElementById("billing_zip_code").value = "";
+                }
+            }
         </script>
     </div>
     <!-- /page content -->
