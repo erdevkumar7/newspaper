@@ -123,7 +123,7 @@
                             <h2>Sample</h2>
                         </div><!-- End Section Title -->
                         <div class="paper-blocks" data-aos="fade-up" data-aos-delay="100">
-                            <div class="service-item  position-relative">
+                            <div class="service-item">
                                 <div class="image">
                                     <!--<iframe allowfullscreen="allowfullscreen" scrolling="no" class="fp-iframe" src="https://heyzine.com/flip-book/d2a9f1c444.html" style="border: 1px solid lightgray; width: 100%; height: 412px;"></iframe>-->
                                     <a href="https://www.flipbookpdf.net/web/site/b6b9b15ae6cb325505042c53a43410152d46ef6d202410.pdf.html"
@@ -133,7 +133,7 @@
                             </div>
                             <div class="contents">
                                 <a href="https://www.flipbookpdf.net/web/site/b6b9b15ae6cb325505042c53a43410152d46ef6d202410.pdf.html"
-                                    target="_blank" class="stretched-link">
+                                    target="_blank">
                                     <h3>VIEW</h3>
                                 </a>
                             </div>
@@ -147,7 +147,7 @@
                         </div><!-- End Section Title -->
 
                         <div class="newsissue" data-aos="fade-up" data-aos-delay="100">
-                            <div class="newsissue-item  position-relative">
+                            <div class="newsissue-item">
                                 <div class="image">
                                     <img class="w-100" src="{{ asset('/public/assets/img/current-issue.png') }}"
                                         alt="Image">
@@ -155,12 +155,12 @@
                             </div>
                             <div class="contents">
                                 <div class="subscribed">
-                                    <a href="#" class="stretched-link">
+                                    <a href="#">
                                         <h3>SUBSCRIBE</h3>
                                     </a>
                                 </div>
                                 <div class="dwnload">
-                                    <a href="#" class="stretched-link" download>
+                                    <a href="#" download>
                                         <h3>DOWNLOAD</h3>
                                     </a>
                                 </div>

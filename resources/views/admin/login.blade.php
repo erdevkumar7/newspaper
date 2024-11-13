@@ -21,7 +21,7 @@
                     @error('email')
                     <span class="text-danger" id="emailErr">{{$message}}</span>
                     @enderror
-                    <div>
+                    <div class="adm-sbmit-btn">
                         <button type="submit" class="btn btn-default">Submit</button>
                     </div>
 

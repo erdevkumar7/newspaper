@@ -6,11 +6,27 @@
             <div class="title_left">
                 <h3>Add Banner Images</h3>
                 <!-- Add Image Form-->
+                {{-- <form class="adminAdd-picture-form" action="{{ route('admin.AddBannerSubmit') }}" method="POST"
+                    enctype="multipart/form-data">
+                    @csrf
+                    @method('POST')
+                    <div class="col-lg-3 menu-item">
+                        <span onclick="document.getElementById('addImageInput').click();">
+                            <p class="add-photo-admin">Add Image <i class="fa fa-upload" aria-hidden="true"></i></p>
+                        </span>
+                        <input type="file" id="addImageInput" accept="image/*" name="pictures[]" multiple
+                            style="display: none;" onchange="this.form.submit()">
+                    </div>
+                </form> --}}
+            </div>
+
+            <div class="title_right">
+                <!-- Add Image Form-->
                 <form class="adminAdd-picture-form" action="{{ route('admin.AddBannerSubmit') }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     @method('POST')
-                    <div class="col-lg-3 menu-item adminAdd-add-more-pic">
+                    <div class="col-lg-3 menu-item nav navbar-right panel_toolbox">
                         <span onclick="document.getElementById('addImageInput').click();">
                             <p class="add-photo-admin">Add Image <i class="fa fa-upload" aria-hidden="true"></i></p>
                         </span>

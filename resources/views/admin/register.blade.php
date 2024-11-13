@@ -36,7 +36,7 @@
                         <span class="text-danger" id="conf_passwordError">{{$message}}</span>
                         @enderror
                     </div>
-                    <div>
+                    <div class="adm-sbmit-btn">
                         <button type="submit" class="btn btn-default">Submit</button>
                     </div>
 

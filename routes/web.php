@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminNewspaperController;
 use App\Http\Controllers\AdminPageController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +14,11 @@ Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/about-us', [PageController::class, 'aboutUs'])->name('aboutUs');
 Route::get('/contact-us', [PageController::class, 'contactUs'])->name('contactUs');
 Route::get('/subscribe', [PageController::class, 'subscribe'])->name('subscribe');
+
+Route::post('/payment/create', [PaymentController::class, 'createPayment'])->name('payment.create');
+Route::get('/payment/execute', [PaymentController::class, 'executePayment'])->name('payment.execute');
+Route::get('/payment/cancel', [PaymentController::class, 'cancelPayment'])->name('payment.cancel');
+
 
 Route::prefix('user')->group(function () {
     Route::get('/register', [UserController::class, 'register'])->name(('user.register'));

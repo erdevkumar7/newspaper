@@ -20,3 +20,68 @@ li.new-manage span.fa.fa-chevron-down {
     z-index: 1;
     position: relative;
 }
+
+.table-responsive a.btn.btn-default.buttons-copy.buttons-html5.btn-sm {
+    display: none;
+}
+
+.table-responsive a.btn {
+    border: solid 2px #80808036;
+    display: flex;
+    margin-bottom: 12px;
+    border-radius: 5px;
+}
+
+.table-responsive .dt-buttons.btn-group {
+    gap: 11px;
+}
+
+.table-responsive a.btn.btn-default.buttons-csv.buttons-html5.btn-sm {
+    border-radius: 5px;
+}
+
+a.btn.btn-default.buttons-excel.buttons-html5.btn-sm {
+    border-radius: 5px;
+}
+
+a.btn.btn-default.buttons-pdf.buttons-html5.btn-sm {
+    border-radius: 5px;
+}
+
+a.btn.btn-default.buttons-print.btn-sm {
+    border-radius: 5px;
+}
+
+div#datatable-buttons_filter {
+    margin-top: -48px;
+    margin-bottom: 14px;
+}
+.table-responsive .table td, .table th {
+    padding-bottom: 0px;
+}
+
+.table-responsive .dt-buttons.btn-group a.btn {
+    box-shadow: none;
+}
+
+p.add-photo-admin {
+    border: solid 1px;
+    padding: 8px;
+    margin-top: 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #26B99A;
+    color: #fff;
+    font-size: 15px;
+}
+
+button {
+    box-shadow: none !important;
+}
+.adm-sbmit-btn {
+    background-color: #26B99A;
+    border-radius: 3px;
+}
+.adm-sbmit-btn button.btn.btn-default {
+    color: #fff;
+}
