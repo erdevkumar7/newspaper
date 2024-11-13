@@ -34,15 +34,6 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-md-4 col-sm-4 ">
-                                    <label for="logo_img">Logo </label>
-                                    <input type="file" class="form-control" id="logo_img" name="logo_img"
-                                        accept="image/*" oninput="removeError('logo_imgErr')">
-                                    @error('logo_img')
-                                        <span class="text-danger" id="logo_imgErr">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
                             </div>
                             <div class="item form-group">
                                 <div class="col-md-12 col-sm-12 ">

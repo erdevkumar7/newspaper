@@ -55,7 +55,7 @@
                         <a><i class="fa fa-columns"></i>Content Management <span
                             class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
-                                <li><a href="{{route('admin.allpage')}}">Page List</a></li> 
+                                <li><a href="{{route('admin.allpage')}}">All pages</a></li> 
                                 <li><a href="{{route('admin.addBanner')}}">Banner Menu</a></li>                               
                             </ul>
                     </li>
