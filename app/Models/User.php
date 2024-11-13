@@ -23,7 +23,8 @@ class User extends Authenticatable
         'state',
         'city',
         'zip_code',
-
+        'status',
+        
         'billing_name',
         'billing_address',
         'billing_state',

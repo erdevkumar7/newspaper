@@ -11,7 +11,8 @@ use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
 use PayPal\Rest\ApiContext;
 use PayPal\Auth\OAuthTokenCredential;
-
+use App\Models\User;
+use App\Models\Payment as PaymentModel;
 
 class PaymentController extends Controller
 {
@@ -21,21 +22,19 @@ class PaymentController extends Controller
     {
         $this->apiContext = new ApiContext(
             new OAuthTokenCredential(
-                config('services.paypal.client_id'),     // Client ID
-                config('services.paypal.secret')         // Client Secret
+                config('services.paypal.client_id'),
+                config('services.paypal.secret')
             )
         );
 
-        // Optional: Configure additional settings
         $this->apiContext->setConfig([
-            'mode' => config('services.paypal.settings.mode'), // 'sandbox' or 'live'
+            'mode' => config('services.paypal.settings.mode'),
             'http.ConnectionTimeOut' => 30,
             'log.LogEnabled' => true,
             'log.FileName' => storage_path('logs/paypal.log'),
-            'log.LogLevel' => 'ERROR',  // Adjust log level as needed
+            'log.LogLevel' => 'ERROR',
         ]);
     }
-
 
     public function createPayment(Request $request)
     {
@@ -68,10 +67,11 @@ class PaymentController extends Controller
             'billing_name.regex' => 'Name field must contain only letters and spaces',
         ]);
 
+        // Save validated data in session
+        session(['user_data' => $validateData]);
 
         $price = $request->input('plan');
 
-        // Step 3: Create PayPal payment
         $payer = new Payer();
         $payer->setPaymentMethod("paypal");
 
@@ -84,8 +84,8 @@ class PaymentController extends Controller
         $transaction->setDescription("Subscription for your website");
 
         $redirectUrls = new RedirectUrls();
-        $redirectUrls->setReturnUrl(route('payment.execute'))  // Callback after success
-            ->setCancelUrl(route('payment.cancel'));  // Callback if canceled
+        $redirectUrls->setReturnUrl(route('payment.execute'))
+            ->setCancelUrl(route('payment.cancel'));
 
         $payment = new Payment();
         $payment->setIntent("sale")
@@ -101,27 +101,53 @@ class PaymentController extends Controller
         }
     }
 
-
     public function executePayment(Request $request)
     {
         $paymentId = $request->paymentId;
         $payerId = $request->PayerID;
-
+    
         $payment = Payment::get($paymentId, $this->apiContext);
-
+    
         $execution = new PaymentExecution();
         $execution->setPayerId($payerId);
-
+    
         try {
             $result = $payment->execute($execution, $this->apiContext);
             if ($result->getState() === 'approved') {
-                // Logic for successful subscription, e.g., update user subscription status
+                // Retrieve user data from session
+                $userData = session('user_data');
+    
+                // Insert the user data into the users table if needed
+                $user = User::create([
+                    'name' => $userData['name'],
+                    'email' => $userData['email'],
+                    'address' => $userData['address'],
+                    'state' => $userData['state'],
+                    'city' => $userData['city'],
+                    'zip_code' => $userData['zip_code'],
+                    'billing_name' => $userData['billing_name'],
+                    'billing_address' => $userData['billing_address'],
+                    'billing_state' => $userData['billing_state'],
+                    'billing_city' => $userData['billing_city'],
+                    'billing_zip_code' => $userData['billing_zip_code'],
+                    'status' => 1,
+                ]);
+    
+                // Save payment details in payments table
+                PaymentModel::create([
+                    'user_id' => $user->id,
+                    'payment_id' => $result->getId(),
+                    'status' => $result->getState(),
+                    'amount' => $result->transactions[0]->getAmount()->getTotal(),
+                    'currency' => $result->transactions[0]->getAmount()->getCurrency(),
+                ]);
+    
                 return view('user.payment-success');
             }
         } catch (\Exception $ex) {
             return back()->withError('Payment execution failed.');
         }
-
+    
         return back()->withError('Subscription failed.');
     }
 
