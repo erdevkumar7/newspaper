@@ -116,7 +116,7 @@ class PaymentController extends Controller
             $result = $payment->execute($execution, $this->apiContext);
             if ($result->getState() === 'approved') {
                 // Logic for successful subscription, e.g., update user subscription status
-                return redirect()->route('home')->withSuccess('Subscription successful!');
+                return view('user.payment-success');
             }
         } catch (\Exception $ex) {
             return back()->withError('Payment execution failed.');
@@ -127,6 +127,6 @@ class PaymentController extends Controller
 
     public function cancelPayment()
     {
-        return redirect()->route('home')->withError('Subscription canceled.');
+        return view('user.payment-cancel');
     }
 }
