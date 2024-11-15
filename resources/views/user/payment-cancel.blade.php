@@ -1,20 +1,21 @@
 @extends('user.layout')
 @section('page_content')
-    <main class="main">
-        <!-- Membership Section -->
-        <section id="" class="my-membership section">
-            <div class="container d-flex justify-content-center mt-5 mb-5">
-                <div class="col-md-4"> <!-- Adjusted the width to center better -->
-                    <div class="card text-center p-4" style="margin-top: 20px; margin-bottom: 20px;">
-                        <h4>Your Payment Failed</h4>
-                        <a href="{{ route('home') }}" class="mt-3">
-                            <button type="submit" class="btn free-button">Back to home</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- /Membership Section -->
-    </main>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                title: "Payment Failed!",
+                text: "Your subscription is pending!",
+                icon: "error",
+                confirmButtonColor: "#FFD700",
+                confirmButtonText: "Back Home",
+                allowOutsideClick: false,  // Prevents closing when clicking outside
+                allowEscapeKey: false,     // Prevents closing with the 'Esc' key
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "{{ route('home') }}";  // Update 'home' with your actual route name
+                }
+            });
+        });
+    </script>   
 @endsection
