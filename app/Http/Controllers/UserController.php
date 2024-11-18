@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class UserController extends Controller
 {
@@ -17,48 +18,64 @@ class UserController extends Controller
         return view('user.register');
     }
 
+
     public function registerSubmit(Request $request)
     {
-        $validateData = $request->validate([
-            'name' => [
-                'required',
-                'string',
-                'max:70',
-                'regex:/^[\pL\s]+$/u',
-            ],
-            'address' => 'required|string|max:100',
-            'state' => 'required',
-            'city' => 'required',
-            'zip_code' => 'required|numeric',
-
-            'billing_name' => [
-                'required',
-                'string',
-                'max:70',
-                'regex:/^[\pL\s]+$/u',
-            ],
-            'billing_address' => 'required|string|max:100',
-            'billing_state' => 'required',
-            'billing_city' => 'required',
-            'billing_zip_code' => 'required|numeric',
-
-            'email' => 'required|string|email:rfc,dns|max:150|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-        ], [
-            'name.regex' => 'Name field must contain only letters and spaces',
-            'billing_name.regex' => 'Name field must contain only letters and spaces',
+        // Validation
+        $validatedData = $request->validate([
+            'first_name' => 'required|string|max:30',
+            'last_name' => 'required|string|max:30',
+            'email' => 'required|string|email|max:100|unique:users',
+            'phone_number' => 'required|numeric',
+            'city' => 'required|string',
+            'gender' => 'required',
+            'state' => 'required|string',
+            'district' => 'required|string',
+            'passout_batch' => 'required|string',
+            'profession' => 'required|string',
+            'profession_specification' => 'nullable|string|max:100',
+            'password' => 'required|string|min:6',
         ]);
 
-        $validateData['original_password'] = $validateData['password'];
-        $validateData['password'] = Hash::make($validateData['password']);
-        $user = User::create($validateData);
+        try {
+            // Hash the password and add it to the validated data
+            $validatedData['original_password'] = $validatedData['password'];
+            $validatedData['password'] = Hash::make($validatedData['password']);
 
-        if ($user) {
-            return redirect()->route('user.login')->with('success', 'Registration Successfully!');
-        } else {
-            return redirect()->back()->with('error', 'Failed to add User. Please try again.');
+            // Create the user
+            $user = User::create($validatedData);
+            $url = route('user.profile', ['id' => $user->id]);
+
+            // Generate the QR code
+            $qrCodeImage = time() . '_' . $user->id . '_qrcode.svg';
+            $qrCodeFileName = 'qrcodes/' . $qrCodeImage;
+            QrCode::size(250)->generate($url, public_path($qrCodeFileName));
+
+            // Save the QR code image path in the user table
+            $user->qr_code_image = $qrCodeImage;
+            $user->save();
+
+            return redirect()->route('user.viewQR', $user->id)->with('sucess', 'Your Registration Successful!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to create alumni: ' . $e->getMessage());
         }
     }
+
+    public function viewQR($user_id)
+    {
+        $user = User::find($user_id);
+        if (!$user) {
+            return redirect()->back()->with('error', 'No Allumni Found!');
+        }
+        return view('user.view-qr', compact('user'));
+    }
+
+    public function showProfile($id)
+    {
+        $user = User::findOrFail($id);
+        return view('user.profile', compact('user'));
+    }
+
 
     public function login()
     {

@@ -1,21 +1,20 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
     @include('user.headerCSS')
 </head>
 
-<body class="index-page">
+<body>    
+    <div class="container h-100">
+        @include('user.topNav')
 
-    @include('user.header')
-
-    @yield('page_content')
-
-    @include('user.footer')
-
-    @include('user.footerJS')
-
+        @yield('page_content') 
+        
+        @include('user.footerJS')
+    </div>
 
 </body>
 
 </html>
+
