@@ -36,7 +36,10 @@ class UserController extends Controller
                 'regex:/^[\pL\s]+$/u',
             ],
             'email' => 'required|string|email:rfc,dns|max:70|unique:users',
-            'phone_number' => 'required|numeric',
+            'phone_number' => [
+                'required',
+                'regex:/^[6-9]\d{9}$/',
+            ],
             'city' => 'required|string',
             'gender' => 'required',
             'state' => 'required|string',
@@ -48,6 +51,7 @@ class UserController extends Controller
         ], [
             'first_name.regex' => 'Name field must contain only letters and spaces',
             'last_name.regex' => 'Name field must contain only letters and spaces',
+            'phone_number.regex' => 'The Contact number must be a valid number.',
         ]);
 
         try {

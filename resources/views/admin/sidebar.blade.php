@@ -36,21 +36,21 @@
                                 class="fa fa-chevron-down"></span></a>
                     </li>
                     {{-- user --}}
-                    <li><a><i class="fa fa-users"></i> User Management <span class="fa fa-chevron-down"></span></a>
+                    <li><a><i class="fa fa-users"></i> Alumni Management <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="{{ route('admin.alluser') }}">All Users</a></li>
-                            <li><a href="{{ route('admin.adduser') }}">Add User</a></li>
+                            <li><a href="{{ route('admin.alluser') }}">All Alumni</a></li>
+                            <li><a href="{{ route('admin.adduser') }}">Add Alumni</a></li>
                         </ul>
                     </li>
-                    {{-- News-paper --}}
-                    <li class="new-manage"><a><i class="fa fa-file-text-o"></i> News-paper Management <span
+               
+                    {{-- <li class="new-manage"><a><i class="fa fa-file-text-o"></i> News-paper Management <span
                                 class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="{{ route('admin.allnewspaper') }}">All News-papers</a></li>
                             <li><a href="{{ route('admin.addnewspaper') }}">Add News-paper</a></li>
                         </ul>
                     </li>
-                    {{-- Content --}}
+                
                     <li>
                         <a><i class="fa fa-columns"></i>Content Management <span
                             class="fa fa-chevron-down"></span></a>
@@ -61,7 +61,12 @@
                     </li>
 
                     <li><a href="{{route('admin.allPageSetting')}}"><i class="fa fa-cogs"></i> Settings <span
-                        class="fa fa-chevron-down"></span></a>
+                        class="fa fa-chevron-down"></span></a> --}}
+
+
+
+
+                        
 
                     {{-- <li><a><i class="fa fa-cogs"></i> Settings <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">

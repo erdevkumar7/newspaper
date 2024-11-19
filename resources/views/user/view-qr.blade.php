@@ -11,10 +11,11 @@
                         <!-- Add text-center for horizontal alignment -->
                         <h2 class="qr-head">Welcome, {{ $user->first_name }}!</h2>
                         <p>Your QR code has been generated. You can use it for further verification.</p>
-
                         <div>
                             <img src="{{ asset('/public/qrcodes') . '/' . $user->qr_code_image }}" alt="QR Code">
                         </div>
+
+                        <button type="submit" class="btn btn-warning mt-4" >QR Download</button>
                     </div>
                 </div>
             </div>

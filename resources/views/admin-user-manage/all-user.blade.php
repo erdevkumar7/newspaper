@@ -10,8 +10,8 @@
                         <h2>All Users<small>(registered)</small></h2>
                         <div class="nav navbar-right panel_toolbox">
                             <a href="{{ route('admin.adduser') }}">
-                                <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Add User">
-                                    Add User
+                                <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Add Alumni">
+                                    Add Alumni
                                 </button>
                             </a>
                         </div>
@@ -28,8 +28,9 @@
                                                 <th>#</th>
                                                 <th>Name</th>
                                                 <th>Email</th>
+                                                <th>Contact</th>
                                                 <th>State</th>
-                                                <th>City</th>
+                                                <th>District</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                                 <th>View User</th>
@@ -45,21 +46,22 @@
                                                 @foreach ($allusers as $user)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $user->name ?? 'Not Available' }}</td>
+                                                        <td>{{ $user->first_name ?? 'Not Available' }}</td>
                                                         <td>{{ $user->email ?? 'Not Available' }} </td>
+                                                        <td>{{ $user->phone_number ?? 'Not Available' }} </td>
                                                         <td>{{ $user->state ?? 'Not Available' }} </td>
-                                                        <td>{{ $user->city ?? 'Not Available' }}</td>
+                                                        <td>{{ $user->district ?? 'Not Available' }}</td>
                                                         <td>
                                                             @if ($user->status == 1)
                                                                 <button type="button"
                                                                     class="btn btn-success btn-sm update-status"
                                                                     data-id="{{ $user->id }}"
-                                                                    data-status="1">Active</button>
+                                                                    data-status="1">Verified</button>
                                                             @else
                                                                 <button type="button"
                                                                     class="btn btn-warning btn-sm update-status"
                                                                     data-id="{{ $user->id }}"
-                                                                    data-status="0">Inactive</button>
+                                                                    data-status="0">Pending</button>
                                                             @endif
                                                         </td>
                                                         <td>
@@ -179,10 +181,10 @@
                             // Toggle the button text and class based on the new status
                             if (newStatus == 1) {
                                 $('button[data-id="' + userId + '"]').removeClass('btn-warning').addClass(
-                                    'btn-success').text('Active');
+                                    'btn-success').text('Verified');
                             } else {
                                 $('button[data-id="' + userId + '"]').removeClass('btn-success').addClass(
-                                    'btn-warning').text('Inactive');
+                                    'btn-warning').text('Pending');
                             }
                             $('button[data-id="' + userId + '"]').data('status',
                                 newStatus); // Update the data-status attribute

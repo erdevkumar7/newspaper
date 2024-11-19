@@ -4,7 +4,7 @@
     <div class="right_col" role="main">
         <div class="page-title">
             <div class="title_left">
-                <h3>Add New User</h3>
+                <h3>Add New Alumni</h3>
             </div>
         </div>
         <div class="clearfix"></div>
@@ -15,7 +15,6 @@
                         <br />
                         <form action="{{ route('admin.adduserSubmit') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <span class="section">Malling Address</span>
                             <div class="item form-group">
                                 {{-- name --}}
                                 <div class="col-md-4 col-sm-4 ">
@@ -77,85 +76,6 @@
                                 </div>
                             </div>
 
-                            <br />
-                            <span class="section">
-                                Billing Address
-                                <div class="form-check form-check-inline">
-                                    <small>
-                                        <input type="checkbox" class="form-check-input" id="same-details"
-                                            onclick="copyMailingDetails()">
-                                        <label class="form-check-label" for="same-details">Same as Mailing Address</label>
-                                    </small>
-                                </div>
-                            </span>
-                            <div class="item form-group">
-                                {{-- name --}}
-                                <div class="col-md-4 col-sm-4 ">
-                                    <label for="billing_name"> Name * </label>
-                                    <input type="text" class="form-control" name="billing_name" id="billing_name"
-                                        value="{{ old('billing_name') }}" oninput="removeError('billing_nameErr')">
-                                    @error('billing_name')
-                                        <span class="text-danger" id="billing_nameErr">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                {{-- address --}}
-                                <div class="col-md-4 col-sm-4 ">
-                                    <label for="billing_address">Address </label>
-                                    <input type="text" class="form-control" id="billing_address" name="billing_address"
-                                        value="{{ old('billing_address') }}" oninput="removeError('billing_addressErr')">
-                                    @error('billing_address')
-                                        <span class="text-danger" id="billing_addressErr">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <div class="col-md-4 col-sm-4 ">
-                                    <label for="billing_state">State *</label>
-                                    <select class="form-control" id="billing_state" name="billing_state"
-                                        oninput="removeError('billing_stateErr')">
-                                        <option value="">Select state</option>
-                                        <option value="state1" {{ old('billing_state') == 'state1' ? 'selected' : '' }}>
-                                            state1
-                                        </option>
-                                        <option value="state2" {{ old('billing_state') == 'state2' ? 'selected' : '' }}>
-                                            state2
-                                        </option>
-                                    </select>
-                                    @error('billing_state')
-                                        <span class="text-danger" id="billing_stateErr">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="item form-group">
-
-                                <div class="col-md-4 col-sm-4 ">
-                                    <label for="billing_city">City *</label>
-                                    <select class="form-control" id="billing_city" name="billing_city"
-                                        oninput="removeError('billing_cityErr')">
-                                        <option value="">Select city</option>
-                                        <option value="city1" {{ old('billing_city') == 'city1' ? 'selected' : '' }}>
-                                            city1
-                                        </option>
-                                        <option value="city2" {{ old('billing_city') == 'city2' ? 'selected' : '' }}>
-                                            city2
-                                        </option>
-                                    </select>
-                                    @error('billing_city')
-                                        <span class="text-danger" id="billing_cityErr">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="col-md-4 col-sm-4 ">
-                                    <label for="billing_zip_code">Zip Code</label>
-                                    <input type="text" class="form-control" name="billing_zip_code"
-                                        id="billing_zip_code" value="{{ old('billing_zip_code') }}"
-                                        oninput="removeError('billing_zip_codeErr')">
-                                    @error('billing_zip_code')
-                                        <span class="text-danger" id="billing_zip_codeErr">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-
-
                             <div class="item form-group">
                                 {{-- email --}}
                                 <div class="col-md-4 col-sm-4 ">
@@ -187,6 +107,9 @@
                                     @enderror
                                 </div>
                             </div>
+
+
+                          
 
                             {{-- submit --}}
                             <div class="item form-group">

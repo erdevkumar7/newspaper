@@ -72,7 +72,7 @@
 
                                 <div class="d-flex justify-content-center">
                                     <button type="submit" data-mdb-button-init data-mdb-ripple-init
-                                        class="btn btn-warning">Verfy Alumni</button>
+                                        class="btn btn-warning">Verify Alumni</button>
                                 </div>
                             </div>
                         </div>
