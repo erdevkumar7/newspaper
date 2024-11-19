@@ -23,9 +23,19 @@ class UserController extends Controller
     {
         // Validation
         $validatedData = $request->validate([
-            'first_name' => 'required|string|max:30',
-            'last_name' => 'required|string|max:30',
-            'email' => 'required|string|email|max:100|unique:users',
+            'first_name' => [
+                'required',
+                'string',
+                'max:30',
+                'regex:/^[\pL\s]+$/u',
+            ],
+            'last_name' => [
+                'required',
+                'string',
+                'max:30',
+                'regex:/^[\pL\s]+$/u',
+            ],
+            'email' => 'required|string|email:rfc,dns|max:70|unique:users',
             'phone_number' => 'required|numeric',
             'city' => 'required|string',
             'gender' => 'required',
@@ -35,6 +45,9 @@ class UserController extends Controller
             'profession' => 'required|string',
             'profession_specification' => 'nullable|string|max:100',
             'password' => 'required|string|min:6',
+        ], [
+            'first_name.regex' => 'Name field must contain only letters and spaces',
+            'last_name.regex' => 'Name field must contain only letters and spaces',
         ]);
 
         try {
@@ -44,7 +57,7 @@ class UserController extends Controller
 
             // Create the user
             $user = User::create($validatedData);
-            $url = route('user.profile', ['id' => $user->id]);
+            $url = route('user.profile', ['user_id' => $user->id]);
 
             // Generate the QR code
             $qrCodeImage = time() . '_' . $user->id . '_qrcode.svg';
@@ -70,9 +83,12 @@ class UserController extends Controller
         return view('user.view-qr', compact('user'));
     }
 
-    public function showProfile($id)
+    public function showProfile($user_id)
     {
-        $user = User::findOrFail($id);
+        $user = User::find($user_id);
+        if (!$user) {
+            return redirect()->back()->with('error', 'No Allumni Found!');
+        }
         return view('user.profile', compact('user'));
     }
 

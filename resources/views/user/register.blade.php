@@ -4,7 +4,7 @@
         <form action="{{route('user.registerSubmit')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="col">
-                <div class="card card-registration my-4">
+                <div class="card card-registration my-2">
                     {{-- @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
@@ -17,13 +17,13 @@
 
                     <div class="row g-0">
                         <div class="col-xl-6 d-none d-xl-block">
-                            <img src="{{asset('/public/images/allumni_img/img2.jpg')}}"
+                            <img src="{{asset('/public/images/allumni_img/allumni3.jpg')}}"
                                 alt="Sample photo" class="img-fluid"
-                                style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
+                                style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem; height: 95%;" />
                         </div>
                         <div class="col-xl-6">
-                            <div class="card-body p-md-5 text-black">
-                                <h3 class="mb-5 text-uppercase">Allumni registration form</h3>
+                            <div class="card-body p-md-4 text-black">
+                                <h3 class="mb-4 text-uppercase">Alumni Registration Form </h3>
 
                                 <div class="row">
                                     <div class="col-md-6 mb-4">
@@ -66,7 +66,7 @@
                                             {{-- <label class="form-label" for="mobile_number">Mobile Number</label> --}}
                                             <input type="text" id="phone_number" name="phone_number"
                                                 value="{{ old('phone_number') }}" oninput="removeError('phone_numberErr')"
-                                                placeholder="Phone Number" class="form-control" />
+                                                placeholder="Contact Number" class="form-control" />
                                             @error('phone_number')
                                                 <span class="text-danger" id="phone_numberErr">{{ $message }}</span>
                                             @enderror
@@ -107,7 +107,7 @@
 
                                 <div class="row">
                                     <div class="col-md-6 mb-4">
-                                        <label for="inputState4" class="form-label">Your JNV State</label>
+                                        <label for="inputState4" class="form-label">State of the JNV Last Attended</label>
                                         <select id="inputState4" class="form-select" name="state"
                                             oninput="removeError('stateErr')">
                                             <option value="" selected> --- Select State --- </option>
@@ -123,7 +123,7 @@
                                     </div>
 
                                     <div class="col-md-6 mb-4">
-                                        <label for="inputDistrict4" class="form-label">Your JNV District</label>
+                                        <label for="inputDistrict4" class="form-label">JNV District Last Attended</label>
                                         <select id="inputDistrict4" class="form-select" name="district"
                                             oninput="removeError('districtErr')">
                                             <option value="" selected> --- Select District --- </option>
@@ -140,7 +140,7 @@
 
                                 <div class="row">
                                     <div class="col-md-6 mb-4">
-                                        <label for="inputBatch4" class="form-label">Passout Batch</label>
+                                        <label for="inputBatch4" class="form-label">Year Of Passing:</label>
                                         <select id="inputBatch4" class="form-select" name="passout_batch"
                                             oninput="removeError('passout_batchErr')">
                                             <option value="" selected> --- Select Batch --- </option>
@@ -184,7 +184,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-outline mb-4">
+                                {{-- <div class="form-outline mb-4">
                                     <label class="form-label" for="ProfessionSp">Specialization (optional)</label>
                                     <input type="text" id="ProfessionSp" class="form-control"
                                         value="{{ old('profession_specialization') }}" name="profession_specialization"
@@ -192,7 +192,7 @@
                                     @error('profession_specialization')
                                         <span class="text-danger" id="ProfessionSpErr">{{ $message }}</span>
                                     @enderror
-                                </div>
+                                </div> --}}
 
 
                                 <div class="d-flex justify-content-end pt-3">

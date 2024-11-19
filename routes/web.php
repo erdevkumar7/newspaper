@@ -25,7 +25,7 @@ Route::prefix('user')->group(function () {
     Route::post('/register', [UserController::class, 'registerSubmit'])->name(('user.registerSubmit'));
 
     Route::get('/qr-code/{user_id}/view-qr', [UserController::class, 'viewQR'])->name('user.viewQR');
-    Route::get('/profile/{id}', [UserController::class, 'showProfile'])->name('user.profile');
+    Route::get('/profile/{user_id}/view-detail', [UserController::class, 'showProfile'])->name('user.profile');
 
 
     Route::get('/login', [UserController::class, 'login'])->name('user.login');

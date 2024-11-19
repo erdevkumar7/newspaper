@@ -8,11 +8,8 @@ use Illuminate\Support\Facades\DB;
 class PageController extends Controller
 {
     public function home()
-    {
-        $allbanner = DB::table('banners')
-            ->orderBy("updated_at", "desc")
-            ->get();
-        return view('user.home', compact('allbanner'));
+    {       
+        return view('user.home');
     }
 
     public function aboutUs()
