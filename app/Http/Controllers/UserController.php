@@ -65,12 +65,23 @@ class UserController extends Controller
 
             // Generate the QR code
             $qrCodeImage = time() . '_' . $user->id . '_qrcode.svg';
-            $qrCodeFileName = 'qrcodes/' . $qrCodeImage;
-            QrCode::size(250)->generate($url, public_path($qrCodeFileName));
+            $svgPath  = public_path('qrcodes/' . $qrCodeImage);
+
+            QrCode::size(250)->generate($url, $svgPath);
+            // Convert the SVG to JPG
+            $jpgFileName = time() . '_' . $user->id . '_qrcode.jpg';
+            $jpgPath = public_path('qrcodes/' . $jpgFileName);
+
+            $imagick = new \Imagick();
+            $imagick->readImage($svgPath);
+            $imagick->setImageFormat('jpeg');
+            $imagick->writeImage($jpgPath);
 
             // Save the QR code image path in the user table
-            $user->qr_code_image = $qrCodeImage;
+            $user->qr_code_image = $jpgFileName;
             $user->save();
+            // Optionally, delete the temporary SVG file
+            unlink($svgPath);
 
             return redirect()->route('user.viewQR', $user->id)->with('sucess', 'Your Registration Successful!');
         } catch (\Exception $e) {
@@ -94,6 +105,25 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'No Allumni Found!');
         }
         return view('user.profile', compact('user'));
+    }
+
+    public function downloadQRCode($user_id)
+    {
+        $user = User::find($user_id);
+        if (!$user) {
+            return redirect()->back()->with('error', 'No Allumni Found!');
+        }
+
+        $qrCodePath = public_path('qrcodes/' . $user->qr_code_image);
+
+        // Check if the file exists
+        if (file_exists($qrCodePath)) {
+            return response()->download($qrCodePath, $user->first_name . '_QRCode.jpg', [
+                'Content-Type' => 'image/jpeg',
+            ]);
+        }
+
+        return redirect()->back()->with('error', 'QR Code not found.');
     }
 
 
