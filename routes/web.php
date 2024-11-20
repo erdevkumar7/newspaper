@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminNewspaperController;
 use App\Http\Controllers\AdminPageController;
+use App\Http\Controllers\OrganizerController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
@@ -106,4 +107,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/add-page-setting', [AdminPageController::class, 'addPageSetting'])->name('admin.addPageSetting');
         Route::post('/add-page-setting', [AdminPageController::class, 'addPageSettingSubmit'])->name('admin.addPageSettingSubmit');
     });
+});
+
+Route::prefix('organizer')->group(function(){
+    Route::get('/register', [OrganizerController::class, 'organizerRegForm'])->name('organizer.register');
+    Route::post('/register', [OrganizerController::class, 'organizerRegisterSubmit'])->name('organizer.registerSubmit');
 });
