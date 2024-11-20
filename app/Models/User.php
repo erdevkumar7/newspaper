@@ -27,7 +27,6 @@ class User extends Authenticatable
         'district',
         'passout_batch',
         'profession',
-        'profession_specialization',
         'qr_code_image',
 
         'status',     

@@ -1,7 +1,7 @@
 @extends('user.layout')
 @section('page_content')
     <div class="row d-flex justify-content-center align-items-center h-100">
-        <form action="{{route('user.registerSubmit')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('user.registerSubmit') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="col">
                 <div class="card card-registration my-2">
@@ -17,8 +17,8 @@
 
                     <div class="row g-0">
                         <div class="col-xl-6 d-none d-xl-block">
-                            <img src="{{asset('/public/images/allumni_img/allumni3.jpg')}}"
-                                alt="Sample photo" class="img-fluid"
+                            <img src="{{ asset('/public/images/allumni_img/allumni3.jpg') }}" alt="Sample photo"
+                                class="img-fluid"
                                 style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem; height: 95%;" />
                         </div>
                         <div class="col-xl-6">
@@ -111,11 +111,11 @@
                                         <select id="inputState4" class="form-select" name="state"
                                             oninput="removeError('stateErr')">
                                             <option value="" selected> --- Select State --- </option>
-                                            <option value="madhyapradesh"
-                                                {{ old('state') == 'madhyapradesh' ? 'selected' : '' }}> Madhya Pradesh
-                                            </option>
-                                            <option value="other" {{ old('state') == 'other' ? 'selected' : '' }}> Other
-                                            </option>
+                                            @foreach ($jnvSchools as $state => $districts)
+                                                <option value="{{ $state }}"
+                                                    {{ old('state') == $state ? 'selected' : '' }}>{{ $state }}
+                                                </option>
+                                            @endforeach
                                         </select>
                                         @error('state')
                                             <span class="text-danger" id="stateErr">{{ $message }}</span>
@@ -125,16 +125,14 @@
                                     <div class="col-md-6 mb-4">
                                         <label for="inputDistrict4" class="form-label">JNV District Last Attended</label>
                                         <select id="inputDistrict4" class="form-select" name="district"
-                                            oninput="removeError('districtErr')">
+                                            oninput="removeError('districtErr')"
+                                            data-old-district="{{ old('district') }}">
                                             <option value="" selected> --- Select District --- </option>
-                                            <option value="indore">Indore</option>
-                                            <option value="dewas">Dewas</option>
-                                            <option value="ujjain">Ujjain</option>
-                                            <option value="sehore"> Sehore </option>
                                         </select>
                                         @error('district')
                                             <span class="text-danger" id="districtErr">{{ $message }}</span>
                                         @enderror
+
                                     </div>
                                 </div>
 
@@ -144,17 +142,18 @@
                                         <select id="inputBatch4" class="form-select" name="passout_batch"
                                             oninput="removeError('passout_batchErr')">
                                             <option value="" selected> --- Select Batch --- </option>
-                                            <option value="2024">2024</option>
-                                            <option value="2023">2023</option>
-                                            <option value="2022">2022</option>
-                                            <option value="2021">2021</option>
-                                            <option value="2020">2020</option>
-                                            <option value="2019">2019</option>
+                                            @for ($year = 1954; $year <= 2024; $year++)
+                                                <option value="{{ $year }}"
+                                                    {{ old('passout_batch') == $year ? 'selected' : '' }}>
+                                                    {{ $year }}
+                                                </option>
+                                            @endfor
                                         </select>
                                         @error('passout_batch')
                                             <span class="text-danger" id="passout_batchErr">{{ $message }}</span>
                                         @enderror
                                     </div>
+
 
                                     <div class="col-md-6 mb-4">
                                         <label class="form-label" for="Profession">Profession</label>
@@ -184,16 +183,6 @@
                                     </div>
                                 </div>
 
-                                {{-- <div class="form-outline mb-4">
-                                    <label class="form-label" for="ProfessionSp">Specialization (optional)</label>
-                                    <input type="text" id="ProfessionSp" class="form-control"
-                                        value="{{ old('profession_specialization') }}" name="profession_specialization"
-                                        oninput="removeError('ProfessionSpErr')" />
-                                    @error('profession_specialization')
-                                        <span class="text-danger" id="ProfessionSpErr">{{ $message }}</span>
-                                    @enderror
-                                </div> --}}
-
 
                                 <div class="d-flex justify-content-end pt-3">
                                     <button type="submit" data-mdb-button-init data-mdb-ripple-init
@@ -206,5 +195,47 @@
                 </div>
             </div>
         </form>
+        <script>
+            const jnvSchools = @json($jnvSchools);
+
+            const stateSelect = document.getElementById('inputState4');
+            const districtSelect = document.getElementById('inputDistrict4');
+
+            function populateDistricts(state, oldDistrict = null) {
+                // Clear previous options
+                districtSelect.innerHTML = '<option value="" selected> --- Select District --- </option>';
+
+                // Populate districts
+                if (jnvSchools[state]) {
+                    jnvSchools[state].forEach(function(district) {
+                        const option = document.createElement('option');
+                        option.value = district;
+                        option.textContent = district;
+
+                        // Mark the old value as selected
+                        if (district === oldDistrict) {
+                            option.selected = true;
+                        }
+
+                        districtSelect.appendChild(option);
+                    });
+                }
+            }
+
+            // Handle state change
+            stateSelect.addEventListener('change', function() {
+                populateDistricts(this.value);
+            });
+
+            // Populate districts on page load (if there's an old value)
+            const oldState = stateSelect.value;
+            const oldDistrict = districtSelect.getAttribute('data-old-district');
+
+            if (oldState) {
+                populateDistricts(oldState, oldDistrict);
+            }
+        </script>
+
+
     </div>
 @endsection

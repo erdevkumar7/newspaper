@@ -10,12 +10,16 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Support\Facades\File;
 
 class UserController extends Controller
 {
     public function register()
     {
-        return view('user.register');
+        $jsonPath = public_path('jnv_schools.json');
+        $jnvSchools = json_decode(File::get($jsonPath), true);
+
+        return view('user.register', compact('jnvSchools'));
     }
 
 
@@ -40,13 +44,12 @@ class UserController extends Controller
                 'required',
                 'regex:/^[6-9]\d{9}$/',
             ],
-            'city' => 'required|string',
+            'city' => 'required|string|max:30',
             'gender' => 'required',
             'state' => 'required|string',
             'district' => 'required|string',
             'passout_batch' => 'required|string',
             'profession' => 'required|string',
-            'profession_specification' => 'nullable|string|max:100',
             'password' => 'required|string|min:6',
         ], [
             'first_name.regex' => 'Name field must contain only letters and spaces',
