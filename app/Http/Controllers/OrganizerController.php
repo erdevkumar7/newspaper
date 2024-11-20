@@ -50,7 +50,7 @@ class OrganizerController extends Controller
            
             $organizer = Organizer::create($validatedData);
 
-            return redirect()->route('user.register')->with('success', 'Your Registration Successful!');
+            return redirect()->route('home')->with('success', 'Your Registration Successful!');
             
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to create alumni: ' . $e->getMessage());

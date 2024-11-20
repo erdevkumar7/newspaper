@@ -222,8 +222,7 @@
             if (oldState) {
                 populateDistricts(oldState, oldDistrict);
             }
-        </script> --}}
-
+        </script> --}}     
 
     </div>
 @endsection
