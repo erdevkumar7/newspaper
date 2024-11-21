@@ -42,7 +42,13 @@
                             <li><a href="{{ route('admin.adduser') }}">Add Alumni</a></li>
                         </ul>
                     </li>
-               
+
+                    <li class="new-manage"><a><i class="fa fa-globe"></i> Organizer-Management <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="{{ route('admin.allOrganizer') }}">All Organizer</a></li>
+                            <li><a href="">Add Organizer</a></li>
+                        </ul>
+                    </li>
                     {{-- <li class="new-manage"><a><i class="fa fa-file-text-o"></i> News-paper Management <span
                                 class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
@@ -66,7 +72,7 @@
 
 
 
-                        
+
 
                     {{-- <li><a><i class="fa fa-cogs"></i> Settings <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Organizer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class OrganizerController extends Controller
@@ -47,13 +48,48 @@ class OrganizerController extends Controller
             // Hash the password and add it to the validated data
             $validatedData['original_password'] = $validatedData['password'];
             $validatedData['password'] = Hash::make($validatedData['password']);
-           
+
             $organizer = Organizer::create($validatedData);
 
             return redirect()->route('home')->with('success', 'Your Registration Successful!');
-            
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to create alumni: ' . $e->getMessage());
         }
+    }
+
+    public function allOrganizer()
+    {
+        $allorganizer = DB::table('organizers')->orderBy('created_at', 'desc')->get();
+        return view('admin-organizer-manage.all-organizer', compact('allorganizer'));
+    }
+
+    public function updateOrganizerStatus(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:organizers,id',
+            'status' => 'required|boolean'
+        ]);
+        $user = Organizer::find($request->user_id);
+        if ($user) {
+            $user->status = $request->status;
+            $user->save();
+
+            return response()->json(['success' => true, 'message' => 'Status updated successfully!']);
+        }
+        return response()->json(['success' => false, 'message' => 'User not found!']);
+    }
+
+    public function deleteOrganizer(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:organizers,id'
+        ]);
+        $user = Organizer::find($request->user_id);
+        if ($user) {
+            $user->delete();
+            return response()->json(['success' => true, 'message' => 'Organizer deleted successfully.']);
+        }
+
+        return response()->json(['success' => false, 'message' => 'Organizer not found.']);
     }
 }

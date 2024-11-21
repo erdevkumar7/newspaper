@@ -38,7 +38,7 @@ Route::prefix('user')->group(function () {
 
     // Reset Password
     Route::get('/reset-password/{token}', [UserController::class, 'showResetPasswordForm'])->name('password.reset');
-    Route::post('/reset-password', [UserController::class, 'resetPassword'])->name('user.password.update');  
+    Route::post('/reset-password', [UserController::class, 'resetPassword'])->name('user.password.update');
 
     Route::middleware(['user'])->group(function () {
         Route::get('/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
@@ -70,6 +70,16 @@ Route::prefix('admin')->group(function () {
         Route::delete('/delete-user', [AdminController::class, 'deleteUser'])->name('admin.deleteuser');
         Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
     });
+
+    // Admin Organizer Functionality
+    Route::middleware('admin')->group(function () {
+        Route::get('/all-organizer', [OrganizerController::class, 'allOrganizer'])->name('admin.allOrganizer');
+        Route::post('/organizer/update-status', [OrganizerController::class, 'updateOrganizerStatus'])->name('admin.updateOrganizerStatus');
+
+        Route::delete('/delete-organizer', [OrganizerController::class, 'deleteOrganizer'])->name('admin.deleteOrganizer');
+    });
+
+
     // Admin Newspaper Functionality
     Route::middleware('admin')->group(function () {
         Route::get('/all-newspaper', [AdminNewspaperController::class, 'allNewsPaper'])->name('admin.allnewspaper');
@@ -109,7 +119,7 @@ Route::prefix('admin')->group(function () {
     });
 });
 
-Route::prefix('organizer')->group(function(){
+Route::prefix('organizer')->group(function () {
     Route::get('/register', [OrganizerController::class, 'organizerRegForm'])->name('organizer.register');
     Route::post('/register', [OrganizerController::class, 'organizerRegisterSubmit'])->name('organizer.registerSubmit');
 });
