@@ -1,5 +1,6 @@
 @extends('user.layout')
 @section('page_content')
+<div class="container">
     <div class="row d-flex justify-content-center align-items-center h-100">
         <form action="{{ route('organizer.registerSubmit') }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -52,7 +53,6 @@
 
                                 <div class="form-outline mb-4">
                                     {{-- <label class="form-label" for="form3Example97">Email ID</label> --}}
-                                    <input type="hidden" value="Dev@123" name="password">
                                     <input type="text" id="form3Example97" class="form-control" name="email"
                                         value="{{ old('email') }}" placeholder="Email" oninput="removeError('emailErr')" />
                                     @error('email')
@@ -174,7 +174,7 @@
 
                                 <div class="d-flex justify-content-end pt-3">
                                     <button type="submit" data-mdb-button-init data-mdb-ripple-init
-                                        class="btn btn-warning btn-lg ms-2">Submit</button>
+                                        class="btn btn-warning ms-2">Submit</button>
                                 </div>
 
                             </div>
@@ -182,47 +182,8 @@
                     </div>
                 </div>
             </div>
-        </form>
-        {{-- <script>
-            const jnvSchools = @json($jnvSchools);
-
-            const stateSelect = document.getElementById('inputState4');
-            const districtSelect = document.getElementById('inputDistrict4');
-
-            function populateDistricts(state, oldDistrict = null) {
-                // Clear previous options
-                districtSelect.innerHTML = '<option value="" selected> --- Select District --- </option>';
-
-                // Populate districts
-                if (jnvSchools[state]) {
-                    jnvSchools[state].forEach(function(district) {
-                        const option = document.createElement('option');
-                        option.value = district;
-                        option.textContent = district;
-
-                        // Mark the old value as selected
-                        if (district === oldDistrict) {
-                            option.selected = true;
-                        }
-
-                        districtSelect.appendChild(option);
-                    });
-                }
-            }
-
-            // Handle state change
-            stateSelect.addEventListener('change', function() {
-                populateDistricts(this.value);
-            });
-
-            // Populate districts on page load (if there's an old value)
-            const oldState = stateSelect.value;
-            const oldDistrict = districtSelect.getAttribute('data-old-district');
-
-            if (oldState) {
-                populateDistricts(oldState, oldDistrict);
-            }
-        </script> --}}     
+        </form>    
 
     </div>
+</div>
 @endsection

@@ -21,6 +21,10 @@
             <a href="{{ route('user.register') }}">
                 <button class="btn btn-warning">Register</button>
             </a>
+
+            <a href="{{ route('user.register') }}">
+                <button class="btn btn-warning">Login</button>
+            </a>
         </div>
 
         {{-- <div class="header-social-links">

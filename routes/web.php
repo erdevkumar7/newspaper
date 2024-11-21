@@ -122,4 +122,14 @@ Route::prefix('admin')->group(function () {
 Route::prefix('organizer')->group(function () {
     Route::get('/register', [OrganizerController::class, 'organizerRegForm'])->name('organizer.register');
     Route::post('/register', [OrganizerController::class, 'organizerRegisterSubmit'])->name('organizer.registerSubmit');
+
+
+    Route::get('/login', [OrganizerController::class, 'showLoginForm'])->name('organizer.login');
+    Route::post('/login', [OrganizerController::class, 'loginSubmit'])->name('organizer.loginSubmit');
+    Route::post('/logout', [OrganizerController::class, 'logout'])->name('organizer.logout');    
+
+    Route::group(['middleware' => 'organizer.auth'], function () {
+        Route::get('/dashboard', [OrganizerController::class, 'dashboard'])->name('organizer.dashboard');
+        Route::post('/logout', [OrganizerController::class, 'logout'])->name('organizer.logout');
+    });
 });

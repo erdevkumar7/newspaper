@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Organizer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -51,10 +52,44 @@ class OrganizerController extends Controller
 
             $organizer = Organizer::create($validatedData);
 
-            return redirect()->route('home')->with('success', 'Your Registration Successful!');
+            return redirect()->route('organizer.login')->with('success', 'Your Registration Successful!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to create alumni: ' . $e->getMessage());
         }
+    }
+
+    public function showLoginForm()
+    {
+        return view('organizer.login');
+    }
+
+    public function loginSubmit(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+        ]);
+
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::guard('organizer')->attempt($credentials)) {
+            return redirect()->route('organizer.dashboard')->with('success', 'Logged in successfully!');
+        }
+
+        return back()->withErrors([
+            'email' => 'Invalid email or password.',
+        ]);
+    }
+
+    public function dashboard()
+    {
+        return view('organizer.dashboard');
+    }
+
+    public function logout()
+    {
+        Auth::guard('organizer')->logout();
+        return redirect()->route('organizer.login')->with('success', 'Logged out successfully!');
     }
 
     public function allOrganizer()
