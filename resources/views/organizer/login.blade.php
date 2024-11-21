@@ -44,29 +44,15 @@
                                         @enderror
                                     </div>
 
-                                    {{-- <div class="row">
-                                        <div class="col-md-6 mb-4">
-                                            <div class="form-outline">
-                                                <input type="Password" name="password" class="form-control" id="password"
-                                                    placeholder="Password" oninput="removeError('PasswordErr')">
-                                                @error('password')
-                                                    <span class="text-danger" id="PasswordErr">{{ $message }}</span>
-                                                @enderror
-                                            </div>
+                                    <div class="form-outline mb-4">
+                                        <div class="separator">
+                                            <p class="change_link">Don't have Organizer ?
+                                                <a href="{{ route('organizer.register') }}" class="to_register"> Register
+                                                </a>
+                                            </p>
                                         </div>
-                                        <div class="col-md-6 mb-4">
-                                            <div class="form-outline">
-                                                <input type="Password" name="password_confirmation" class="form-control"
-                                                    id="password_confirm" placeholder="Confirm password"
-                                                    oninput="removeError('confirmPasswordErr')">
-                                                @error('password_confirmation')
-                                                    <span class="text-danger" id="ConfirmPasswordErr">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                    </div> --}}
-
-
+                                    </div>
+                                    
                                     <div class="d-flex justify-content-end pt-3">
                                         <button type="submit" data-mdb-button-init data-mdb-ripple-init
                                             class="btn btn-warning ms-2">Submit</button>

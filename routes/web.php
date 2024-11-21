@@ -25,8 +25,11 @@ Route::prefix('user')->group(function () {
     Route::get('/register', [UserController::class, 'register'])->name(('user.register'));
     Route::post('/register', [UserController::class, 'registerSubmit'])->name(('user.registerSubmit'));
 
+    Route::group(['middleware' => 'organizer.auth'], function () {
+        Route::get('/profile/{user_id}/view-detail', [UserController::class, 'showProfile'])->name('user.profile');
+    });
+
     Route::get('/qr-code/{user_id}/view-qr', [UserController::class, 'viewQR'])->name('user.viewQR');
-    Route::get('/profile/{user_id}/view-detail', [UserController::class, 'showProfile'])->name('user.profile');
     Route::get('/download-qr-code/{user_id}', [UserController::class, 'downloadQRCode'])->name('user.qrdownload');
 
     Route::get('/login', [UserController::class, 'login'])->name('user.login');
@@ -126,7 +129,7 @@ Route::prefix('organizer')->group(function () {
 
     Route::get('/login', [OrganizerController::class, 'showLoginForm'])->name('organizer.login');
     Route::post('/login', [OrganizerController::class, 'loginSubmit'])->name('organizer.loginSubmit');
-    Route::post('/logout', [OrganizerController::class, 'logout'])->name('organizer.logout');    
+    Route::post('/logout', [OrganizerController::class, 'logout'])->name('organizer.logout');
 
     Route::group(['middleware' => 'organizer.auth'], function () {
         Route::get('/dashboard', [OrganizerController::class, 'dashboard'])->name('organizer.dashboard');

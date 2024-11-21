@@ -63,6 +63,24 @@ class OrganizerController extends Controller
         return view('organizer.login');
     }
 
+    // public function loginSubmit(Request $request)
+    // {
+    //     $request->validate([
+    //         'email' => 'required|email',
+    //         'password' => 'required|min:6',
+    //     ]);
+
+    //     $credentials = $request->only('email', 'password');
+
+    //     if (Auth::guard('organizer')->attempt($credentials)) {
+    //         return redirect()->route('organizer.dashboard')->with('success', 'Logged in successfully!');
+    //     }
+
+    //     return back()->withErrors([
+    //         'email' => 'Invalid email or password.',
+    //     ]);
+    // }
+
     public function loginSubmit(Request $request)
     {
         $request->validate([
@@ -71,6 +89,19 @@ class OrganizerController extends Controller
         ]);
 
         $credentials = $request->only('email', 'password');
+        $organizer = Organizer::where('email', $credentials['email'])->first();
+
+        if (!$organizer) {
+            return back()->withErrors([
+                'email' => 'Invalid email or password.',
+            ]);
+        }
+
+        if ($organizer->status == 0) {
+            return back()->withErrors([
+                'email' => 'Your account is not verified. Please contact the admin.',
+            ]);
+        }
 
         if (Auth::guard('organizer')->attempt($credentials)) {
             return redirect()->route('organizer.dashboard')->with('success', 'Logged in successfully!');
@@ -80,6 +111,7 @@ class OrganizerController extends Controller
             'email' => 'Invalid email or password.',
         ]);
     }
+
 
     public function dashboard()
     {

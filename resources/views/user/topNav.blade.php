@@ -22,8 +22,8 @@
                 <button class="btn btn-warning">Register</button>
             </a>
 
-            <a href="{{ route('user.register') }}">
-                <button class="btn btn-warning">Login</button>
+            <a href="{{ route('organizer.login') }}">
+                <button class="btn btn-default" style="background: #2ec2fa">Login</button>
             </a>
         </div>
 
