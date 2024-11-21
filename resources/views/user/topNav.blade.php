@@ -1,29 +1,32 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">MAAN(NAVOTSAV-3.0)</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{route('home')}}">Home</a>
-                </li>
-                {{-- <li class="nav-item">
-                    <a class="nav-link" href="#">Alumni</a>
-                </li> --}}
+<header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container position-relative d-flex align-items-center justify-content-between">
 
+        <a href="{{ route('home') }}" class="logo d-flex align-items-center me-auto me-xl-0">
+            <!-- Uncomment the line below if you also wish to use an image logo -->
+            <!-- <img src="assets/img/logo.png" alt=""> -->
+            <h1 class="sitename">MAAN(NAVOTSAV-3.0)</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+            <ul>
+                <li><a href="{{ route('home') }}" class="active">Home</a></li>
+                <li><a href="#" class="active">About</a></li>
+                <li><a href="#" class="active">Events</a></li>
+                <li><a href="#" class="active">Contact</a></li>
             </ul>
-            <div class="d-flex">
-                <a class="nav-link" href="{{route('user.register')}}">
-                    <button class="btn btn-warning">Register</button>
-                </a>
-            </div>
-            {{-- <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form> --}}
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+        <div class="header-social-links">
+            <a href="{{ route('user.register') }}">
+                <button class="btn btn-warning">Register</button>
+            </a>
         </div>
+
+        {{-- <div class="header-social-links">
+            <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+        </div> --}}
+
     </div>
-</nav>
+</header>

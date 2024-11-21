@@ -6,11 +6,12 @@
 </head>
 
 <body>    
-    <div class="container h-100">
+    <div>
         @include('user.topNav')
 
         @yield('page_content') 
         
+        @include('user.footer')
         @include('user.footerJS')
     </div>
 

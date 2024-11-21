@@ -1,5 +1,6 @@
 @extends('user.layout')
 @section('page_content')
+<div class="container">
     <div class="row d-flex justify-content-center align-items-center h-100">
         <form action="{{ route('user.registerSubmit') }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -238,4 +239,5 @@
 
 
     </div>
+</div>
 @endsection

@@ -86,7 +86,7 @@ class UserController extends Controller
             // Optionally, delete the temporary SVG file
             unlink($svgPath);
 
-            return redirect()->route('user.viewQR', $user->id)->with('sucess', 'Your Registration Successful!');
+            return redirect()->route('user.viewQR', $user->id)->with('success', 'Your Registration Successful!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to create alumni: ' . $e->getMessage());
         }
