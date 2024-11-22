@@ -11,11 +11,7 @@
                             <h2 class="qr-head">Welcome, Organizer!</h2>
                             <p>Thanks for Your Support for the event.</p>
                            
-                            <form action="{{ route('organizer.logout') }}" method="post"
-                                enctype="multipart/form-data">
-                                @csrf
-                                <button type="submit" class="btn btn-warning mt-4">Logout</button>
-                            </form>
+                       
                         </div>
                     </div>
                 </div>

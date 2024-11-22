@@ -90,15 +90,15 @@ class UserController extends Controller
             // Log in the user
             Auth::login($user);
 
-            return redirect()->route('user.viewQR', $user->id)->with('success', 'Your Registration Successful!');
+            return redirect()->route('user.viewQR')->with('success', 'Your Registration Successful!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to create alumni: ' . $e->getMessage());
         }
     }
 
-    public function viewQR($user_id)
+    public function viewQR()
     {
-        $user = User::find($user_id);
+        $user = User::find(auth()->user()->id);
         if (!$user) {
             return redirect()->back()->with('error', 'No Allumni Found!');
         }

@@ -50,7 +50,7 @@
                                         <a href="{{ route('user.dashboard') }}">
                                             <button type="button" class="btn btn-warning">Profile</button>
                                         </a>
-                                        <a href="{{ route('user.viewQR', $user->id) }}">
+                                        <a href="{{ route('user.viewQR') }}">
                                             <button type="button" class="btn btn-default"
                                                 style="background: #2ec2fa">QR-Code</button>
                                         </a>

@@ -40,7 +40,7 @@ Route::prefix('user')->group(function () {
 
     Route::middleware(['user'])->group(function () {
         Route::get('/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
-        Route::get('/qr-code/{user_id}/view-qr', [UserController::class, 'viewQR'])->name('user.viewQR');
+        Route::get('/qr-code/view-qr', [UserController::class, 'viewQR'])->name('user.viewQR');
         Route::get('/download-qr-code/{user_id}', [UserController::class, 'downloadQRCode'])->name('user.qrdownload');
         Route::post('/logout', [UserController::class, 'logout'])->name('user.logout');
     });

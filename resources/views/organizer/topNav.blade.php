@@ -30,7 +30,7 @@
                     <button class="btn btn-warning">Register</button>
                 </a>
 
-                <a href="{{ route('organizer.login') }}">
+                <a href="{{ route('user.login') }}">
                     <button class="btn btn-default" style="background: #2ec2fa">Login</button>
                 </a>
             </div>
