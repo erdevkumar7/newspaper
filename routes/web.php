@@ -25,12 +25,7 @@ Route::prefix('user')->group(function () {
     Route::get('/register', [UserController::class, 'register'])->name(('user.register'));
     Route::post('/register', [UserController::class, 'registerSubmit'])->name(('user.registerSubmit'));
 
-    Route::group(['middleware' => 'organizer.auth'], function () {
-        Route::get('/profile/{user_id}/view-detail', [UserController::class, 'showProfile'])->name('user.profile');
-    });
-
-    Route::get('/qr-code/{user_id}/view-qr', [UserController::class, 'viewQR'])->name('user.viewQR');
-    Route::get('/download-qr-code/{user_id}', [UserController::class, 'downloadQRCode'])->name('user.qrdownload');
+    Route::get('/profile/{user_id}/view-detail', [UserController::class, 'showProfile'])->name('user.profile');
 
     Route::get('/login', [UserController::class, 'login'])->name('user.login');
     Route::post('/login', [UserController::class, 'loginSubmit'])->name('user.loginSubmit');
@@ -45,6 +40,8 @@ Route::prefix('user')->group(function () {
 
     Route::middleware(['user'])->group(function () {
         Route::get('/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
+        Route::get('/qr-code/{user_id}/view-qr', [UserController::class, 'viewQR'])->name('user.viewQR');
+        Route::get('/download-qr-code/{user_id}', [UserController::class, 'downloadQRCode'])->name('user.qrdownload');
         Route::post('/logout', [UserController::class, 'logout'])->name('user.logout');
     });
 });
@@ -134,5 +131,7 @@ Route::prefix('organizer')->group(function () {
     Route::group(['middleware' => 'organizer.auth'], function () {
         Route::get('/dashboard', [OrganizerController::class, 'dashboard'])->name('organizer.dashboard');
         Route::post('/logout', [OrganizerController::class, 'logout'])->name('organizer.logout');
+        Route::get('/view-user/{user_id}/details', [OrganizerController::class, 'showUserProfile'])->name('organizer.showUserProfile');
+        Route::post('/update-status', [AdminController::class, 'updateUserStatus'])->name('organizer.updateuserstatus');
     });
 });

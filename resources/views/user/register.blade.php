@@ -185,7 +185,10 @@
                                 </div>
 
 
-                                <div class="d-flex justify-content-end pt-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p class="change_link">Already Alumni ?
+                                        <a href="{{ route('user.login') }}" class="to_register"> Login </a>
+                                    </p>
                                     <button type="submit" data-mdb-button-init data-mdb-ripple-init
                                         class="btn btn-warning ms-2">Submit</button>
                                 </div>

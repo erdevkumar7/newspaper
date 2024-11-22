@@ -1,4 +1,4 @@
-@extends('user.layout')
+@extends('organizer.layout')
 @section('page_content')
     <div class="container">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -72,12 +72,12 @@
                                     <hr>
 
                                     <div class="d-flex justify-content-center">
-                                        @if ($user->status)
-                                            <button type="submit" data-mdb-button-init data-mdb-ripple-init
-                                                class="btn btn-success" disabled>Alumni Verified</button>
+                                        @if ($user->status == 1)
+                                            <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-success update-status"
+                                                data-id="{{ $user->id }}" data-status="1">Verified</button>
                                         @else
-                                            <button type="submit" data-mdb-button-init data-mdb-ripple-init
-                                                class="btn btn-warning">Verify Alumni</button>
+                                            <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-warning update-status"
+                                                data-id="{{ $user->id }}" data-status="0">Pending</button>
                                         @endif
 
                                     </div>
@@ -88,5 +88,49 @@
                 </div>
             </div>
         </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+        <script>
+            $(document).on('click', '.update-status', function() {
+                var userId = $(this).data('id');
+                var currentStatus = $(this).data('status');
+                var newStatus = currentStatus == 1 ? 0 : 1; // Toggle status
+
+                $.ajax({
+                    url: "{{ route('organizer.updateuserstatus') }}",
+                    type: "POST",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        user_id: userId,
+                        status: newStatus
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            // Toggle the button text and class based on the new status
+                            if (newStatus == 1) {
+                                $('button[data-id="' + userId + '"]').removeClass('btn-warning').addClass(
+                                    'btn-success').text('Verified');
+                            } else {
+                                $('button[data-id="' + userId + '"]').removeClass('btn-success').addClass(
+                                    'btn-warning').text('Pending');
+                            }
+                            $('button[data-id="' + userId + '"]').data('status',
+                                newStatus); // Update the data-status attribute
+
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: "Status updated successfully",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.responseText); // Handle any errors
+                    }
+                });
+            });
+        </script>
     </div>
 @endsection

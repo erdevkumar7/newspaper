@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Organizer;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -158,5 +159,31 @@ class OrganizerController extends Controller
         }
 
         return response()->json(['success' => false, 'message' => 'Organizer not found.']);
+    }
+
+    
+    public function showUserProfile($user_id)
+    {
+        $user = User::find($user_id);
+        if (!$user) {
+            return redirect()->back()->with('error', 'No Allumni Found!');
+        }
+        return view('organizer.view-user', compact('user'));
+    }
+
+    public function updateUserStatus(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'status' => 'required|boolean'
+        ]);
+        $user = User::find($request->user_id);
+        if ($user) {
+            $user->status = $request->status;
+            $user->save();
+
+            return response()->json(['success' => true, 'message' => 'Status updated successfully!']);
+        }
+        return response()->json(['success' => false, 'message' => 'User not found!']);
     }
 }

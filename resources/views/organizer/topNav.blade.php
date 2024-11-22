@@ -17,9 +17,9 @@
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
 
-        @if (Auth::guard('web')->check())
+        @if (Auth::guard('organizer')->check())
             <div class="header-social-links">
-                <form action="{{ route('user.logout') }}" method="post">
+                <form action="{{ route('organizer.logout') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <button type="submit" class="btn btn-warning">Logout</button>
                 </form>
@@ -30,7 +30,7 @@
                     <button class="btn btn-warning">Register</button>
                 </a>
 
-                <a href="{{ route('user.login') }}">
+                <a href="{{ route('organizer.login') }}">
                     <button class="btn btn-default" style="background: #2ec2fa">Login</button>
                 </a>
             </div>

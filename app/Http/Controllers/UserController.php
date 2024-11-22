@@ -43,6 +43,7 @@ class UserController extends Controller
             'phone_number' => [
                 'required',
                 'regex:/^[6-9]\d{9}$/',
+                'unique:users,phone_number',
             ],
             'city' => 'required|string|max:30',
             'gender' => 'required',
@@ -55,6 +56,7 @@ class UserController extends Controller
             'first_name.regex' => 'Name field must contain only letters and spaces',
             'last_name.regex' => 'Name field must contain only letters and spaces',
             'phone_number.regex' => 'The Contact number must be a valid number.',
+            'phone_number.unique' => 'The Contact number is already in use.',
         ]);
 
         try {
@@ -64,7 +66,7 @@ class UserController extends Controller
 
             // Create the user
             $user = User::create($validatedData);
-            $url = route('user.profile', ['user_id' => $user->id]);
+            $url = route('organizer.showUserProfile', ['user_id' => $user->id]);
 
             // Generate the QR code
             $qrCodeImage = time() . '_' . $user->id . '_qrcode.svg';
@@ -85,6 +87,8 @@ class UserController extends Controller
             $user->save();
             // Optionally, delete the temporary SVG file
             unlink($svgPath);
+            // Log in the user
+            Auth::login($user);
 
             return redirect()->route('user.viewQR', $user->id)->with('success', 'Your Registration Successful!');
         } catch (\Exception $e) {
@@ -154,8 +158,11 @@ class UserController extends Controller
 
     public function dashboard()
     {
-        $page = Page::where('title', 'Home')->first();
-        return view('user.dashboard', compact('page'));
+        $user = User::find(auth()->user()->id);
+        if (!$user) {
+            return redirect()->back()->with('error', 'No Allumni Found!');
+        }
+        return view('user.dashboard', compact('user'));
     }
 
     public function showForgotPasswordForm()

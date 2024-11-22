@@ -1,6 +1,6 @@
 @extends('user.layout')
 @section('page_content')
-    <main class="main">
+    {{-- <main class="main">
         <!-- Membership Section -->
         <section id="" class="my-membership section">
             <div class="container">
@@ -10,13 +10,13 @@
                         <form action="{{ route('user.loginSubmit') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="item form-group">
-                                {{-- email --}}
+                               
                                 <div class="col-md-12 col-sm-12 mb-3">
                                     <label for="email">Email *</label>
                                     <input type="email" class="form-control" name="email" id="email"
                                         value="{{ old('email') }}" oninput="removeError('emailPassErr')">
                                 </div>
-                                {{-- password --}}
+                                
                                 <div class="col-md-12 col-sm-12">
                                     <label for="password">Password *</label>
                                     <div style="position: relative;">
@@ -41,7 +41,6 @@
                                 <div class="clearfix"></div>
                             </div>
 
-                            {{-- submit --}}
                             <div class="item btn-form form-group">
                                 <div class="col-md-12 col-sm-12 mt-4">
                                     <button type="submit" class="btn btn-success">Submit</button>
@@ -56,7 +55,7 @@
             </div>
 
         </section><!-- /Membership Section -->
-        {{-- sweetalert2 JS --}}
+     
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         @if (session('success'))
             <script>
@@ -93,5 +92,88 @@
                 }
             });
         </script>
-    </main>
+    </main> --}}
+
+
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <form action="" method="POST">
+                @csrf
+                <div class="col">
+                    <div class="card card-registration my-2">
+                        {{-- @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif --}}
+
+                        <div class="row g-0">
+                            <div class="col-xl-6 d-none d-xl-block">
+                                <img src="{{ asset('/public/images/allumni_img/allumni3.jpg') }}" alt="Sample photo"
+                                    class="img-fluid"
+                                    style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="card-body p-md-4 text-black">
+                                    <h3 class="mb-4 text-uppercase">Alumni Login Form </h3>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="form3Example97">Email ID *</label>
+                                        <input type="text" id="form3Example97" class="form-control" name="email"
+                                            value="{{ old('email') }}" oninput="removeError('emailErr')" />
+                                        @error('email')
+                                            <span class="text-danger" id="emailErr">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="orgPassword">Password *</label>
+                                        <input type="Password" name="password" class="form-control" id="orgPassword"
+                                            oninput="removeError('PasswordErr')">
+                                        @error('password')
+                                            <span class="text-danger" id="PasswordErr">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <div class="separator d-flex justify-content-between align-items-center">
+                                            <p class="change_link">Don't have Alumni ?
+                                                <a href="{{ route('user.register') }}" class="to_register"> Register
+                                                </a>
+                                            </p>
+                                            <p class="change_link">Organizer <a href="{{ route('organizer.login') }}"
+                                                    class="to_register"> Login</a></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex justify-content-end">
+                                        <button type="submit" data-mdb-button-init data-mdb-ripple-init
+                                            class="btn btn-warning ms-2">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        @if (session('success'))
+            <script>
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "{{ session('success') }}",
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            </script>
+        @endif
+    </div>
 @endsection

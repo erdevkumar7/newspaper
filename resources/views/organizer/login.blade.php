@@ -1,4 +1,4 @@
-@extends('user.layout')
+@extends('organizer.layout')
 @section('page_content')
     <div class="container">
         <div class="row d-flex justify-content-center align-items-center h-100">
