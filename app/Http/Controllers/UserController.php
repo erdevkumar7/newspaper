@@ -141,20 +141,30 @@ class UserController extends Controller
 
     public function loginSubmit(Request $request)
     {
+        // Validate input
         $credential = $request->validate([
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
+            'phone_number' => 'required|regex:/^[6-9]\d{9}$/', // Validate phone number format
+        ], [
+            'phone_number.regex' => 'The Contact number must be a valid mobile number.',
         ]);
 
-        if (Auth::guard('web')->attempt($credential)) { // Using 'web' guard for users
-            return redirect()->route('user.dashboard'); // Redirect to the user dashboard
+        // Check if the user exists and matches the given phone number
+        $user = User::where('email', $request->email)
+            ->where('phone_number', $request->phone_number)
+            ->first();
+
+        if ($user && Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password])) {
+            return redirect()->route('user.dashboard')->with('success', 'Logged in successfully!'); // Redirect to the user dashboard
         }
 
         // Authentication failed
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'The provided credentials do not match our records!',
         ])->withInput();
     }
+
 
     public function dashboard()
     {

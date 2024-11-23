@@ -122,7 +122,7 @@
                                     <h3 class="mb-4 text-uppercase">Alumni Login Form </h3>
 
                                     <div class="form-outline mb-4">
-                                        <label class="form-label" for="form3Example97">Email ID *</label>
+                                        <label class="form-label" for="form3Example97">Email ID *</label>                                        
                                         <input type="text" id="form3Example97" class="form-control" name="email"
                                             value="{{ old('email') }}" oninput="removeError('emailErr')" />
                                         @error('email')
@@ -130,23 +130,31 @@
                                         @enderror
                                     </div>
 
-                                    <div class="form-outline mb-4">
+                                    {{-- <div class="form-outline mb-4">
                                         <label class="form-label" for="orgPassword">Password *</label>
                                         <input type="Password" name="password" class="form-control" id="orgPassword"
                                             oninput="removeError('PasswordErr')">
                                         @error('password')
                                             <span class="text-danger" id="PasswordErr">{{ $message }}</span>
                                         @enderror
+                                    </div> --}}
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="phone_number">Contact Number *</label>
+                                        <input type="hidden" value="Dev@123" name="password">
+                                        <input type="text" id="phone_number" name="phone_number"
+                                            value="{{ old('phone_number') }}" oninput="removeError('phone_numberErr')" class="form-control" />
+                                        @error('phone_number')
+                                            <span class="text-danger" id="phone_numberErr">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <div class="separator d-flex justify-content-between align-items-center">
+                                        <div class="separator">
                                             <p class="change_link">Don't have Alumni ?
                                                 <a href="{{ route('user.register') }}" class="to_register"> Register
                                                 </a>
                                             </p>
-                                            <p class="change_link">Organizer <a href="{{ route('organizer.login') }}"
-                                                    class="to_register"> Login</a></p>
                                         </div>
                                     </div>
 

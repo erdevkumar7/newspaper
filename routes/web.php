@@ -120,6 +120,7 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::prefix('organizer')->group(function () {
+    Route::get('/', [OrganizerController::class, 'organizerHome'])->name('organizer.home');
     Route::get('/register', [OrganizerController::class, 'organizerRegForm'])->name('organizer.register');
     Route::post('/register', [OrganizerController::class, 'organizerRegisterSubmit'])->name('organizer.registerSubmit');
 

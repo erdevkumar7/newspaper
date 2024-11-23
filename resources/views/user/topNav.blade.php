@@ -13,11 +13,22 @@
                 <li><a href="#" class="active">About</a></li>
                 <li><a href="#" class="active">Events</a></li>
                 <li><a href="#" class="active">Contact</a></li>
+                @if (Auth::guard('web')->check())
+                    <form action="{{ route('user.logout') }}" method="post">
+                        @csrf
+                        <li>
+                            <button type="submit" class="btn btn-warning">Logout</button>
+                        </li>
+                    </form>
+                @else
+                    <li><a href="{{ route('user.register') }}" class="active"><button
+                                class="btn btn-warning">Register</button></a></li>
+                @endif
             </ul>
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
 
-        @if (Auth::guard('web')->check())
+        {{-- @if (Auth::guard('web')->check())
             <div class="header-social-links">
                 <form action="{{ route('user.logout') }}" method="post">
                     @csrf
@@ -34,7 +45,7 @@
                     <button class="btn btn-default" style="background: #2ec2fa">Login</button>
                 </a>
             </div>
-        @endif
+        @endif --}}
 
 
         {{-- <div class="header-social-links">

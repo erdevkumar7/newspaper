@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Hash;
 
 class OrganizerController extends Controller
 {
+    public function organizerHome()
+    {
+        return view('organizer.home');
+    }
     public function organizerRegForm()
     {
         return view('organizer.register');
