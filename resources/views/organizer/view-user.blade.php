@@ -71,15 +71,18 @@
                                     </div>
                                     <hr>
 
-                                    <div class="d-flex justify-content-center">
+                                    <div class="d-flex justify-content-center gap-3">
                                         @if ($user->status == 1)
-                                            <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-success update-status"
-                                                data-id="{{ $user->id }}" data-status="1">Verified</button>
+                                            <button type="button" data-mdb-button-init data-mdb-ripple-init
+                                                class="btn btn-success update-status" data-id="{{ $user->id }}"
+                                                data-status="1">Verified</button>
                                         @else
-                                            <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-warning update-status"
-                                                data-id="{{ $user->id }}" data-status="0">Pending</button>
+                                            <button type="button" data-mdb-button-init data-mdb-ripple-init
+                                                class="btn btn-warning update-status" data-id="{{ $user->id }}"
+                                                data-status="0">Pending</button>
                                         @endif
-
+                                        <a href="{{route('organizer.dashboard')}}"><button type="button" data-mdb-button-init data-mdb-ripple-init
+                                                class="btn btn-warning">Back</button></a>
                                     </div>
                                 </div>
                             </div>
@@ -89,7 +92,7 @@
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
             $(document).on('click', '.update-status', function() {
                 var userId = $(this).data('id');
