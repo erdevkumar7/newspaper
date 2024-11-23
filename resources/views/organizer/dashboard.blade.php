@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col">
-                <div class="card card-registration my-4">
+                <div class="card card-registration my-2">
                     <div class="row g-0">
                         <div class="col-xl-12">
                             <div class="card-body p-md-4 text-black">
@@ -19,15 +19,7 @@
                                         </a>
                                     </div>
                                     <h3 class="mb-4 text-center text-uppercase flex-grow-1 qr-head">My Profile Details</h3>
-                                    <div>
-                                        @if ($organizer->status)
-                                            <button type="button" data-mdb-button-init data-mdb-ripple-init
-                                                class="btn btn-success"> Verified </button>
-                                        @else
-                                            <button type="button" data-mdb-button-init data-mdb-ripple-init
-                                                class="btn btn-warning">Pending</button>
-                                        @endif
-                                    </div>
+
                                 </div>
                                 <hr>
                                 <div class="row">
@@ -67,8 +59,14 @@
                                         <input type="text" value="{{ $organizer->role ?? 'Not Available' }}"
                                             class="form-control" disabled>
                                     </div>
+
+                                    <div class="form-outline col-md-6 mb-3">
+                                        <label class="form-label">Password </label>
+                                        <input type="text" value="{{ $organizer->original_password ?? 'Not Available' }}"
+                                            class="form-control" disabled>
+                                    </div>
                                     <hr>
-                                    {{-- <div class="d-flex justify-content-center">
+                                    <div class="d-flex justify-content-center">
                                         @if ($organizer->status)
                                             <button type="button" data-mdb-button-init data-mdb-ripple-init
                                                 class="btn btn-success">Profile Verified</button>
@@ -77,7 +75,7 @@
                                                 class="btn btn-warning">Verification Pending</button>
                                         @endif
 
-                                    </div> --}}
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -19,50 +19,33 @@
                                         </a>
                                     </div>
                                     <h3 class="mb-4 text-center text-uppercase flex-grow-1 qr-head">Welcome, Organizer!</h3>
-                                        {{-- <p>Thanks for Your Support for the event.</p> --}}
-                                    <div>
-                                        @if ($organizer->status)
-                                            <button type="button" data-mdb-button-init data-mdb-ripple-init
-                                                class="btn btn-success"> Verified </button>
-                                        @else
-                                            <button type="button" data-mdb-button-init data-mdb-ripple-init
-                                                class="btn btn-warning">Pending</button>
-                                        @endif
-                                    </div>
+                                        {{-- <p>Thanks for Your Support for the event.</p> --}}                                  
                                 </div>
-                                <hr>
-                             
-                                    <div class="card-body p-md-5 text-black text-center">
+                                <hr>                             
+                                    <div class="card-body p-md-5 text-black text-center" style="height: 400px">
                                         <h1>QR Code Scanner</h1>
                                         <button class="btn btn-primary" id="startScannerBtn">Start Scanner</button>
-                                        <div id="qr-reader" style="display: none;"></div>
-                                        <p><strong>Scanned QR Code:</strong> <span id="qr-result">None</span></p>
-
+                                        <div id="qr-reader" style="width: 100%; max-width: 500px; margin: auto; display: none;"></div>
+                                    
                                         <script>
                                             const startScannerBtn = document.getElementById('startScannerBtn');
                                             const qrReaderElement = document.getElementById('qr-reader');
-                                            const qrResultElement = document.getElementById('qr-result');
-
+                                    
                                             startScannerBtn.addEventListener('click', () => {
                                                 qrReaderElement.style.display = 'block';
                                                 const html5QrCode = new Html5Qrcode("qr-reader");
+                                    
                                                 // Start QR Code scanning
-                                                html5QrCode.start({
-                                                        facingMode: "environment"
-                                                    }, // Use the back camera
+                                                html5QrCode.start(
+                                                    { facingMode: "environment" }, // Use the back camera
                                                     {
                                                         fps: 10, // Scans per second
                                                         qrbox: 250 // Scanning box size
                                                     },
                                                     (decodedText) => {
-                                                        // When a QR code is scanned
-                                                        qrResultElement.innerText = decodedText;
-
-                                                        // Stop scanning after a successful scan
+                                                        // Redirect to the scanned URL
                                                         html5QrCode.stop().then(() => {
-                                                            console.log("QR Code scanning stopped.");
-                                                            // Redirect to the scanned URL
-                                                            window.location.href = decodedText;
+                                                            window.location.href = decodedText; // Redirect to URL
                                                         }).catch(err => console.error("Error stopping QR code scanner:", err));
                                                     },
                                                     (errorMessage) => {
