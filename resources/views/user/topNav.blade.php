@@ -21,7 +21,7 @@
                     <li><a href="#" class="active">About</a></li>
                 @endif
 
-                <li><a href="#" class="active">Events</a></li>
+                {{-- <li><a href="#" class="active">Events</a></li> --}}
                 <li><a href="#" class="active">Contact</a></li>
                 @if (Auth::guard('web')->check())
                     <form action="{{ route('user.logout') }}" method="post">
