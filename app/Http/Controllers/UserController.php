@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\File;
+use Illuminate\Validation\Rule;
+
 
 class UserController extends Controller
 {
@@ -24,8 +26,7 @@ class UserController extends Controller
 
 
     public function registerSubmit(Request $request)
-    {
-        // Validation
+    {        
         $validatedData = $request->validate([
             'first_name' => [
                 'required',
@@ -174,6 +175,76 @@ class UserController extends Controller
         }
         return view('user.dashboard', compact('user'));
     }
+
+    public function showEditUser()
+    {
+        $user = User::find(auth()->user()->id);
+        if (!$user) {
+            return redirect()->back()->with('error', 'No Allumni Found!');
+        }
+        $jsonPath = public_path('jnv_schools.json');
+        $jnvSchools = json_decode(File::get($jsonPath), true);
+        
+        return view('user.edit-details', compact('user','jnvSchools'));
+    }
+
+    public function updateUser(Request $request)
+    {       
+        $user = User::find(auth()->id()); // Use auth()->id() to get the currently authenticated user ID
+        if (!$user) {
+            return redirect()->back()->with('error', 'No User Found!');
+        }
+    
+        // Validate request data
+        $validatedData = $request->validate([
+            'first_name' => [
+                'required',
+                'string',
+                'max:30',
+                'regex:/^[\pL\s]+$/u', // Allows letters and spaces
+            ],
+            'last_name' => [
+                'required',
+                'string',
+                'max:30',
+                'regex:/^[\pL\s]+$/u',
+            ],
+            'email' => [
+                'required',
+                'string',
+                'email:rfc,dns',
+                'max:70',
+                Rule::unique('users')->ignore($user->id), // Ignore current user's email for uniqueness check
+            ],
+            'phone_number' => [
+                'required',
+                'regex:/^[6-9]\d{9}$/', // Validate phone number format
+                Rule::unique('users', 'phone_number')->ignore($user->id), // Ignore current user's phone number
+            ],
+            'city' => 'required|string|max:30',
+            'gender' => 'required|string',
+            'state' => 'required|string|max:50',
+            'district' => 'required|string|max:50',
+            'passout_batch' => 'required|string|max:10',
+            'profession' => 'required|string|max:50',
+        ], [
+            'first_name.regex' => 'The first name must contain only letters and spaces.',
+            'last_name.regex' => 'The last name must contain only letters and spaces.',
+            'phone_number.regex' => 'The phone number must be a valid 10-digit number.',
+            'phone_number.unique' => 'The phone number is already in use.',
+        ]);
+    
+        try {
+            // Update user details
+            $user->update($validatedData);
+    
+            return redirect()->route('user.dashboard')->with('success', 'Profile updated successfully!');
+        } catch (\Exception $e) {
+            // Handle errors during update
+            return redirect()->back()->with('error', 'Failed to update profile: ' . $e->getMessage());
+        }
+    }
+    
 
     public function showForgotPasswordForm()
     {

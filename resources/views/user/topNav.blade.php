@@ -9,20 +9,32 @@
 
         <nav id="navmenu" class="navmenu">
             <ul>
-                <li><a href="{{ route('home') }}" class="active">Home</a></li>
-                <li><a href="#" class="active">About</a></li>
+                @if (Auth::guard('web')->check())
+                    <li><a href="{{ route('user.dashboard') }}" class="active">My-Profile</a></li>
+                @else
+                    <li><a href="{{ route('home') }}" class="active">Home</a></li>
+                @endif
+
+                @if (Auth::guard('web')->check())
+                    <li><a href="{{ route('user.viewQR') }}" class="active">OR-Code</a></li>
+                @else
+                    <li><a href="#" class="active">About</a></li>
+                @endif
+
                 <li><a href="#" class="active">Events</a></li>
                 <li><a href="#" class="active">Contact</a></li>
                 @if (Auth::guard('web')->check())
                     <form action="{{ route('user.logout') }}" method="post">
                         @csrf
                         <li>
-                            <button type="submit" class="btn btn-warning">Logout</button>
+                            <a href="" class="active">
+                                <button type="submit" class="btn btn-warning">Logout</button></a>
                         </li>
                     </form>
                 @else
-                    <li><a href="{{ route('user.register') }}" class="active"><button
-                                class="btn btn-warning">Register</button></a></li>
+                    <li><a href="{{ route('user.register') }}" class="active">
+                            <button class="btn btn-warning">Register</button></a>
+                    </li>
                 @endif
             </ul>
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>

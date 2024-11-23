@@ -13,19 +13,27 @@
                                             <button type="button" class="btn btn-warning">Profile</button>
                                         </a>
                                         <a href="{{ route('user.viewQR') }}">
-                                            <button type="button" class="btn btn-default" style="background: #2ec2fa">QR-Code</button>
+                                            <button type="button" class="btn btn-default"
+                                                style="background: #2ec2fa">QR-Code</button>
                                         </a>
                                     </div>
                                     <h3 class="mb-4 text-center text-uppercase flex-grow-1">My Profile Details</h3>
                                     <div>
-                                        @if ($user->status)
-                                        <button type="button" data-mdb-button-init data-mdb-ripple-init
-                                            class="btn btn-success"> Verified </button>
-                                    @else
-                                        <button type="button" data-mdb-button-init data-mdb-ripple-init
-                                            class="btn btn-warning">Pending</button>
-                                    @endif
+                                        <a href="{{ route('user.edit') }}">
+                                            <button type="button" class="btn btn-primary">
+                                                Edit Details
+                                            </button>
+                                        </a>
                                     </div>
+                                    {{-- <div>
+                                        @if ($user->status)
+                                            <button type="button" data-mdb-button-init data-mdb-ripple-init
+                                                class="btn btn-success"> Verified </button>
+                                        @else
+                                            <button type="button" data-mdb-button-init data-mdb-ripple-init
+                                                class="btn btn-warning">Verification Pending</button>
+                                        @endif
+                                    </div> --}}
                                 </div>
                                 <hr>
                                 <div class="row">
@@ -90,7 +98,7 @@
                                     </div>
                                     <hr>
 
-                                    {{-- <div class="d-flex justify-content-center">
+                                    <div class="d-flex justify-content-center">
                                         @if ($user->status)
                                             <button type="button" data-mdb-button-init data-mdb-ripple-init
                                                 class="btn btn-success">Profile Verified</button>
@@ -98,8 +106,7 @@
                                             <button type="button" data-mdb-button-init data-mdb-ripple-init
                                                 class="btn btn-warning">Verification Pending</button>
                                         @endif
-
-                                    </div> --}}
+                                    </div>
                                 </div>
                             </div>
                         </div>

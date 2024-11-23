@@ -43,6 +43,9 @@ Route::prefix('user')->group(function () {
         Route::get('/qr-code/view-qr', [UserController::class, 'viewQR'])->name('user.viewQR');
         Route::get('/download-qr-code/{user_id}', [UserController::class, 'downloadQRCode'])->name('user.qrdownload');
         Route::post('/logout', [UserController::class, 'logout'])->name('user.logout');
+
+        Route::get('/edit-details', [UserController::class, 'showEditUser'])->name('user.edit');
+        Route::put('/edit-details', [Usercontroller::class, 'updateUser'])->name('user.update');
     });
 });
 
@@ -135,5 +138,7 @@ Route::prefix('organizer')->group(function () {
         Route::get('/view-user/{user_id}/details', [OrganizerController::class, 'showUserProfile'])->name('organizer.showUserProfile');
         Route::post('/update-status', [AdminController::class, 'updateUserStatus'])->name('organizer.updateuserstatus');
         Route::get('/qr-scan', [OrganizerController::class, 'QrScan'])->name('organizer.QrScan');
+
+        
     });
 });
