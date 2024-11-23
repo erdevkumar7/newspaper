@@ -9,15 +9,26 @@
 
         <nav id="navmenu" class="navmenu">
             <ul>
-                <li><a href="{{ route('organizer.home') }}" class="active">Home</a></li>
-                <li><a href="#" class="active">About</a></li>
+                @if (Auth::guard('organizer')->check())
+                    <li><a href="{{ route('organizer.dashboard') }}" class="active">My-Profile</a></li>
+                @else
+                    <li><a href="{{ route('organizer.home') }}" class="active">Home</a></li>
+                @endif
+
+                @if (Auth::guard('organizer')->check())
+                    <li><a href="{{ route('organizer.QrScan') }}" class="active">QR-Scan</a></li>
+                @else
+                    <li><a href="#" class="active">About</a></li>
+                @endif
+
                 <li><a href="#" class="active">Events</a></li>
                 <li><a href="#" class="active">Contact</a></li>
                 @if (Auth::guard('organizer')->check())
                     <form action="{{ route('organizer.logout') }}" method="post">
                         @csrf
                         <li>
-                            <button type="submit" class="btn btn-warning">Logout</button>
+                            <a href="" class="active">
+                                <button type="submit" class="btn btn-warning">Logout</button></a>
                         </li>
                     </form>
                 @else

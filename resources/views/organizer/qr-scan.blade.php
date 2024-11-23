@@ -13,58 +13,61 @@
                                         <a href="{{ route('organizer.dashboard') }}">
                                             <button type="button" class="btn btn-warning">Profile</button>
                                         </a>
-                                        <a href="{{route('organizer.QrScan')}}">
+                                    </div>
+                                    <h3 class="mb-4 text-center text-uppercase flex-grow-1 qr-head">Welcome, Organizer!</h3>
+                                    <div>
+                                        <a href="{{ route('organizer.QrScan') }}">
                                             <button type="button" class="btn btn-default"
                                                 style="background: #2ec2fa">QR-Scan</button>
                                         </a>
                                     </div>
-                                    <h3 class="mb-4 text-center text-uppercase flex-grow-1 qr-head">Welcome, Organizer!</h3>
-                                        {{-- <p>Thanks for Your Support for the event.</p> --}}                                  
                                 </div>
-                                <hr>                             
-                                    <div class="card-body p-md-5 text-black text-center" style="height: 400px">
-                                        <h1>QR Code Scanner</h1>
-                                        <button class="btn btn-primary" id="startScannerBtn">Start Scanner</button>
-                                        <div id="qr-reader" style="width: 100%; max-width: 500px; margin: auto; display: none;"></div>
-                                    
-                                        <script>
-                                            const startScannerBtn = document.getElementById('startScannerBtn');
-                                            const qrReaderElement = document.getElementById('qr-reader');
-                                    
-                                            startScannerBtn.addEventListener('click', () => {
-                                                qrReaderElement.style.display = 'block';
-                                                const html5QrCode = new Html5Qrcode("qr-reader");
-                                    
-                                                // Start QR Code scanning
-                                                html5QrCode.start(
-                                                    { facingMode: "environment" }, // Use the back camera
-                                                    {
-                                                        fps: 10, // Scans per second
-                                                        qrbox: 250 // Scanning box size
-                                                    },
-                                                    (decodedText) => {
-                                                        // Redirect to the scanned URL
-                                                        html5QrCode.stop().then(() => {
-                                                            window.location.href = decodedText; // Redirect to URL
-                                                        }).catch(err => console.error("Error stopping QR code scanner:", err));
-                                                    },
-                                                    (errorMessage) => {
-                                                        // Error handling for failed scans
-                                                        console.log("QR Code scanning error:", errorMessage);
-                                                    }
-                                                ).catch(err => {
-                                                    console.error("Unable to start scanning:", err);
-                                                });
-                                            });
-                                        </script>
+                                <hr>
+                                <div class="card-body p-md-5 text-black text-center" style="height: 400px">
+                                    <h1>QR Code Scanner</h1>
+                                    <button class="btn btn-primary" id="startScannerBtn">Start Scanner</button>
+                                    <div id="qr-reader" style="width: 100%; max-width: 500px; margin: auto; display: none;">
                                     </div>
 
+                                    <script>
+                                        const startScannerBtn = document.getElementById('startScannerBtn');
+                                        const qrReaderElement = document.getElementById('qr-reader');
+
+                                        startScannerBtn.addEventListener('click', () => {
+                                            qrReaderElement.style.display = 'block';
+                                            const html5QrCode = new Html5Qrcode("qr-reader");
+
+                                            // Start QR Code scanning
+                                            html5QrCode.start({
+                                                    facingMode: "environment"
+                                                }, // Use the back camera
+                                                {
+                                                    fps: 10, // Scans per second
+                                                    qrbox: 250 // Scanning box size
+                                                },
+                                                (decodedText) => {
+                                                    // Redirect to the scanned URL
+                                                    html5QrCode.stop().then(() => {
+                                                        window.location.href = decodedText; // Redirect to URL
+                                                    }).catch(err => console.error("Error stopping QR code scanner:", err));
+                                                },
+                                                (errorMessage) => {
+                                                    // Error handling for failed scans
+                                                    console.log("QR Code scanning error:", errorMessage);
+                                                }
+                                            ).catch(err => {
+                                                console.error("Unable to start scanning:", err);
+                                            });
+                                        });
+                                    </script>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 @endsection

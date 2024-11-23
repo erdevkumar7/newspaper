@@ -13,13 +13,14 @@
                                         <a href="{{ route('organizer.dashboard') }}">
                                             <button type="button" class="btn btn-warning">Profile</button>
                                         </a>
+                                    </div>
+                                    <h3 class="mb-4 text-center text-uppercase flex-grow-1 qr-head">My Profile Details</h3>
+                                    <div>
                                         <a href="{{ route('organizer.QrScan') }}">
                                             <button type="button" class="btn btn-default"
                                                 style="background: #2ec2fa">QR-Scan</button>
                                         </a>
                                     </div>
-                                    <h3 class="mb-4 text-center text-uppercase flex-grow-1 qr-head">My Profile Details</h3>
-
                                 </div>
                                 <hr>
                                 <div class="row">

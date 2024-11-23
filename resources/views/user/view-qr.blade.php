@@ -1,6 +1,6 @@
 @extends('user.layout')
 @section('page_content')
-    <div class="container">  
+    <div class="container">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col">
                 <div class="card card-registration my-2">
@@ -8,12 +8,13 @@
                         <div class="col-xl-12">
                             <div class="card-body p-md-4 text-black">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div>                                   
+                                    <div>
                                         <a href="{{ route('user.viewQR') }}">
                                             <button type="button" class="btn btn-warning">My QR-Code</button>
                                         </a>
                                     </div>
                                     <h3 class="mb-4 text-center text-uppercase flex-grow-1">My QR-Code</h3>
+                                    <div></div>
                                 </div>
                                 <hr>
 
