@@ -116,7 +116,20 @@ class OrganizerController extends Controller
 
     public function dashboard()
     {
-        return view('organizer.dashboard');
+        $organizer = Organizer::find(Auth::guard('organizer')->user()->id);
+        if (!$organizer) {
+            return redirect()->back()->with('error', 'No Organizer Found!');
+        }
+        return view('organizer.dashboard', compact('organizer'));
+    }
+
+    public function QrScan()
+    {
+        $organizer = Organizer::find(Auth::guard('organizer')->user()->id);
+        if (!$organizer) {
+            return redirect()->back()->with('error', 'No Organizer Found!');
+        }
+        return view('organizer.qr-scan', compact('organizer'));
     }
 
     public function logout()
@@ -161,7 +174,7 @@ class OrganizerController extends Controller
         return response()->json(['success' => false, 'message' => 'Organizer not found.']);
     }
 
-    
+
     public function showUserProfile($user_id)
     {
         $user = User::find($user_id);

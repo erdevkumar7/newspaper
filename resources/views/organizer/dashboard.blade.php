@@ -13,81 +13,63 @@
                                         <a href="{{ route('organizer.dashboard') }}">
                                             <button type="button" class="btn btn-warning">Profile</button>
                                         </a>
-                                        <a href="">
+                                        <a href="{{ route('organizer.QrScan') }}">
                                             <button type="button" class="btn btn-default"
-                                                style="background: #2ec2fa">QR-Code</button>
+                                                style="background: #2ec2fa">QR-Scan</button>
                                         </a>
                                     </div>
-                                    <h3 class="mb-4 text-center text-uppercase flex-grow-1">My Profile Details</h3>
+                                    <h3 class="mb-4 text-center text-uppercase flex-grow-1 qr-head">My Profile Details</h3>
                                     <div>
-                                        {{-- @if ($user->status)
+                                        @if ($organizer->status)
                                             <button type="button" data-mdb-button-init data-mdb-ripple-init
                                                 class="btn btn-success"> Verified </button>
                                         @else
                                             <button type="button" data-mdb-button-init data-mdb-ripple-init
                                                 class="btn btn-warning">Pending</button>
-                                        @endif --}}
-                                        <button type="button" data-mdb-button-init data-mdb-ripple-init
-                                            class="btn btn-success"> Verified </button>
+                                        @endif
                                     </div>
                                 </div>
                                 <hr>
-                             
-                                    <div class="card-body p-md-5 text-black text-center">
-                                        <!-- Add text-center for horizontal alignment -->
-                                        <h2 class="qr-head">Welcome, Organizer!</h2>
-                                        <p>Thanks for Your Support for the event.</p>
+                                <div class="row">
+                                    <div class="form-outline col-md-6 mb-3">
+                                        <label class="form-label">First Name *</label>
+                                        <input type="text" value="{{ $organizer->first_name ?? 'Not Available' }}"
+                                            class="form-control" disabled>
+                                    </div>
 
-                                        <h1>QR Code Scanner</h1>
-                                        <button class="btn btn-primary" id="startScannerBtn">Start Scanner</button>
-                                        <div id="qr-reader" style="display: none;"></div>
-                                        <p><strong>Scanned QR Code:</strong> <span id="qr-result">None</span></p>
+                                    <div class="form-outline col-md-6 mb-3">
+                                        <label class="form-label">Last Name *</label>
+                                        <input type="text" value="{{ $organizer->last_name ?? 'Not Available' }}"
+                                            class="form-control" disabled>
+                                    </div>
 
-                                        <script>
-                                            const startScannerBtn = document.getElementById('startScannerBtn');
-                                            const qrReaderElement = document.getElementById('qr-reader');
-                                            const qrResultElement = document.getElementById('qr-result');
+                                    <div class="form-outline col-md-6 mb-3">
+                                        <label class="form-label">Email *</label>
+                                        <input type="text" value="{{ $organizer->email ?? 'Not Available' }}"
+                                            class="form-control" disabled>
+                                    </div>
 
-                                            startScannerBtn.addEventListener('click', () => {
-                                                qrReaderElement.style.display = 'block';
-                                                const html5QrCode = new Html5Qrcode("qr-reader");
-
-                                                // Start QR Code scanning
-                                                html5QrCode.start({
-                                                        facingMode: "environment"
-                                                    }, // Use the back camera
-                                                    {
-                                                        fps: 10, // Scans per second
-                                                        qrbox: 250 // Scanning box size
-                                                    },
-                                                    (decodedText) => {
-                                                        // When a QR code is scanned
-                                                        qrResultElement.innerText = decodedText;
-
-                                                        // Stop scanning after a successful scan
-                                                        html5QrCode.stop().then(() => {
-                                                            console.log("QR Code scanning stopped.");
-                                                            // Redirect to the scanned URL
-                                                            window.location.href = decodedText;
-                                                        }).catch(err => console.error("Error stopping QR code scanner:", err));
-                                                    },
-                                                    (errorMessage) => {
-                                                        // Error handling for failed scans
-                                                        console.log("QR Code scanning error:", errorMessage);
-                                                    }
-                                                ).catch(err => {
-                                                    console.error("Unable to start scanning:", err);
-                                                });
-                                            });
-                                        </script>
-
+                                    <div class="form-outline col-md-6 mb-3">
+                                        <label class="form-label">Contact Number *</label>
+                                        <input type="text" value="{{ $organizer->phone_number ?? 'Not Available' }}"
+                                            class="form-control" disabled>
                                     </div>
 
 
-                        
+                                    <div class="form-outline col-md-6 mb-3">
+                                        <label class="form-label">Gender </label>
+                                        <input type="text" value="{{ $organizer->gender ?? 'Not Available' }}"
+                                            class="form-control" disabled>
+                                    </div>
 
+                                    <div class="form-outline col-md-6 mb-3">
+                                        <label class="form-label">Team Role </label>
+                                        <input type="text" value="{{ $organizer->role ?? 'Not Available' }}"
+                                            class="form-control" disabled>
+                                    </div>
+                                    <hr>
                                     {{-- <div class="d-flex justify-content-center">
-                                        @if ($user->status)
+                                        @if ($organizer->status)
                                             <button type="button" data-mdb-button-init data-mdb-ripple-init
                                                 class="btn btn-success">Profile Verified</button>
                                         @else
@@ -103,5 +85,6 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 @endsection

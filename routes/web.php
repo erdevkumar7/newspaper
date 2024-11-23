@@ -133,5 +133,6 @@ Route::prefix('organizer')->group(function () {
         Route::post('/logout', [OrganizerController::class, 'logout'])->name('organizer.logout');
         Route::get('/view-user/{user_id}/details', [OrganizerController::class, 'showUserProfile'])->name('organizer.showUserProfile');
         Route::post('/update-status', [AdminController::class, 'updateUserStatus'])->name('organizer.updateuserstatus');
+        Route::get('/qr-scan', [OrganizerController::class, 'QrScan'])->name('organizer.QrScan');
     });
 });
