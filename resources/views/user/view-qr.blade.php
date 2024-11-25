@@ -10,11 +10,19 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
                                         <a href="{{ route('user.viewQR') }}">
-                                            <button type="button" class="btn btn-warning">My QR-Code</button>
+                                            <button type="button" class="btn btn-warning">My-QR-Code</button>
                                         </a>
                                     </div>
                                     <h3 class="mb-4 text-center text-uppercase flex-grow-1">My QR-Code</h3>
-                                    <div></div>
+                                    <div>
+                                        @if ($user->status)
+                                            <button type="button" data-mdb-button-init data-mdb-ripple-init
+                                                class="btn btn-success"> Verified </button>
+                                        @else
+                                            <button type="button" data-mdb-button-init data-mdb-ripple-init
+                                                class="btn btn-warning"> Not-Verified</button>
+                                        @endif
+                                    </div>
                                 </div>
                                 <hr>
 

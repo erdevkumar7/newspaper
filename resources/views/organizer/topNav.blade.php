@@ -18,10 +18,10 @@
                 @if (Auth::guard('organizer')->check())
                     <li><a href="{{ route('organizer.QrScan') }}" class="active">QR-Scan</a></li>
                 @else
-                    <li><a href="#" class="active">About</a></li>
+                    <li><a href="{{route('organizer.login')}}" class="active">Organizer Login</a></li>
                 @endif
 
-                <li><a href="#" class="active">Events</a></li>
+                {{-- <li><a href="#" class="active">Events</a></li> --}}
                 <li><a href="#" class="active">Contact</a></li>
                 @if (Auth::guard('organizer')->check())
                     <form action="{{ route('organizer.logout') }}" method="post">

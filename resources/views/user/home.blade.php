@@ -85,7 +85,7 @@
             <div class="container section-title" data-aos="fade-up">
                 <div class="section-title-container d-flex align-items-center justify-content-between">
                     <h2>Alumni</h2>
-                    <p><a href="">See All Events</a></p>
+                    <p><a href="{{ route('user.register') }}">For Join Navotsav Register</a></p>
                 </div>
             </div><!-- End Section Title -->
 

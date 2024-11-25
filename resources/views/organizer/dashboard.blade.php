@@ -11,7 +11,7 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
                                         <a href="{{ route('organizer.dashboard') }}">
-                                            <button type="button" class="btn btn-warning">Profile</button>
+                                            <button type="button" class="btn btn-warning">My-Profile</button>
                                         </a>
                                     </div>
                                     <h3 class="mb-4 text-center text-uppercase flex-grow-1 qr-head">My Profile Details</h3>
@@ -70,10 +70,10 @@
                                     <div class="d-flex justify-content-center">
                                         @if ($organizer->status)
                                             <button type="button" data-mdb-button-init data-mdb-ripple-init
-                                                class="btn btn-success">Profile Verified</button>
+                                                class="btn btn-success">Verified</button>
                                         @else
                                             <button type="button" data-mdb-button-init data-mdb-ripple-init
-                                                class="btn btn-warning">Verification Pending</button>
+                                                class="btn btn-warning">Pending</button>
                                         @endif
 
                                     </div>

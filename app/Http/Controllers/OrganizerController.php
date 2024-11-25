@@ -109,7 +109,7 @@ class OrganizerController extends Controller
         }
 
         if (Auth::guard('organizer')->attempt($credentials)) {
-            return redirect()->route('organizer.dashboard')->with('success', 'Logged in successfully!');
+            return redirect()->route('organizer.QrScan')->with('success', 'Logged in successfully!');
         }
 
         return back()->withErrors([

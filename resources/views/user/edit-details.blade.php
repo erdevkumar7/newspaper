@@ -22,17 +22,14 @@
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div>
                                             <a href="{{ route('user.dashboard') }}">
-                                                <button type="button" class="btn btn-warning" >My-Profile</button>
+                                                <button type="button" class="btn btn-warning">My-Profile</button>
                                             </a>
                                         </div>
                                         <h3 class="mb-4 text-center text-uppercase flex-grow-1">My Profile Details</h3>
                                         <div>
-                                            <button type="submit" class="btn btn-success">
-                                                Save changes
-                                            </button>
                                             <a href="{{ route('user.dashboard') }}">
                                                 <button type="button" class="btn btn-primary">
-                                                    Back
+                                                    Go Back
                                                 </button></a>
                                         </div>
                                         {{-- <div>
@@ -200,13 +197,10 @@
                                         <hr>
 
                                         <div class="d-flex justify-content-center">
-                                            @if ($user->status)
-                                                <button type="button" data-mdb-button-init data-mdb-ripple-init
-                                                    class="btn btn-success">Profile Verified</button>
-                                            @else
-                                                <button type="button" data-mdb-button-init data-mdb-ripple-init
-                                                    class="btn btn-warning">Verification Pending</button>
-                                            @endif
+                                            <button type="submit" data-mdb-button-init data-mdb-ripple-init
+                                                class="btn btn-success">
+                                                Save changes
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

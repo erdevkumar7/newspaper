@@ -16,9 +16,9 @@
                 @endif
 
                 @if (Auth::guard('web')->check())
-                    <li><a href="{{ route('user.viewQR') }}" class="active">OR-Code</a></li>
+                    <li><a href="{{ route('user.viewQR') }}" class="active">My-QR-Code</a></li>
                 @else
-                    <li><a href="#" class="active">About</a></li>
+                    <li><a href="{{route('organizer.login')}}" class="active" target="_blank">Organizer Login</a></li>
                 @endif
 
                 {{-- <li><a href="#" class="active">Events</a></li> --}}

@@ -11,7 +11,7 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
                                         <a href="{{ route('organizer.dashboard') }}">
-                                            <button type="button" class="btn btn-warning">Profile</button>
+                                            <button type="button" class="btn btn-warning">My-Profile</button>
                                         </a>
                                     </div>
                                     <h3 class="mb-4 text-center text-uppercase flex-grow-1 qr-head">Welcome, Organizer!</h3>
