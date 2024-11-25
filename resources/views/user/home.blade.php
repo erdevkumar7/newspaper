@@ -84,7 +84,8 @@
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
                 <div class="section-title-container d-flex align-items-center justify-content-between">
-                    <h2>Alumni</h2>
+                    <h3>NAVOTSAV-3.0</h3>
+                    {{-- <p>Hello</p> --}}
                     <p><a href="{{ route('user.register') }}">For Join Navotsav Register</a></p>
                 </div>
             </div><!-- End Section Title -->
@@ -94,7 +95,7 @@
                 <div class="row g-5">
                     <div class="col-lg-12">
                         <div class="post-list lg">
-                            <h2>Welcome to the NVS Alumni Community!</h2>
+                            <h3>Welcome to the NVS Alumni Community!</h3>
                             <p class="mb-4 d-block">We are thrilled to invite you to reconnect, reminisce, and relive the
                                 cherished memories of your time at Navodaya. This meet is an opportunity to celebrate our
                                 shared legacy, strengthen bonds, and create new memories together. You are encouraged to
