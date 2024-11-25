@@ -73,6 +73,20 @@
                                         disabled>
                                 </div>
                             </div>
+
+                            <div class="item form-group">
+                                <div class="col-md-4 col-sm-4 ">
+                                    <label> Contact Number</label>
+                                    <input type="text" class="form-control"
+                                        value="{{ $user->phone_number ?? 'Not Available' }}" disabled>
+                                </div>
+
+                                <div class="col-md-4 col-sm-4 ">
+                                </div>
+
+                                <div class="col-md-4 col-sm-4 ">
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>

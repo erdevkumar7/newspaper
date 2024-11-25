@@ -13,103 +13,151 @@
                 <div class="x_panel">
                     <div class="x_content">
                         <br />
-                        <form action="{{ route('admin.adduserSubmit') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.adduserSubmit') }}" method="POST">
                             @csrf
                             <div class="item form-group">
                                 {{-- name --}}
                                 <div class="col-md-4 col-sm-4 ">
-                                    <label for="name"> Name * </label>
-                                    <input type="text" class="form-control" name="name" id="name"
-                                        value="{{ old('name') }}" oninput="removeError('nameErr')">
-                                    @error('name')
-                                        <span class="text-danger" id="nameErr">{{ $message }}</span>
+                                    <label for="form3Example1m">First Name * </label>
+                                    <input type="text" id="form3Example1m" value="{{ old('first_name') }}"
+                                        name="first_name" class="form-control" oninput="removeError('first_nameErr')">
+                                    @error('first_name')
+                                        <span class="text-danger" id="first_nameErr">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 {{-- address --}}
                                 <div class="col-md-4 col-sm-4 ">
-                                    <label for="address">Address </label>
-                                    <input type="text" class="form-control" id="address" name="address"
-                                        value="{{ old('address') }}" oninput="removeError('addressErr')">
-                                    @error('address')
-                                        <span class="text-danger" id="addressErr">{{ $message }}</span>
+                                    <label for="form3Example1n">Last Name * </label>
+                                    <input type="text" id="form3Example1n" value="{{ old('last_name') }}"
+                                        name="last_name" class="form-control" oninput="removeError('last_nameErr')" />
+                                    @error('last_name')
+                                        <span class="text-danger" id="last_nameErr">{{ $message }}</span>
                                     @enderror
                                 </div>
 
                                 <div class="col-md-4 col-sm-4 ">
-                                    <label for="state">State *</label>
-                                    <select class="form-control" id="state" name="state"
-                                        oninput="removeError('stateErr')">
-                                        <option value="">Select state</option>
-                                        <option value="state1" {{ old('state') == 'state1' ? 'selected' : '' }}>state1
-                                        </option>
-                                        <option value="state2" {{ old('state') == 'state2' ? 'selected' : '' }}>state2
-                                        </option>
-                                    </select>
-                                    @error('state')
-                                        <span class="text-danger" id="stateErr">{{ $message }}</span>
+                                    <label for="form3Example97">Email *</label>
+                                    <input type="hidden" value="Dev@123" name="password">
+                                    <input type="text" id="form3Example97" class="form-control" name="email"
+                                        value="{{ old('email') }}" oninput="removeError('emailErr')" />
+                                    @error('email')
+                                        <span class="text-danger" id="emailErr">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
 
                             <div class="item form-group">
                                 <div class="col-md-4 col-sm-4 ">
-                                    <label for="city">City *</label>
-                                    <select class="form-control" id="city" name="city"
-                                        oninput="removeError('cityErr')">
-                                        <option value="">Select City</option>
-                                        <option value="city1" {{ old('city') == 'city1' ? 'selected' : '' }}>city1
-                                        </option>
-                                        <option value="city2" {{ old('city') == 'city2' ? 'selected' : '' }}>city2
-                                        </option>
-                                    </select>
+                                    <label for="phone_number">Contact Number *</label>
+                                    <input type="text" id="phone_number" name="phone_number"
+                                        value="{{ old('phone_number') }}" oninput="removeError('phone_numberErr')"
+                                        class="form-control" />
+                                    @error('phone_number')
+                                        <span class="text-danger" id="phone_numberErr">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 col-sm-4 ">
+                                    <label for="city">Current City *</label>
+                                    <input type="text" id="city" name="city" value="{{ old('city') }}"
+                                        class="form-control" oninput="removeError('cityErr')" />
                                     @error('city')
                                         <span class="text-danger" id="cityErr">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 col-sm-4 ">
-                                    <label for="zip_code">Zip Code</label>
-                                    <input type="text" class="form-control" name="zip_code" id="zip_code"
-                                        value="{{ old('zip_code') }}" oninput="removeError('zip_codeErr')">
-                                    @error('zip_code')
-                                        <span class="text-danger" id="zip_codeErr">{{ $message }}</span>
+                                    <label for="gender">Gender </label>
+                                    <select id="gender" class="form-control" name="gender"
+                                        oninput="removeError('genderErr')">
+                                        <option value="" selected> --- Select Gender --- </option>
+                                        <option value="Male" {{ old('gender') == 'Male' ? 'selected' : '' }}>
+                                            Male</option>
+                                        <option value="Female" {{ old('gender') == 'Female' ? 'selected' : '' }}>
+                                            Female
+                                        </option>
+                                    </select>
+                                    @error('gender')
+                                        <span class="text-danger" id="genderErr">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
 
                             <div class="item form-group">
-                                {{-- email --}}
                                 <div class="col-md-4 col-sm-4 ">
-                                    <label for="email">Email *</label>
-                                    <input type="email" class="form-control" name="email" id="email"
-                                        value="{{ old('email') }}" oninput="removeError('emailErr')">
-                                    @error('email')
-                                        <span class="text-danger" id="emailErr">{{ $message }}</span>
+                                    <label for="inputState4">State of the JNV Last Attended</label>
+                                    <select id="inputState4" class="form-control" name="state"
+                                        oninput="removeError('stateErr')">
+                                        <option value="" selected> --- Select State --- </option>
+                                        @foreach ($jnvSchools as $state => $districts)
+                                            <option value="{{ $state }}"
+                                                {{ old('state') == $state ? 'selected' : '' }}>{{ $state }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('state')
+                                        <span class="text-danger" id="stateErr">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                {{-- password --}}
+                               
                                 <div class="col-md-4 col-sm-4">
-                                    <label for="password">Password * </label>
-                                    <input type="Password" name="password" class="form-control" id="password"
-                                        oninput="removeError('PasswordErr')">
-                                    <i class="fa fa-eye eye-icon-position" id="eyeIcon"></i>
-                                    @error('password')
-                                        <span class="text-danger" id="PasswordErr">{{ $message }}</span>
+                                    <label for="inputDistrict4">JNV District Last Attended</label>
+                                    <select id="inputDistrict4" class="form-control" name="district"
+                                        oninput="removeError('districtErr')" data-old-district="{{ old('district') }}">
+                                        <option value="" selected> --- Select District --- </option>
+                                    </select>
+                                    @error('district')
+                                        <span class="text-danger" id="districtErr">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                {{-- password_confirmation --}}
+                               
                                 <div class="col-md-4 col-sm-4">
-                                    <label for="password_confirmation">Confirm Password * </label>
-                                    <input type="password" name="password_confirmation" id="password_confirmation"
-                                        class="form-control" oninput="removeError('C_PasswordErr')">
-                                    <i class="fa fa-eye eye-icon-position" id="eyeIconConfirm"></i>
-                                    @error('password_confirmation')
-                                        <span class="text-danger" id="C_PasswordErr">{{ $message }}</span>
+                                    <label for="inputBatch4" >Year Of Passing</label>
+                                    <select id="inputBatch4" class="form-control" name="passout_batch"
+                                        oninput="removeError('passout_batchErr')">
+                                        <option value="" selected> --- Select Batch --- </option>
+                                        @for ($year = 1954; $year <= 2024; $year++)
+                                            <option value="{{ $year }}"
+                                                {{ old('passout_batch') == $year ? 'selected' : '' }}>
+                                                {{ $year }}
+                                            </option>
+                                        @endfor
+                                    </select>
+                                    @error('passout_batch')
+                                        <span class="text-danger" id="passout_batchErr">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="item form-group">
+                                <div class="col-md-4 col-sm-4 ">
+                                    <label for="Profession">Profession</label>
+                                    <select id="Profession" class="form-control" name="profession"
+                                        oninput="removeError('professionErr')">
+                                        <option value="" selected> --- Select Profession --- </option>
+                                        <option value="student"
+                                            {{ old('profession') == 'student' ? 'selected' : '' }}>Student</option>
+                                        <option value="bussiness"
+                                            {{ old('profession') == 'bussiness' ? 'selected' : '' }}>Bussiness</option>
+                                        <option value="self-Employeed"
+                                            {{ old('profession') == 'self-Employeed' ? 'selected' : '' }}>
+                                            Self-Employeed</option>
+                                        <option value="doctor" {{ old('profession') == 'doctor' ? 'selected' : '' }}>
+                                            Doctor</option>
+                                        <option value="enginner"
+                                            {{ old('profession') == 'enginner' ? 'selected' : '' }}>Enginner</option>
+                                        <option value="govt-employee"
+                                            {{ old('profession') == 'govt-employee' ? 'selected' : '' }}>Govt. Employee
+                                        </option>
+                                        <option value="Other" {{ old('profession') == 'Other' ? 'selected' : '' }}>
+                                            Other</option>
+                                    </select>
+                                    @error('profession')
+                                        <span class="text-danger" id="professionErr">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
 
 
-                          
+
 
                             {{-- submit --}}
                             <div class="item form-group">
@@ -129,63 +177,43 @@
 
 
         <script>
-            // Password field toggle
-            document.getElementById('eyeIcon').addEventListener('click', function() {
-                var passwordField = document.getElementById('password');
-                var icon = document.getElementById('eyeIcon');
+            const jnvSchools = @json($jnvSchools);
 
-                if (passwordField.type === 'password') {
-                    passwordField.type = 'text';
-                    icon.classList.remove('fa-eye');
-                    icon.classList.add('fa-eye-slash');
-                } else {
-                    passwordField.type = 'password';
-                    icon.classList.remove('fa-eye-slash');
-                    icon.classList.add('fa-eye');
+            const stateSelect = document.getElementById('inputState4');
+            const districtSelect = document.getElementById('inputDistrict4');
+
+            function populateDistricts(state, oldDistrict = null) {
+                // Clear previous options
+                districtSelect.innerHTML = '<option value="" selected> --- Select District --- </option>';
+
+                // Populate districts
+                if (jnvSchools[state]) {
+                    jnvSchools[state].forEach(function(district) {
+                        const option = document.createElement('option');
+                        option.value = district;
+                        option.textContent = district;
+
+                        // Mark the old value as selected
+                        if (district === oldDistrict) {
+                            option.selected = true;
+                        }
+
+                        districtSelect.appendChild(option);
+                    });
                 }
+            }
+
+            // Handle state change
+            stateSelect.addEventListener('change', function() {
+                populateDistricts(this.value);
             });
 
-            // Confirm password field toggle
-            document.getElementById('eyeIconConfirm').addEventListener('click', function() {
-                var confirmPasswordField = document.getElementById('password_confirmation');
-                var icon = document.getElementById('eyeIconConfirm');
+            // Populate districts on page load (if there's an old value)
+            const oldState = stateSelect.value;
+            const oldDistrict = districtSelect.getAttribute('data-old-district');
 
-                if (confirmPasswordField.type === 'password') {
-                    confirmPasswordField.type = 'text';
-                    icon.classList.remove('fa-eye');
-                    icon.classList.add('fa-eye-slash');
-                } else {
-                    confirmPasswordField.type = 'password';
-                    icon.classList.remove('fa-eye-slash');
-                    icon.classList.add('fa-eye');
-                }
-            });
-        </script>
-
-        <script>
-            function copyMailingDetails() {
-                const isChecked = document.getElementById("same-details").checked;
-
-                if (isChecked) {
-                    // Copy values from Mailing Address to Billing Address
-                    document.getElementById("billing_name").value = document.getElementById("name").value;
-                    document.getElementById("billing_address").value = document.getElementById("address").value;
-                    document.getElementById("billing_zip_code").value = document.getElementById("zip_code").value;
-
-                    const mailingState = document.getElementById("state").value;
-                    document.getElementById("billing_state").value = mailingState;
-
-                    const mailingCity = document.getElementById("city").value;
-                    document.getElementById("billing_city").value = mailingCity;
-
-                } else {
-                    // Clear Billing Address fields if unchecked
-                    document.getElementById("billing_name").value = "";
-                    document.getElementById("billing_address").value = "";
-                    document.getElementById("billing_state").value = "";
-                    document.getElementById("billing_city").value = "";
-                    document.getElementById("billing_zip_code").value = "";
-                }
+            if (oldState) {
+                populateDistricts(oldState, oldDistrict);
             }
         </script>
     </div>

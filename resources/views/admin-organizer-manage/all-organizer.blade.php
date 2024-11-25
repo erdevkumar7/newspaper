@@ -39,7 +39,7 @@
                                         <tbody>
                                             @if ($allorganizer->isEmpty())
                                                 <tr>
-                                                    <td colspan="7" class="text-center">No data available</td>
+                                                    <td colspan="8" class="text-center">No data available</td>
                                                 </tr>
                                             @else
                                                 @foreach ($allorganizer as $user)

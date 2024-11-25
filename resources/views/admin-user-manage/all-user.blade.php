@@ -7,7 +7,7 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>All Users<small>(registered)</small></h2>
+                        <h2>All Alumni<small>(registered)</small></h2>
                         <div class="nav navbar-right panel_toolbox">
                             <a href="{{ route('admin.adduser') }}">
                                 <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Add Alumni">
@@ -40,7 +40,7 @@
                                         <tbody>
                                             @if ($allusers->isEmpty())
                                                 <tr>
-                                                    <td colspan="8" class="text-center">No data available</td>
+                                                    <td colspan="9" class="text-center">No data available</td>
                                                 </tr>
                                             @else
                                                 @foreach ($allusers as $user)
