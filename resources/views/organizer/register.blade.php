@@ -155,9 +155,13 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-4">
                                             <div class="form-outline">
-                                                <input type="Password" name="password" class="form-control"
-                                                    id="password" placeholder="Password"
-                                                    oninput="removeError('PasswordErr')">
+                                                <div style="position: relative;">
+                                                    <input type="Password" name="password" class="form-control"
+                                                        id="password" placeholder="Password"
+                                                        oninput="removeError('PasswordErr')">
+                                                    <i class="bi bi-eye eye-icon-position" id="eyeIcon"
+                                                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
+                                                </div>
                                                 @error('password')
                                                     <span class="text-danger" id="PasswordErr">{{ $message }}</span>
                                                 @enderror
@@ -165,9 +169,14 @@
                                         </div>
                                         <div class="col-md-6 mb-4">
                                             <div class="form-outline">
-                                                <input type="Password" name="password_confirmation" class="form-control"
-                                                    id="password_confirm" placeholder="Confirm password"
-                                                    oninput="removeError('confirmPasswordErr')">
+                                                <div style="position: relative;">
+                                                    <input type="Password" name="password_confirmation"
+                                                        class="form-control" id="password_confirmation"
+                                                        placeholder="Confirm password"
+                                                        oninput="removeError('confirmPasswordErr')">
+                                                    <i class="bi bi-eye eye-icon-position" id="eyeIconConfirm"
+                                                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
+                                                </div>
                                                 @error('password_confirmation')
                                                     <span class="text-danger"
                                                         id="ConfirmPasswordErr">{{ $message }}</span>
@@ -197,5 +206,39 @@
             </form>
 
         </div>
+        <script>
+            // Password field toggle
+            document.getElementById('eyeIcon').addEventListener('click', function() {
+                var passwordField = document.getElementById('password');
+                var icon = document.getElementById('eyeIcon');
+                // bi bi-eye
+                // bi bi-eye-slash
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    icon.classList.remove('bi-eye');
+                    icon.classList.add('bi-eye-slash');
+                } else {
+                    passwordField.type = 'password';
+                    icon.classList.remove('bi-eye-slash');
+                    icon.classList.add('bi-eye');
+                }
+            });
+
+            // Confirm password field toggle
+            document.getElementById('eyeIconConfirm').addEventListener('click', function() {
+                var confirmPasswordField = document.getElementById('password_confirmation');
+                var icon = document.getElementById('eyeIconConfirm');
+
+                if (confirmPasswordField.type === 'password') {
+                    confirmPasswordField.type = 'text';
+                    icon.classList.remove('bi-eye');
+                    icon.classList.add('bi-eye-slash');
+                } else {
+                    confirmPasswordField.type = 'password';
+                    icon.classList.remove('bi-eye-slash');
+                    icon.classList.add('bi-eye');
+                }
+            });
+        </script>
     </div>
 @endsection

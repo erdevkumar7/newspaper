@@ -73,7 +73,9 @@ class UserController extends Controller
             $qrCodeImage = time() . '_' . $user->id . '_qrcode.svg';
             $svgPath  = public_path('qrcodes/' . $qrCodeImage);
 
-            QrCode::size(250)->generate($url, $svgPath);
+            QrCode::size(250)
+            ->margin(5)
+            ->generate($url, $svgPath);
             // Convert the SVG to JPG
             $jpgFileName = time() . '_' . $user->id . '_qrcode.jpg';
             $jpgPath = public_path('qrcodes/' . $jpgFileName);

@@ -36,9 +36,13 @@
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <label class="form-label" for="orgPassword">Password *</label>
-                                        <input type="Password" name="password" class="form-control" id="orgPassword"
-                                            oninput="removeError('PasswordErr')">
+                                        <label class="form-label" for="password">Password *</label>
+                                        <div style="position: relative;">
+                                            <input type="Password" name="password" class="form-control" id="password"
+                                                oninput="removeError('PasswordErr')">
+                                            <i class="bi bi-eye eye-icon-position" id="eyeIcon"
+                                                style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
+                                        </div>
                                         @error('password')
                                             <span class="text-danger" id="PasswordErr">{{ $message }}</span>
                                         @enderror
@@ -52,7 +56,7 @@
                                             </p>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="d-flex justify-content-end pt-3">
                                         <button type="submit" data-mdb-button-init data-mdb-ripple-init
                                             class="btn btn-warning ms-2">Submit</button>
@@ -78,5 +82,21 @@
                 });
             </script>
         @endif
+
+        <script>
+            document.getElementById('eyeIcon').addEventListener('click', function() {
+                var passwordField = document.getElementById('password');
+                var icon = document.getElementById('eyeIcon');             
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    icon.classList.remove('bi-eye');
+                    icon.classList.add('bi-eye-slash');
+                } else {
+                    passwordField.type = 'password';
+                    icon.classList.remove('bi-eye-slash');
+                    icon.classList.add('bi-eye');
+                }
+            });
+        </script>
     </div>
 @endsection

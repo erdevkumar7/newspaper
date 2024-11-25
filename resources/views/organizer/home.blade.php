@@ -107,7 +107,7 @@
                         <div class="post-list lg">
                             <h4 class="mb-4">To ensure smooth participation, we have introduced a seamless registration
                                 process:</h4>
-                            <h4><a href="{{ route('user.register') }}">1. Fill the Registration Form:</a></h4>
+                            <h4>1. Fill the Registration Form:</h4>
                             <p class="mb-4 d-block">Begin by providing your details through our online registration form.
                                 This will help us gather accurate information to organize the event efficiently.</p>
 
