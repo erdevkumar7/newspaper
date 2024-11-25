@@ -134,11 +134,14 @@ Route::prefix('organizer')->group(function () {
 
     Route::group(['middleware' => 'organizer.auth'], function () {
         Route::get('/dashboard', [OrganizerController::class, 'dashboard'])->name('organizer.dashboard');
-        Route::post('/logout', [OrganizerController::class, 'logout'])->name('organizer.logout');
         Route::get('/view-user/{user_id}/details', [OrganizerController::class, 'showUserProfile'])->name('organizer.showUserProfile');
+        
+        Route::get('/edit-user/{user_id}/details', [OrganizerController::class, 'showEditUser'])->name('organizer.showEditUser');
+        Route::put('/edit-user/{user_id}/details', [OrganizerController::class, 'updateUser'])->name('organizer.updateUser');
+
         Route::post('/update-status', [AdminController::class, 'updateUserStatus'])->name('organizer.updateuserstatus');
         Route::get('/qr-scan', [OrganizerController::class, 'QrScan'])->name('organizer.QrScan');
-
-        
+                
+        Route::post('/logout', [OrganizerController::class, 'logout'])->name('organizer.logout');
     });
 });

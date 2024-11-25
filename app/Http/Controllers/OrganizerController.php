@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\File;
 
 class OrganizerController extends Controller
 {
@@ -186,6 +188,73 @@ class OrganizerController extends Controller
             return redirect()->back()->with('error', 'No Allumni Found!');
         }
         return view('organizer.view-user', compact('user'));
+    }
+
+    public function showEditUser($user_id)
+    {
+        $user = User::find($user_id);
+        if (!$user) {
+            return redirect()->back()->with('error', 'No Allumni Found!');
+        }
+        $jsonPath = public_path('jnv_schools.json');
+        $jnvSchools = json_decode(File::get($jsonPath), true);
+        return view('organizer.edit-user', compact('user', 'jnvSchools'));
+    }
+
+    public function updateUser(Request $request, $user_id)
+    {
+        $user = User::find($user_id);
+        if (!$user) {
+            return redirect()->back()->with('error', 'No Allumni Found!');
+        }
+
+        $validatedData = $request->validate([
+            'first_name' => [
+                'required',
+                'string',
+                'max:30',
+                'regex:/^[\pL\s]+$/u', // Allows letters and spaces
+            ],
+            'last_name' => [
+                'required',
+                'string',
+                'max:30',
+                'regex:/^[\pL\s]+$/u',
+            ],
+            'email' => [
+                'required',
+                'string',
+                'email:rfc,dns',
+                'max:70',
+                Rule::unique('users')->ignore($user->id), // Ignore current user's email for uniqueness check
+            ],
+            'phone_number' => [
+                'required',
+                'regex:/^[6-9]\d{9}$/', // Validate phone number format
+                Rule::unique('users', 'phone_number')->ignore($user->id), // Ignore current user's phone number
+            ],
+            'city' => 'required|string|max:30',
+            'gender' => 'required|string',
+            'state' => 'required|string|max:50',
+            'district' => 'required|string|max:50',
+            'passout_batch' => 'required|string|max:10',
+            'profession' => 'required|string|max:50',
+        ], [
+            'first_name.regex' => 'The first name must contain only letters and spaces.',
+            'last_name.regex' => 'The last name must contain only letters and spaces.',
+            'phone_number.regex' => 'The phone number must be a valid 10-digit number.',
+            'phone_number.unique' => 'The phone number is already in use.',
+        ]);
+
+        try {
+            // Update user details
+            $user->update($validatedData);
+
+            return redirect()->route('organizer.showUserProfile', $user->id)->with('success', 'Alumni updated successfully!');
+        } catch (\Exception $e) {
+            // Handle errors during update
+            return redirect()->back()->with('error', 'Failed to update Alumni: ' . $e->getMessage());
+        }
     }
 
     public function updateUserStatus(Request $request)

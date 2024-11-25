@@ -7,7 +7,23 @@
                     <div class="row g-0">
                         <div class="col-xl-12">
                             <div class="card-body p-md-4 text-black">
-                                <h3 class="mb-4 text-center text-uppercase">Alumni Detail's </h3>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <a href="">
+                                            <button type="button" class="btn btn-warning">Alumni-Profile</button>
+                                        </a>
+                                    </div>
+                                    <h3 class="mb-4 text-center text-uppercase flex-grow-1">Alumni Detail's </h3>
+                                    {{-- <h3 class="mb-4 text-center text-uppercase flex-grow-1">My Profile Details</h3> --}}
+                                    <div>
+                                        <a href="{{ route('organizer.showEditUser', $user->id) }}">
+                                            <button type="button" class="btn btn-primary">
+                                                Edit Alumni
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
                                 <hr>
                                 <div class="row">
                                     <div class="form-outline col-md-6 mb-3">
@@ -75,14 +91,15 @@
                                         @if ($user->status == 1)
                                             <button type="button" data-mdb-button-init data-mdb-ripple-init
                                                 class="btn btn-success update-status" data-id="{{ $user->id }}"
-                                                data-status="1">Verified</button>
+                                                data-status="1">Alumni Verified</button>
                                         @else
                                             <button type="button" data-mdb-button-init data-mdb-ripple-init
                                                 class="btn btn-warning update-status" data-id="{{ $user->id }}"
-                                                data-status="0">Pending</button>
+                                                data-status="0">Verification Pending</button>
                                         @endif
-                                        <a href="{{route('organizer.dashboard')}}"><button type="button" data-mdb-button-init data-mdb-ripple-init
-                                                class="btn btn-warning">Back</button></a>
+                                        <a href="{{ route('organizer.QrScan') }}"><button type="button"
+                                                data-mdb-button-init data-mdb-ripple-init class="btn btn-warning">Verify
+                                                Another</button></a>
                                     </div>
                                 </div>
                             </div>
@@ -112,10 +129,10 @@
                             // Toggle the button text and class based on the new status
                             if (newStatus == 1) {
                                 $('button[data-id="' + userId + '"]').removeClass('btn-warning').addClass(
-                                    'btn-success').text('Verified');
+                                    'btn-success').text('Alumni Verified');
                             } else {
                                 $('button[data-id="' + userId + '"]').removeClass('btn-success').addClass(
-                                    'btn-warning').text('Pending');
+                                    'btn-warning').text('Verification Pending');
                             }
                             $('button[data-id="' + userId + '"]').data('status',
                                 newStatus); // Update the data-status attribute
@@ -135,5 +152,17 @@
                 });
             });
         </script>
+
+        @if (session('success'))
+            <script>
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "{{ session('success') }}",
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            </script>
+        @endif
     </div>
 @endsection
