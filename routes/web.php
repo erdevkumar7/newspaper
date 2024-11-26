@@ -77,6 +77,9 @@ Route::prefix('admin')->group(function () {
     // Admin Organizer Functionality
     Route::middleware('admin')->group(function () {
         Route::get('/all-organizer', [OrganizerController::class, 'allOrganizer'])->name('admin.allOrganizer');
+        Route::get('/add-organizer', [OrganizerController::class, 'addOrganizer'])->name('admin.addOrganizer');
+        Route::post('/add-organizer', [OrganizerController::class, 'addOrganizerSubmit'])->name('admin.addOrganizerSubmit');
+
         Route::post('/organizer/update-status', [OrganizerController::class, 'updateOrganizerStatus'])->name('admin.updateOrganizerStatus');
 
         Route::delete('/delete-organizer', [OrganizerController::class, 'deleteOrganizer'])->name('admin.deleteOrganizer');
@@ -97,6 +100,7 @@ Route::prefix('admin')->group(function () {
         Route::delete('/delete-newspaper', [AdminNewspaperController::class, 'deleteNeswPaper'])->name('admin.deleteNeswPaper');
         Route::get('/newspaper/{paper_id}/download', [AdminNewspaperController::class, 'downloadPDF'])->name('admin.newspaper.download');
     });
+    
     // page(content) management functionality
     Route::middleware('admin')->group(function () {
         Route::get('/all-page', [AdminPageController::class, 'allPage'])->name('admin.allpage');

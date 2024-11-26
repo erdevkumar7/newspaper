@@ -272,4 +272,52 @@ class OrganizerController extends Controller
         }
         return response()->json(['success' => false, 'message' => 'User not found!']);
     }
+
+    public function addOrganizer()
+    {
+        return view('admin-organizer-manage.add-organizer');
+    }
+
+    public function addOrganizerSubmit(Request $request)
+    {
+        $validatedData = $request->validate([
+            'first_name' => [
+                'required',
+                'string',
+                'max:30',
+                'regex:/^[\pL\s]+$/u',
+            ],
+            'last_name' => [
+                'required',
+                'string',
+                'max:30',
+                'regex:/^[\pL\s]+$/u',
+            ],
+            'email' => 'required|string|email:rfc,dns|max:70|unique:organizers',
+            'phone_number' => [
+                'required',
+                'regex:/^[6-9]\d{9}$/',
+            ],
+            'role' => 'required|string|max:30',
+            'gender' => 'required',
+            'password' => 'required|confirmed|string|min:6',
+            'password_confirmation' => 'required',
+        ], [
+            'first_name.regex' => 'Name field must contain only letters and spaces',
+            'last_name.regex' => 'Name field must contain only letters and spaces',
+            'phone_number.regex' => 'The Contact number must be a valid number.',
+        ]);
+
+        try {
+            // Hash the password and add it to the validated data
+            $validatedData['original_password'] = $validatedData['password'];
+            $validatedData['password'] = Hash::make($validatedData['password']);
+
+            $organizer = Organizer::create($validatedData);
+
+            return redirect()->route('admin.allOrganizer')->with('success', 'Organizer added Successful!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to create alumni: ' . $e->getMessage());
+        }
+    }
 }

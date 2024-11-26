@@ -1,8 +1,8 @@
 @extends('organizer.layout')
 @section('page_content')
     <div class="container">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <form action="{{ route('organizer.loginSubmit') }}" method="POST" enctype="multipart/form-data">
+        <div class="row d-flex justify-content-center align-items-center h-200">
+            <form action="{{ route('organizer.loginSubmit') }}" method="POST" enctype="multipart/form-data" class="organization-form">
                 @csrf
                 <div class="col">
                     <div class="card card-registration my-2">

@@ -9,7 +9,7 @@
                     <div class="x_title">
                         <h2>All Organizers<small>(registered)</small></h2>
                         <div class="nav navbar-right panel_toolbox">
-                            <a href="">
+                            <a href="{{route('admin.addOrganizer')}}">
                                 <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Add Organizer">
                                     Add Organizer
                                 </button>

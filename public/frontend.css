@@ -1,3 +1,16 @@
 .qr-head{
     color: brown;
 }
+
+form.organization-form {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+
+
+@media only screen and (max-width: 767px) {
+    form.organization-form {
+        margin-bottom: 120px;
+    }
+}
