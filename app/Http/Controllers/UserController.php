@@ -49,9 +49,10 @@ class UserController extends Controller
             'city' => 'required|string|max:30',
             'gender' => 'required',
             'state' => 'required|string',
+            'contribute' => 'required|string',
             'district' => 'required|string',
             'passout_batch' => 'required|string',
-            'profession' => 'required|string',
+            'profession' => 'required|string|max:25',
             'password' => 'required|string|min:6',
         ], [
             'first_name.regex' => 'Name field must contain only letters and spaces',
@@ -63,7 +64,7 @@ class UserController extends Controller
         try {
             // Hash the password and add it to the validated data
             $validatedData['original_password'] = $validatedData['password'];
-            $validatedData['password'] = Hash::make($validatedData['password']);
+            $validatedData['password'] = Hash::make($validatedData['password']);           
 
             // Create the user
             $user = User::create($validatedData);

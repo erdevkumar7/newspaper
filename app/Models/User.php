@@ -29,7 +29,8 @@ class User extends Authenticatable
         'profession',
         'qr_code_image',
 
-        'status',     
+        'status', 
+        'contribute',
         'email',
         'password',
         'original_password',
