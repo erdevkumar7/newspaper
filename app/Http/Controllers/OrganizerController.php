@@ -320,4 +320,48 @@ class OrganizerController extends Controller
             return redirect()->back()->with('error', 'Failed to create alumni: ' . $e->getMessage());
         }
     }
+
+    public function loginApi(Request $request)
+    {
+        // return response()->json($request);
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+        ]);
+        
+        $credentials = $request->only('email', 'password');
+        $organizer = Organizer::where('email', $credentials['email'])->first();
+
+        if (!$organizer) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid email or password.',
+            ], 401);
+        }
+
+        if ($organizer->status == 0) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Your account is not verified. Please contact the admin.',
+            ], 403);
+        }
+
+        if (Auth::guard('organizer')->attempt($credentials)) {
+            $token = $organizer->createToken('OrganizerToken')->plainTextToken;
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Logged in successfully!',
+                'data' => [
+                    'organizer' => $organizer,
+                    'token' => $token,
+                ],
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Invalid email or password.',
+        ], 401);
+    }
 }

@@ -166,27 +166,6 @@
                                             @error('profession')
                                                 <span class="text-danger" id="professionErr">{{ $message }}</span>
                                             @enderror
-
-                                            {{-- <select id="Profession" class="form-select" name="profession"
-                                            oninput="removeError('professionErr')">
-                                            <option value="" selected> --- Select Profession --- </option>
-                                            <option value="student"
-                                                {{ old('profession') == 'student' ? 'selected' : '' }}>Student</option>
-                                            <option value="bussiness"
-                                                {{ old('profession') == 'bussiness' ? 'selected' : '' }}>Bussiness</option>
-                                            <option value="self-Employeed"
-                                                {{ old('profession') == 'self-Employeed' ? 'selected' : '' }}>
-                                                Self-Employeed</option>
-                                            <option value="doctor" {{ old('profession') == 'doctor' ? 'selected' : '' }}>
-                                                Doctor</option>
-                                            <option value="enginner"
-                                                {{ old('profession') == 'enginner' ? 'selected' : '' }}>Enginner</option>
-                                            <option value="govt-employee"
-                                                {{ old('profession') == 'govt-employee' ? 'selected' : '' }}>Govt. Employee
-                                            </option>
-                                            <option value="Other" {{ old('profession') == 'Other' ? 'selected' : '' }}>
-                                                Other</option>
-                                        </select> --}}
                                         </div>
                                     </div>
 
@@ -195,14 +174,14 @@
                                      
                                         <div class="form-check form-check-inline mb-0 me-4">
                                             <input class="form-check-input" type="radio" name="contribute"
-                                                id="yescontribute" oninput="removeError('contributeErr')" value="yes"
-                                                {{ old('contribute') == 'yes' ? 'checked' : '' }} />
+                                                id="yescontribute" oninput="removeError('contributeErr')" value="Yes"
+                                                {{ old('contribute') == 'Yes' ? 'checked' : '' }} />
                                             <label class="form-check-label" for="malecontribute">Yes</label>
                                         </div>
                                         <div class="form-check form-check-inline mb-0 me-4">
                                             <input class="form-check-input" type="radio" name="contribute"
-                                                id="nocontribute" oninput="removeError('contributeErr')" value="no"
-                                                {{ old('contribute') == 'no' ? 'checked' : '' }} />
+                                                id="nocontribute" oninput="removeError('contributeErr')" value="No"
+                                                {{ old('contribute') == 'No' ? 'checked' : '' }} />
                                             <label class="form-check-label" for="nocontribute">No</label>
                                         </div>
                                         @error('contribute')
