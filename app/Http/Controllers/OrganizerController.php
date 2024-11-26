@@ -150,6 +150,15 @@ class OrganizerController extends Controller
         return view('admin-organizer-manage.all-organizer', compact('allorganizer'));
     }
 
+    public function viewOrganizer($org_id)
+    {
+        $organizer = Organizer::find($org_id);
+        if (!$organizer) {
+            return redirect()->back()->with('error', 'No Organizer Found!');
+        }
+        return view('admin-organizer-manage.view-organizer', compact('organizer'));
+    }
+
     public function updateOrganizerStatus(Request $request)
     {
         $request->validate([
@@ -321,14 +330,15 @@ class OrganizerController extends Controller
         }
     }
 
+
+    //Organizer APIs
     public function loginApi(Request $request)
     {
-        // return response()->json($request);
         $request->validate([
             'email' => 'required|email',
             'password' => 'required|min:6',
         ]);
-        
+
         $credentials = $request->only('email', 'password');
         $organizer = Organizer::where('email', $credentials['email'])->first();
 
@@ -363,5 +373,58 @@ class OrganizerController extends Controller
             'success' => false,
             'message' => 'Invalid email or password.',
         ], 401);
+    }
+
+    public function getUserById($user_id)
+    {
+        $user = User::find($user_id);
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Alumni not found',
+            ], 404);
+        }
+        // Return the user details
+        return response()->json([
+            'success' => true,
+            'message' => 'Alumni details retrieved successfully',
+            'data' => $user,
+        ], 200);
+    }
+
+    public function apiUpdateUserStatus(Request $request, $user_id)
+    {
+        // Validate the status field
+        $validatedData = $request->validate([
+            'status' => 'required|integer|in:0,1',
+        ]);
+
+        try {
+            $user = User::find($user_id);
+            if (!$user) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Alumni not found',
+                ], 404);
+            }
+
+            $user->status = $validatedData['status'];
+            $user->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Status updated successfully!',
+                'data' => [
+                    'user_id' => $user->id,
+                    'status' => $user->status,
+                ],
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to update Alumni status',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 }

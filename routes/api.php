@@ -21,5 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('organizer')->group(function(){
     Route::post('/login', [OrganizerController::class, 'loginApi']);
+    Route::get('/view-user/{user_id}/details', [OrganizerController::class, 'getUserById']);
+
+    Route::put('/update/{user_id}/user-status', [OrganizerController::class, 'apiUpdateUserStatus']);
 
 });

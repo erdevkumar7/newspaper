@@ -80,7 +80,7 @@
                                                         </td>
 
                                                         <td>
-                                                            <a href="{{ route('admin.viewuser', $user->id) }}">
+                                                            <a href="{{ route('admin.viewOrganizer', $user->id) }}">
                                                                 <button type="button"
                                                                     class="btn btn-primary">view</button></a>
                                                         </td>

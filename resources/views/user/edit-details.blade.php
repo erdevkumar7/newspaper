@@ -113,8 +113,7 @@
                                         </div>
 
                                         <div class="form-outline col-md-6 mb-3">
-                                            <label for="inputState4" class="form-label">State of the JNV Last
-                                                Attended</label>
+                                            <label for="inputState4" class="form-label">State of JNV</label>
                                             <select id="inputState4" class="form-select" name="state"
                                                 oninput="populateDistricts()">
                                                 <option value="" selected>--- Select State ---</option>
@@ -131,8 +130,7 @@
                                         </div>
 
                                         <div class="form-outline col-md-6 mb-3">
-                                            <label for="inputDistrict4" class="form-label">JNV District Last
-                                                Attended</label>
+                                            <label for="inputDistrict4" class="form-label">District of JNV</label>
                                             <select id="inputDistrict4" class="form-select" name="district">
                                                 <option value="" selected>--- Select District ---</option>
                                             </select>
@@ -142,11 +140,11 @@
                                         </div>
 
                                         <div class="form-outline col-md-6 mb-3">
-                                            <label for="inputBatch4" class="form-label">Year Of Passing:</label>
+                                            <label for="inputBatch4" class="form-label">Year of 12th Pass</label>
                                             <select id="inputBatch4" class="form-select" name="passout_batch"
                                                 oninput="removeError('passout_batchErr')">
                                                 <option value="" selected>--- Select Batch ---</option>
-                                                @for ($year = 1954; $year <= 2024; $year++)
+                                                @for ($year = 1992; $year <= 2024; $year++)
                                                     <option value="{{ $year }}"
                                                         {{ old('passout_batch', $user->passout_batch) == $year ? 'selected' : '' }}>
                                                         {{ $year }}
@@ -161,35 +159,9 @@
 
                                         <div class="form-outline col-md-6 mb-3">
                                             <label class="form-label">Profession </label>
-                                            <select id="Profession" class="form-select" name="profession"
+                                            <input type="text" id="profession" placeholder="Your profession"
+                                                value="{{ old('profession',$user->profession) }}" name="profession" class="form-control"
                                                 oninput="removeError('professionErr')">
-                                                <option value="" selected> --- Select Profession --- </option>
-                                                <option value="student"
-                                                    {{ old('profession', $user->profession) == 'student' ? 'selected' : '' }}>
-                                                    Student</option>
-                                                <option value="bussiness"
-                                                    {{ old('profession', $user->profession) == 'bussiness' ? 'selected' : '' }}>
-                                                    Bussiness
-                                                </option>
-                                                <option value="self-Employeed"
-                                                    {{ old('profession', $user->profession) == 'self-Employeed' ? 'selected' : '' }}>
-                                                    Self-Employeed</option>
-                                                <option value="doctor"
-                                                    {{ old('profession', $user->profession) == 'doctor' ? 'selected' : '' }}>
-                                                    Doctor</option>
-                                                <option value="enginner"
-                                                    {{ old('profession', $user->profession) == 'enginner' ? 'selected' : '' }}>
-                                                    Enginner
-                                                </option>
-                                                <option value="govt-employee"
-                                                    {{ old('profession', $user->profession) == 'govt-employee' ? 'selected' : '' }}>
-                                                    Govt.
-                                                    Employee
-                                                </option>
-                                                <option value="Other"
-                                                    {{ old('profession', $user->profession) == 'Other' ? 'selected' : '' }}>
-                                                    Other</option>
-                                            </select>
                                             @error('profession')
                                                 <span class="text-danger" id="professionErr">{{ $message }}</span>
                                             @enderror
