@@ -170,8 +170,8 @@
                                     </div>
 
                                     <div class="d-md-flex justify-content-start align-items-center mb-2 py-2">
-                                        <h6 class="mb-0 me-4">Do you want contribute for Navotsav-3.0 ?</h6>
-                                     
+                                        <p class="mb-0 me-4">Do you want contribute for Navotsav-3.0 ?</p>
+
                                         <div class="form-check form-check-inline mb-0 me-4">
                                             <input class="form-check-input" type="radio" name="contribute"
                                                 id="yescontribute" oninput="removeError('contributeErr')" value="Yes"
@@ -189,11 +189,18 @@
                                         @enderror
                                     </div>
 
-                                    <div class="d-flex justify-content-between align-items-center">
+                                    {{-- <div class="d-flex justify-content-between align-items-center">
                                         <button type="submit" data-mdb-button-init data-mdb-ripple-init
                                             class="btn btn-warning ms-auto">Submit</button>
-                                    </div>
+                                    </div> --}}
 
+                                    <div class="d-flex justify-content-between align-items-center mt-4">
+                                        <p class="change_link">Already Alumni ?
+                                            <a href="{{ route('user.login') }}" class="to_register"> Login </a>
+                                        </p>
+                                        <button type="submit" data-mdb-button-init data-mdb-ripple-init
+                                            class="btn btn-warning ms-2">Submit</button>
+                                    </div>
 
                                 </div>
                             </div>

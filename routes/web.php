@@ -143,7 +143,7 @@ Route::prefix('organizer')->group(function () {
 
     Route::group(['middleware' => 'organizer.auth'], function () {
         Route::get('/dashboard', [OrganizerController::class, 'dashboard'])->name('organizer.dashboard');
-        Route::get('/view-user/{user_id}/details', [OrganizerController::class, 'showUserProfile'])->name('organizer.showUserProfile');
+        Route::get('/view-user/{user_id}', [OrganizerController::class, 'showUserProfile'])->name('organizer.showUserProfile');
         
         Route::get('/edit-user/{user_id}/details', [OrganizerController::class, 'showEditUser'])->name('organizer.showEditUser');
         Route::put('/edit-user/{user_id}/details', [OrganizerController::class, 'updateUser'])->name('organizer.updateUser');

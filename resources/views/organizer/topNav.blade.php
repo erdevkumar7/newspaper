@@ -34,7 +34,7 @@
                     </form>
                 @else
                     <li><a href="{{ route('organizer.register') }}" class="active"><button
-                                class="btn btn-warning">Register</button></a></li>
+                                class="btn btn-warning">Organizer Registration</button></a></li>
                 @endif
             </ul>
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>

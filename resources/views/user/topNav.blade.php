@@ -18,7 +18,7 @@
                 @if (Auth::guard('web')->check())
                     <li><a href="{{ route('user.viewQR') }}" class="active">My-QR-Code</a></li>
                 @else
-                    <li><a href="{{route('organizer.login')}}" class="active" target="_blank">Organizer Login</a></li>
+                    <li><a href="{{route('user.login')}}" class="active">Alumni Login</a></li>
                 @endif
 
                 {{-- <li><a href="#" class="active">Events</a></li> --}}
@@ -33,7 +33,7 @@
                     </form>
                 @else
                     <li><a href="{{ route('user.register') }}" class="active">
-                            <button class="btn btn-warning">Register</button></a>
+                            <button class="btn btn-warning">Alumni Registration</button></a>
                     </li>
                 @endif
             </ul>

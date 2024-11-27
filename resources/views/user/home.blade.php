@@ -86,7 +86,7 @@
                 <div class="section-title-container d-flex align-items-center justify-content-between">
                     <h3>NAVOTSAV-3.0</h3>
                     {{-- <p>Hello</p> --}}
-                    <p><a href="{{ route('user.register') }}">For Join Navotsav Register</a></p>
+                    <p><a href="{{ route('user.register') }}">Join Navotsav-3.0</a></p>
                 </div>
             </div><!-- End Section Title -->
 

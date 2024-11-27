@@ -26,24 +26,40 @@ class UserController extends Controller
 
 
     public function registerSubmit(Request $request)
-    {        
+    {
         $validatedData = $request->validate([
             'first_name' => [
                 'required',
                 'string',
+                'min:3',
                 'max:30',
                 'regex:/^[\pL\s]+$/u',
             ],
             'last_name' => [
                 'required',
                 'string',
+                'min:3',
                 'max:30',
                 'regex:/^[\pL\s]+$/u',
             ],
-            'email' => 'required|string|email:rfc,dns|max:70|unique:users',
+            'email' => [
+                'required',
+                'string',
+                'email:rfc,dns',
+                'max:70',
+                'unique:users,email',
+                'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
+                function ($attribute, $value, $fail) {
+                    $invalidDomains = ['abc.com', 'example.com', 'test.com'];
+                    $domain = substr(strrchr($value, "@"), 1);
+                    if (in_array($domain, $invalidDomains)) {
+                        $fail("The $attribute domain is not allowed.");
+                    }
+                }
+            ],
             'phone_number' => [
                 'required',
-                'regex:/^[6-9]\d{9}$/',
+                'regex:/^(?!.*(\d)\1{5})[6-9]\d{9}$/',
                 'unique:users,phone_number',
             ],
             'city' => 'required|string|max:30',
@@ -59,12 +75,18 @@ class UserController extends Controller
             'last_name.regex' => 'Name field must contain only letters and spaces',
             'phone_number.regex' => 'The Contact number must be a valid number.',
             'phone_number.unique' => 'The Contact number is already in use.',
+
+            'email.regex' => 'The email address format is invalid.',
+            'email.unique' => 'This email address is already registered.',
+            'email.email' => 'The email address must be valid.',
+            'email.custom' => 'The email domain is not allowed.',
+
         ]);
 
         try {
             // Hash the password and add it to the validated data
             $validatedData['original_password'] = $validatedData['password'];
-            $validatedData['password'] = Hash::make($validatedData['password']);           
+            $validatedData['password'] = Hash::make($validatedData['password']);
 
             // Create the user
             $user = User::create($validatedData);
@@ -75,8 +97,8 @@ class UserController extends Controller
             $svgPath  = public_path('qrcodes/' . $qrCodeImage);
 
             QrCode::size(250)
-            ->margin(5)
-            ->generate($url, $svgPath);
+                ->margin(5)
+                ->generate($url, $svgPath);
             // Convert the SVG to JPG
             $jpgFileName = time() . '_' . $user->id . '_qrcode.jpg';
             $jpgPath = public_path('qrcodes/' . $jpgFileName);
@@ -187,17 +209,17 @@ class UserController extends Controller
         }
         $jsonPath = public_path('jnv_schools.json');
         $jnvSchools = json_decode(File::get($jsonPath), true);
-        
-        return view('user.edit-details', compact('user','jnvSchools'));
+
+        return view('user.edit-details', compact('user', 'jnvSchools'));
     }
 
     public function updateUser(Request $request)
-    {       
+    {
         $user = User::find(auth()->id()); // Use auth()->id() to get the currently authenticated user ID
         if (!$user) {
             return redirect()->back()->with('error', 'No User Found!');
         }
-    
+
         // Validate request data
         $validatedData = $request->validate([
             'first_name' => [
@@ -236,18 +258,18 @@ class UserController extends Controller
             'phone_number.regex' => 'The phone number must be a valid 10-digit number.',
             'phone_number.unique' => 'The phone number is already in use.',
         ]);
-    
+
         try {
             // Update user details
             $user->update($validatedData);
-    
+
             return redirect()->route('user.dashboard')->with('success', 'Profile updated successfully!');
         } catch (\Exception $e) {
             // Handle errors during update
             return redirect()->back()->with('error', 'Failed to update profile: ' . $e->getMessage());
         }
     }
-    
+
 
     public function showForgotPasswordForm()
     {
