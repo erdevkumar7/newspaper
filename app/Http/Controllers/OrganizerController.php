@@ -388,7 +388,7 @@ class OrganizerController extends Controller
         try {
             $validatedData['original_password'] = $validatedData['password'];
             $validatedData['password'] = Hash::make($validatedData['password']);
-            
+
             $organizer->update($validatedData);
             return redirect()->route('admin.allOrganizer')->with('success', 'organizer Update Successful!');
         } catch (\Exception $e) {
@@ -439,22 +439,39 @@ class OrganizerController extends Controller
         ], 401);
     }
 
-    public function getUserById($user_id)
-    {
-        $user = User::find($user_id);
+    public function getUserByIdOrPhoneNumber(Request $request)
+    {        
+        $request->validate([
+            'id' => 'nullable|integer', 
+            'phone_number' => 'nullable|regex:/^[6-9]\d{9}$/', 
+        ]);
+
+        // Fetch user by ID or phone_number
+        $user = User::when($request->filled('id'), function ($query) use ($request) {
+            return $query->where('id', $request->id);
+        })
+            ->when($request->filled('phone_number'), function ($query) use ($request) {
+                return $query->orWhere('phone_number', $request->phone_number);
+            })
+            ->first();
+
+        // If no user is found, return a custom error response
         if (!$user) {
             return response()->json([
                 'success' => false,
-                'message' => 'Alumni not found',
+                'message' => 'User not found',
             ], 404);
         }
-        // Return the user details
+
+        // Return the user details if found
         return response()->json([
             'success' => true,
-            'message' => 'Alumni details retrieved successfully',
+            'message' => 'User details retrieved successfully',
             'data' => $user,
         ], 200);
     }
+
+
 
     public function apiUpdateUserStatus(Request $request, $user_id)
     {

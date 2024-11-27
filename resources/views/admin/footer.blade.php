@@ -1,7 +1,7 @@
      <!-- footer content -->
      <footer>
          <div class="pull-right">
-             Admin Footer - Newspaper Admin Copy right 
+             MAAN(NAVOTSAV-3.0) - Developed by Votive Technologies
          </div>
          <div class="clearfix"></div>
      </footer>

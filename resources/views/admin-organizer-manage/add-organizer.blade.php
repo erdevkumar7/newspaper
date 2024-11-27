@@ -121,7 +121,6 @@
 
                                 <div class="col-md-4 col-sm-4 ">
                                     <label for="form3Example97">Email *</label>
-                                    <input type="hidden" value="Dev@123" name="password">
                                     <input type="text" id="form3Example97" class="form-control" name="email"
                                         value="{{ old('email') }}" oninput="removeError('emailErr')" />
                                     @error('email')
