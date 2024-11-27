@@ -41,6 +41,7 @@ class OrganizerController extends Controller
             'phone_number' => [
                 'required',
                 'regex:/^[6-9]\d{9}$/',
+                'unique:organizers,phone_number',
             ],
             'role' => 'required|string|max:30',
             'gender' => 'required',
@@ -50,6 +51,7 @@ class OrganizerController extends Controller
             'first_name.regex' => 'Name field must contain only letters and spaces',
             'last_name.regex' => 'Name field must contain only letters and spaces',
             'phone_number.regex' => 'The Contact number must be a valid number.',
+            'phone_number.unique' => 'The Contact number is already in use.',
         ]);
 
         try {
@@ -306,6 +308,7 @@ class OrganizerController extends Controller
             'phone_number' => [
                 'required',
                 'regex:/^[6-9]\d{9}$/',
+                'unique:organizers,phone_number',
             ],
             'role' => 'required|string|max:30',
             'gender' => 'required',
@@ -315,6 +318,7 @@ class OrganizerController extends Controller
             'first_name.regex' => 'Name field must contain only letters and spaces',
             'last_name.regex' => 'Name field must contain only letters and spaces',
             'phone_number.regex' => 'The Contact number must be a valid number.',
+            'phone_number.unique' => 'The Contact number is already in use.',
         ]);
 
         try {
@@ -330,8 +334,68 @@ class OrganizerController extends Controller
         }
     }
 
+    public function AdminOrgUpdateForm(Request $request, $org_id)
+    {
+        $organizer = Organizer::find($org_id);
+        if (!$organizer) {
+            return redirect()->back()->with('error', 'No Organizer Found!');
+        }
+        return view('admin-organizer-manage.edit-organizer', compact('organizer'));
+    }
 
-    //Organizer APIs
+    public function AdminOrgUpdateSubmit(Request $request, $org_id)
+    {
+        $organizer = Organizer::find($org_id);
+        if (!$organizer) {
+            return redirect()->back()->with('error', 'No Organizer Found!');
+        }
+
+        $validatedData = $request->validate([
+            'first_name' => [
+                'required',
+                'string',
+                'max:30',
+                'regex:/^[\pL\s]+$/u',
+            ],
+            'last_name' => [
+                'required',
+                'string',
+                'max:30',
+                'regex:/^[\pL\s]+$/u',
+            ],
+            'email' => [
+                'required',
+                'string',
+                'email:rfc,dns',
+                'max:70',
+                Rule::unique('organizers')->ignore($organizer->id),
+            ],
+            'phone_number' => [
+                'required',
+                'regex:/^[6-9]\d{9}$/',
+                Rule::unique('organizers', 'phone_number')->ignore($organizer->id),
+            ],
+            'role' => 'required|string|max:30',
+            'gender' => 'required',
+            'password' => 'required|string|min:6',
+        ], [
+            'first_name.regex' => 'Name field must contain only letters and spaces',
+            'last_name.regex' => 'Name field must contain only letters and spaces',
+            'phone_number.regex' => 'The Contact number must be a valid number.',
+            'phone_number.unique' => 'The Contact number is already in use.',
+        ]);
+
+        try {
+            $validatedData['original_password'] = $validatedData['password'];
+            $validatedData['password'] = Hash::make($validatedData['password']);
+            
+            $organizer->update($validatedData);
+            return redirect()->route('admin.allOrganizer')->with('success', 'organizer Update Successful!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to update organizer: ' . $e->getMessage());
+        }
+    }
+    //Organizer APIs --------------------------------------------------------------------------------
     public function loginApi(Request $request)
     {
         $request->validate([

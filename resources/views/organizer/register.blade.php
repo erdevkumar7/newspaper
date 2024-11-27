@@ -83,8 +83,8 @@
                                                     {{ old('role') == 'Accommodation' ? 'selected' : '' }}>
                                                     Accommodation</option>
 
-                                                <option value="Accounting and auditing "
-                                                    {{ old('role') == 'Accounting and auditing ' ? 'selected' : '' }}>
+                                                <option value="Accounting and auditing"
+                                                    {{ old('role') == 'Accounting and auditing' ? 'selected' : '' }}>
                                                     Accounting and auditing </option>
 
                                                 <option value="Cultral performance and event flow"
@@ -137,14 +137,14 @@
                                         <h6 class="mb-0 me-4">Gender: </h6>
                                         <div class="form-check form-check-inline mb-0 me-4">
                                             <input class="form-check-input" type="radio" name="gender" id="maleGender"
-                                                oninput="removeError('genderErr')" value="male"
-                                                {{ old('gender') == 'male' ? 'checked' : '' }} />
+                                                oninput="removeError('genderErr')" value="Male"
+                                                {{ old('gender') == 'Male' ? 'checked' : '' }} />
                                             <label class="form-check-label" for="maleGender">Male</label>
                                         </div>
                                         <div class="form-check form-check-inline mb-0 me-4">
                                             <input class="form-check-input" type="radio" name="gender" id="femaleGender"
-                                                oninput="removeError('genderErr')" value="female"
-                                                {{ old('gender') == 'female' ? 'checked' : '' }} />
+                                                oninput="removeError('genderErr')" value="Female"
+                                                {{ old('gender') == 'Female' ? 'checked' : '' }} />
                                             <label class="form-check-label" for="femaleGender">Female</label>
                                         </div>
                                         @error('gender')

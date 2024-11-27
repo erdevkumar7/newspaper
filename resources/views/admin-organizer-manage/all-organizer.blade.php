@@ -63,7 +63,7 @@
                                                             @endif
                                                         </td>
                                                         <td>
-                                                            <a href="{{ route('admin.edituser', $user->id) }}">
+                                                            <a href="{{ route('admin.orgUpdateForm', $user->id) }}">
                                                                 <button class="btn btn-info btn-sm" data-toggle="tooltip"
                                                                     data-placement="top" title="Edit">
                                                                     <i class="fa fa-edit"></i>

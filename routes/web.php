@@ -77,9 +77,14 @@ Route::prefix('admin')->group(function () {
     // Admin Organizer Functionality
     Route::middleware('admin')->group(function () {
         Route::get('/all-organizer', [OrganizerController::class, 'allOrganizer'])->name('admin.allOrganizer');
+        Route::get('/organizer/{org_id}/view', [OrganizerController::class, 'viewOrganizer'])->name('admin.viewOrganizer');
+       
         Route::get('/add-organizer', [OrganizerController::class, 'addOrganizer'])->name('admin.addOrganizer');
         Route::post('/add-organizer', [OrganizerController::class, 'addOrganizerSubmit'])->name('admin.addOrganizerSubmit');
-        Route::get('/organizer/{org_id}/view', [OrganizerController::class, 'viewOrganizer'])->name('admin.viewOrganizer');
+       
+        Route::get('/organizer/{org_id}/edit-organizer', [OrganizerController::class, 'AdminOrgUpdateForm'])->name('admin.orgUpdateForm');
+        Route::put('/organizer/{org_id}/update-organizer', [OrganizerController::class, 'AdminOrgUpdateSubmit'])->name('admin.OrgUpdateSubmit');
+        
         Route::post('/organizer/update-status', [OrganizerController::class, 'updateOrganizerStatus'])->name('admin.updateOrganizerStatus');
 
         Route::delete('/delete-organizer', [OrganizerController::class, 'deleteOrganizer'])->name('admin.deleteOrganizer');

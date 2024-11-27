@@ -4,7 +4,7 @@
     <div class="right_col" role="main">
         <div class="page-title">
             <div class="title_left">
-                <h3>Add New Organizer</h3>
+                <h3>Update Organizer</h3>
             </div>
         </div>
         <div class="clearfix"></div>
@@ -13,23 +13,26 @@
                 <div class="x_panel">
                     <div class="x_content">
                         <br />
-                        <form action="{{ route('admin.addOrganizerSubmit') }}" method="POST">
+                        <form action="{{ route('admin.OrgUpdateSubmit', $organizer->id) }}" method="POST">
                             @csrf
+                            @method('put')
                             <div class="item form-group">
-                                {{-- name --}}
+
                                 <div class="col-md-4 col-sm-4 ">
                                     <label for="form3Example1m">First Name * </label>
-                                    <input type="text" id="form3Example1m" value="{{ old('first_name') }}"
-                                        name="first_name" class="form-control" oninput="removeError('first_nameErr')">
+                                    <input type="text" id="form3Example1m"
+                                        value="{{ old('first_name', $organizer->first_name) }}" name="first_name"
+                                        class="form-control" oninput="removeError('first_nameErr')">
                                     @error('first_name')
                                         <span class="text-danger" id="first_nameErr">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                {{-- address --}}
+
                                 <div class="col-md-4 col-sm-4 ">
                                     <label for="form3Example1n">Last Name * </label>
-                                    <input type="text" id="form3Example1n" value="{{ old('last_name') }}"
-                                        name="last_name" class="form-control" oninput="removeError('last_nameErr')" />
+                                    <input type="text" id="form3Example1n"
+                                        value="{{ old('last_name', $organizer->last_name) }}" name="last_name"
+                                        class="form-control" oninput="removeError('last_nameErr')" />
                                     @error('last_name')
                                         <span class="text-danger" id="last_nameErr">{{ $message }}</span>
                                     @enderror
@@ -40,9 +43,11 @@
                                     <select id="gender" class="form-control" name="gender"
                                         oninput="removeError('genderErr')">
                                         <option value="" selected> --- Select Gender --- </option>
-                                        <option value="Male" {{ old('gender') == 'Male' ? 'selected' : '' }}>
+                                        <option value="Male"
+                                            {{ old('gender', $organizer->gender) == 'Male' ? 'selected' : '' }}>
                                             Male</option>
-                                        <option value="Female" {{ old('gender') == 'Female' ? 'selected' : '' }}>
+                                        <option value="Female"
+                                            {{ old('gender', $organizer->gender) == 'Female' ? 'selected' : '' }}>
                                             Female
                                         </option>
                                     </select>
@@ -57,8 +62,8 @@
                                 <div class="col-md-4 col-sm-4 ">
                                     <label for="phone_number">Contact Number *</label>
                                     <input type="text" id="phone_number" name="phone_number"
-                                        value="{{ old('phone_number') }}" oninput="removeError('phone_numberErr')"
-                                        class="form-control" />
+                                        value="{{ old('phone_number', $organizer->phone_number) }}"
+                                        oninput="removeError('phone_numberErr')" class="form-control" />
                                     @error('phone_number')
                                         <span class="text-danger" id="phone_numberErr">{{ $message }}</span>
                                     @enderror
@@ -70,48 +75,51 @@
                                         oninput="removeError('roleErr')">
                                         <option value="" selected> --- Select your team role --- </option>
                                         <option value="Accommodation"
-                                            {{ old('role') == 'Accommodation' ? 'selected' : '' }}>
+                                            {{ old('role', $organizer->role) == 'Accommodation' ? 'selected' : '' }}>
                                             Accommodation</option>
 
                                         <option value="Accounting and auditing"
-                                            {{ old('role') == 'Accounting and auditing' ? 'selected' : '' }}>
+                                            {{ old('role', $organizer->role) == 'Accounting and auditing' ? 'selected' : '' }}>
                                             Accounting and auditing </option>
 
                                         <option value="Cultral performance and event flow"
-                                            {{ old('role') == 'Cultral performance and event flow' ? 'selected' : '' }}>
+                                            {{ old('role', $organizer->role) == 'Cultral performance and event flow' ? 'selected' : '' }}>
                                             Cultral performance and event flow</option>
 
-                                        <option value="Decoration" {{ old('role') == 'Decoration' ? 'selected' : '' }}>
+                                        <option value="Decoration"
+                                            {{ old('role', $organizer->role) == 'Decoration' ? 'selected' : '' }}>
                                             Decoration</option>
 
-                                        <option value="Food" {{ old('role') == 'Food' ? 'selected' : '' }}>
+                                        <option value="Food"
+                                            {{ old('role', $organizer->role) == 'Food' ? 'selected' : '' }}>
                                             Food</option>
 
                                         <option value="Registration Desk"
-                                            {{ old('role') == 'Registration Desk' ? 'selected' : '' }}>
+                                            {{ old('role', $organizer->role) == 'Registration Desk' ? 'selected' : '' }}>
                                             Registration Desk</option>
 
                                         <option value="Stage management"
-                                            {{ old('role') == 'Stage management' ? 'selected' : '' }}>
+                                            {{ old('role', $organizer->role) == 'Stage management' ? 'selected' : '' }}>
                                             Stage management</option>
 
                                         <option value="Social Media and Marketing"
-                                            {{ old('role') == 'Social Media and Marketing' ? 'selected' : '' }}>
+                                            {{ old('role', $organizer->role) == 'Social Media and Marketing' ? 'selected' : '' }}>
                                             Social Media and Marketing</option>
 
                                         <option value="Teams coordinator"
-                                            {{ old('role') == 'Teams coordinator' ? 'selected' : '' }}>
+                                            {{ old('role', $organizer->role) == 'Teams coordinator' ? 'selected' : '' }}>
                                             Teams coordinator</option>
 
                                         <option value="Transportation"
-                                            {{ old('role') == 'Transportation' ? 'selected' : '' }}>
+                                            {{ old('role', $organizer->role) == 'Transportation' ? 'selected' : '' }}>
                                             Transportation</option>
 
                                         <option value="Venue Coordinator"
-                                            {{ old('role') == 'Venue Coordinator' ? 'selected' : '' }}>
+                                            {{ old('role', $organizer->role) == 'Venue Coordinator' ? 'selected' : '' }}>
                                             Venue Coordinator</option>
 
-                                        <option value="Other" {{ old('role') == 'Other' ? 'selected' : '' }}>
+                                        <option value="Other"
+                                            {{ old('role', $organizer->role) == 'Other' ? 'selected' : '' }}>
                                             Other</option>
                                     </select>
                                     @error('role')
@@ -123,7 +131,7 @@
                                     <label for="form3Example97">Email *</label>
                                     <input type="hidden" value="Dev@123" name="password">
                                     <input type="text" id="form3Example97" class="form-control" name="email"
-                                        value="{{ old('email') }}" oninput="removeError('emailErr')" />
+                                        value="{{ old('email', $organizer->email) }}" oninput="removeError('emailErr')" />
                                     @error('email')
                                         <span class="text-danger" id="emailErr">{{ $message }}</span>
                                     @enderror
@@ -132,24 +140,15 @@
 
                             <div class="item form-group">
                                 <div class="col-md-4 col-sm-4 ">
-                                    <label for="password">Password * </label>
+                                    <label for="password">Password </label>
                                     <input type="Password" name="password" class="form-control" id="password"
-                                        oninput="removeError('PasswordErr')">
+                                        value="{{ $organizer->original_password }}" oninput="removeError('PasswordErr')">
                                     <i class="fa fa-eye eye-icon-position" id="eyeIcon"></i>
                                     @error('password')
                                         <span class="text-danger" id="PasswordErr">{{ $message }}</span>
                                     @enderror
                                 </div>
 
-                                <div class="col-md-4 col-sm-4 ">
-                                    <label for="password_confirmation">Confirm Password * </label>
-                                    <input type="password" name="password_confirmation" id="password_confirmation"
-                                        class="form-control" oninput="removeError('C_PasswordErr')">
-                                    <i class="fa fa-eye eye-icon-position" id="eyeIconConfirm"></i>
-                                    @error('password_confirmation')
-                                        <span class="text-danger" id="C_PasswordErr">{{ $message }}</span>
-                                    @enderror
-                                </div>
                             </div>
 
 
@@ -158,7 +157,7 @@
                                 <div class="col-md-4 col-sm-4 offset-md-4 mt-3">
                                     <a href="{{ route('admin.allOrganizer') }}"> <button class="btn btn-primary"
                                             type="button">Cancel</button></a>
-                                    <button type="submit" class="btn btn-success">Submit</button>
+                                    <button type="submit" class="btn btn-success">Update</button>
                                 </div>
                             </div>
                         </form>
