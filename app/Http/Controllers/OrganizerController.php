@@ -28,20 +28,36 @@ class OrganizerController extends Controller
             'first_name' => [
                 'required',
                 'string',
+                'min:3',
                 'max:30',
                 'regex:/^[\pL\s]+$/u',
             ],
             'last_name' => [
                 'required',
                 'string',
+                'min:3',
                 'max:30',
                 'regex:/^[\pL\s]+$/u',
             ],
-            'email' => 'required|string|email:rfc,dns|max:70|unique:organizers',
+            'email' => [
+                'required',
+                'string',
+                'email:rfc,dns',
+                'max:70',
+                'unique:users,email',
+                'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
+                function ($attribute, $value, $fail) {
+                    $invalidDomains = ['abc.com', 'example.com', 'test.com'];
+                    $domain = substr(strrchr($value, "@"), 1);
+                    if (in_array($domain, $invalidDomains)) {
+                        $fail("The $attribute domain is not allowed.");
+                    }
+                }
+            ],
             'phone_number' => [
                 'required',
-                'regex:/^[6-9]\d{9}$/',
-                'unique:organizers,phone_number',
+                'regex:/^(?!.*(\d)\1{5})[6-9]\d{9}$/',
+                'unique:users,phone_number',
             ],
             'role' => 'required|string|max:30',
             'gender' => 'required',
@@ -52,6 +68,11 @@ class OrganizerController extends Controller
             'last_name.regex' => 'Name field must contain only letters and spaces',
             'phone_number.regex' => 'The Contact number must be a valid number.',
             'phone_number.unique' => 'The Contact number is already in use.',
+
+            'email.regex' => 'The email address format is invalid.',
+            'email.unique' => 'This email address is already registered.',
+            'email.email' => 'The email address must be valid.',
+            'email.custom' => 'The email domain is not allowed.',
         ]);
 
         try {
@@ -440,10 +461,10 @@ class OrganizerController extends Controller
     }
 
     public function getUserByIdOrPhoneNumber(Request $request)
-    {        
+    {
         $request->validate([
-            'id' => 'nullable|integer', 
-            'phone_number' => 'nullable|regex:/^[6-9]\d{9}$/', 
+            'id' => 'nullable|integer',
+            'phone_number' => 'nullable|regex:/^[6-9]\d{9}$/',
         ]);
 
         // Fetch user by ID or phone_number

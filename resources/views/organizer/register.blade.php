@@ -156,8 +156,7 @@
                                         <div class="col-md-6 mb-4">
                                             <div class="form-outline">
                                                 <div style="position: relative;">
-                                                    <input type="Password" name="password" class="form-control"
-                                                        id="password" placeholder="Password"
+                                                    <input type="password" name="password" class="form-control" id="password" placeholder="Password"
                                                         oninput="removeError('PasswordErr')">
                                                     <i class="bi bi-eye eye-icon-position" id="eyeIcon"
                                                         style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
@@ -170,20 +169,18 @@
                                         <div class="col-md-6 mb-4">
                                             <div class="form-outline">
                                                 <div style="position: relative;">
-                                                    <input type="Password" name="password_confirmation"
-                                                        class="form-control" id="password_confirmation"
-                                                        placeholder="Confirm password"
-                                                        oninput="removeError('confirmPasswordErr')">
+                                                    <input type="password" name="password_confirmation" class="form-control" id="password_confirmation"
+                                                        placeholder="Confirm password" oninput="removeError('ConfirmPasswordErr')">
                                                     <i class="bi bi-eye eye-icon-position" id="eyeIconConfirm"
                                                         style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
                                                 </div>
                                                 @error('password_confirmation')
-                                                    <span class="text-danger"
-                                                        id="ConfirmPasswordErr">{{ $message }}</span>
+                                                    <span class="text-danger" id="ConfirmPasswordErr">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                         </div>
                                     </div>
+                                    
 
                                     <div class="form-outline mb-4">
                                         <div class="separator">
