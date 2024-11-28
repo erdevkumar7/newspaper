@@ -23,6 +23,6 @@ Route::prefix('organizer')->group(function(){
     Route::post('/login', [OrganizerController::class, 'loginApi']);
     Route::post('/view-user/details', [OrganizerController::class, 'getUserByIdOrPhoneNumber']);
 
-    Route::put('/update/{user_id}/user-status', [OrganizerController::class, 'apiUpdateUserStatus']);
+    Route::post('/update-user/status', [OrganizerController::class, 'apiUpdateUserStatus']);
 
 });

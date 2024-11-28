@@ -494,39 +494,42 @@ class OrganizerController extends Controller
 
 
 
-    public function apiUpdateUserStatus(Request $request, $user_id)
+    public function apiUpdateUserStatus(Request $request)
     {
-        // Validate the status field
+        // Validate the input
         $validatedData = $request->validate([
+            'id' => 'required|integer',
             'status' => 'required|integer|in:0,1',
         ]);
-
-        try {
-            $user = User::find($user_id);
+    
+        try {           
+            $user = User::find($validatedData['id']);
+          
             if (!$user) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Alumni not found',
+                    'message' => 'User not found',
                 ], 404);
             }
-
+    
             $user->status = $validatedData['status'];
             $user->save();
-
+    
             return response()->json([
                 'success' => true,
                 'message' => 'Status updated successfully!',
                 'data' => [
-                    'user_id' => $user->id,
+                    'id' => $user->id,
                     'status' => $user->status,
                 ],
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to update Alumni status',
+                'message' => 'Failed to update user status',
                 'error' => $e->getMessage(),
             ], 500);
         }
     }
+    
 }
