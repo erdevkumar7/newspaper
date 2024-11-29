@@ -9,8 +9,8 @@
                             <div class="card-body p-md-4 text-black">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
-                                        <a href="{{ route('user.viewQR') }}">
-                                            <button type="button" class="btn btn-warning">My-QR-Code</button>
+                                        <a href="{{ route('user.dashboard') }}">
+                                            <button type="button" class="btn btn-warning">My-Profile</button>
                                         </a>
                                     </div>
                                     <h3 class="mb-4 text-center text-uppercase flex-grow-1">My QR-Code</h3>

@@ -66,6 +66,7 @@ class UserController extends Controller
             'gender' => 'required',
             'state' => 'required|string',
             'contribute' => 'required|string',
+            't_shirt' => 'required|string',
             'district' => 'required|string',
             'passout_batch' => 'required|string',
             'profession' => 'required|string|max:25',
@@ -80,6 +81,7 @@ class UserController extends Controller
             'email.unique' => 'This email address is already registered.',
             'email.email' => 'The email address must be valid.',
             'email.custom' => 'The email domain is not allowed.',
+            't_shirt.required' => 'Please select T-Shirt options'
 
         ]);
 
@@ -182,7 +184,7 @@ class UserController extends Controller
             ->first();
 
         if ($user && Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect()->route('user.dashboard')->with('success', 'Logged in successfully!'); // Redirect to the user dashboard
+            return redirect()->route('user.viewQR')->with('success', 'Logged in successfully!'); // Redirect to the user dashboard
         }
 
         // Authentication failed

@@ -86,7 +86,13 @@
                 <div class="section-title-container d-flex align-items-center justify-content-between">
                     <h3>NAVOTSAV-3.0</h3>
                     {{-- <p>Hello</p> --}}
-                    <p><a href="{{ route('user.register') }}">Join Navotsav-3.0</a></p>
+                    <a href="" class="animate__animated animate__rubberBand">
+                        <button id="blinking-button" class="animate__animated animate__rubberBand">
+                            <span class="button-content">Date: 22 Dec 2024</span>
+                        </button>
+                    </a>
+
+                    {{-- <p><a href="{{ route('user.register') }}">Join Navotsav-3.0</a></p> --}}
                 </div>
             </div><!-- End Section Title -->
 
@@ -105,7 +111,7 @@
                                 than the sum of its individual parts"</p>
                         </div>
 
-                        <div class="post-list lg">
+                        {{-- <div class="post-list lg">
                             <h4 class="mb-4">To ensure smooth participation, we have introduced a seamless registration
                                 process:</h4>
                             <h4>1. Fill the Registration Form:</h4>
@@ -121,6 +127,55 @@
                             <p>Once You have reciewed Your unique QR Code that will be verfied by any of our orgaizer. On
                                 the day of the meet, the organizers will verify your QR code to confirm your registration.
                                 Please ensure you have your QR code ready for a hassle-free experience.</p>
+                        </div> --}}
+
+                        <div class="post-list lg">
+                            <h3>Registration & Event entry process</h3>
+                            <p>Begin by providing your details through our online registration form.
+                                This will help us gather accurate information to organize the event efficiently.
+                                Once you submit the form, a unique QR code will be generated for you based on the
+                                information
+                                provided. If You want download the QR code You can download this QR code immediately after
+                                its generation.</p>
+                            <p>Once You have reciewed Your unique QR Code that will be verfied by any of our orgaizer. On
+                                the day of the meet, the organizers will verify your QR code to confirm your registration.
+                                Please ensure you have your QR code ready for a hassle-free experience.</p>
+                            <div class="cards-container">
+                                <div class="cards">
+                                    <p class="card__name">Register Yourself</p>
+                                    <ul class="social-icons">
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
+                                    <a href="{{ route('user.register') }}"><button class="draw-border">Register Now (No
+                                            Resgitration No
+                                            Entry)</button></a>
+                                </div>
+                                <div class="cards">
+                                    <p class="card__name">Download Your QR Code</p>
+                                    <ul class="social-icons">
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
+                                    <a href="{{ route('user.login') }}"><button class="draw-border">After Registeration you
+                                            can download QR Code</button></a>
+                                </div>
+                                <div class="cards">
+                                    <p class="card__name">On the day of event</p>
+                                    <ul class="social-icons">
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
+                                    <a href="{{ route('user.login') }}"> <button class="draw-border">Show your QR Code at
+                                            entry point</button></a>
+                                </div>
+                            </div>
                         </div>
 
                     </div>

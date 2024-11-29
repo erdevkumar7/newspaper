@@ -531,5 +531,9 @@ class OrganizerController extends Controller
             ], 500);
         }
     }
+
+    // public function getUserById(Request $request){
+    //     return response()->json($request);
+    // }
     
 }

@@ -189,10 +189,111 @@
                                         @enderror
                                     </div>
 
-                                    {{-- <div class="d-flex justify-content-between align-items-center">
-                                        <button type="submit" data-mdb-button-init data-mdb-ripple-init
-                                            class="btn btn-warning ms-auto">Submit</button>
+                                    {{-- <div class="d-md-flex justify-content-start align-items-center mb-2 py-2">
+                                        <p class="mb-0 me-4">Do you want MAAN T-Shirt ?</p>
+                                        <div class="form-check form-check-inline mb-0 me-4">
+                                            <input class="form-check-input" type="radio" name="t_shirt"
+                                                id="tshirtYes" value="Yes" onchange="toggleSizeOptions()"
+                                                {{ old('t_shirt') == 'Yes' ? 'checked' : '' }} />
+                                            <label class="form-check-label" for="malet_shirt">Yes</label>
+                                        </div>
+                                        <div class="form-check form-check-inline mb-0 me-4">
+                                            <input class="form-check-input" type="radio" name="t_shirt"
+                                                id="tshirtNo" value="No" onchange="toggleSizeOptions()"
+                                                {{ old('t_shirt') == 'No' ? 'checked' : '' }} />
+                                            <label class="form-check-label" for="not_shirt">No</label>
+                                        </div>
+
+                                        <div id="sizeOptions" style="display: none;">
+                                            <select id="tshirtSize" name="tshirt_size" class="form-select">
+                                                <option value="">Choose Size</option>
+                                                <option value="S">S</option>
+                                                <option value="M">M</option>
+                                                <option value="L">L</option>
+                                                <option value="XL">XL</option>
+                                                <option value="XXL">XXL</option>
+                                            </select>
+                                        </div>
+
+                                        <script>
+                                            function toggleSizeOptions() {
+                                                const tshirtYes = document.getElementById('tshirtYes');
+                                                const sizeOptions = document.getElementById('sizeOptions');
+    
+                                                if (tshirtYes.checked) {
+                                                    sizeOptions.style.display = 'block'; 
+                                                } else {
+                                                    sizeOptions.style.display = 'none';
+                                                }
+                                            }
+                                        </script>
                                     </div> --}}
+
+
+                                    <div class="d-md-flex justify-content-start align-items-center mb-2 py-2">
+                                        <p class="mb-0 me-4">Do you want MAAN T-Shirt?</p>
+                                        <div class="form-check form-check-inline mb-0 me-4">
+                                            <input class="form-check-input" type="radio" name="t_shirt" id="tshirtYes"
+                                                value="{{ old('tshirt_size') }}"
+                                                onchange="toggleSizeOptions(), removeError('t_shirtErr')"
+                                                {{ old('t_shirt') && old('t_shirt') !== 'No' ? 'checked' : '' }} />
+                                            <label class="form-check-label" for="tshirtYes">Yes</label>
+                                        </div>
+                                        <div class="form-check form-check-inline mb-0 me-4">
+                                            <input class="form-check-input" type="radio" name="t_shirt" id="tshirtNo"
+                                                value="No" onchange="toggleSizeOptions(), removeError('t_shirtErr')"
+                                                {{ old('t_shirt') == 'No' ? 'checked' : '' }} />
+                                            <label class="form-check-label" for="tshirtNo">No</label>
+                                        </div>
+
+                                        <div id="sizeOptions"
+                                            style="display: {{ old('t_shirt') && old('t_shirt') !== 'No' ? 'block' : 'none' }};">
+                                            <select id="tshirtSize" name="tshirt_size" class="form-select"
+                                                onchange="updateTshirtValue()">
+                                                <option value="">Choose Size</option>
+                                                <option value="S" {{ old('tshirt_size') == 'S' ? 'selected' : '' }}>S
+                                                </option>
+                                                <option value="M" {{ old('tshirt_size') == 'M' ? 'selected' : '' }}>M
+                                                </option>
+                                                <option value="L" {{ old('tshirt_size') == 'L' ? 'selected' : '' }}>L
+                                                </option>
+                                                <option value="XL" {{ old('tshirt_size') == 'XL' ? 'selected' : '' }}>
+                                                    XL</option>
+                                                <option value="XXL"
+                                                    {{ old('tshirt_size') == 'XXL' ? 'selected' : '' }}>XXL</option>
+                                            </select>
+                                        </div>
+
+                                        @error('t_shirt')
+                                            <div class="text-danger" id="t_shirtErr">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <script>
+                                        function toggleSizeOptions() {
+                                            const tshirtYes = document.getElementById('tshirtYes');
+                                            const sizeOptions = document.getElementById('sizeOptions');
+                                            const tshirtSize = document.getElementById('tshirtSize');
+
+                                            if (tshirtYes.checked) {
+                                                sizeOptions.style.display = 'block'; // Show size options
+                                                tshirtYes.value = tshirtSize.value; // Set initial value based on current size
+                                            } else {
+                                                sizeOptions.style.display = 'none'; // Hide size options
+                                                tshirtYes.value = ""; // Reset value
+                                            }
+                                        }
+
+                                        function updateTshirtValue() {
+                                            const tshirtYes = document.getElementById('tshirtYes');
+                                            const tshirtSize = document.getElementById('tshirtSize');
+                                            tshirtYes.value = tshirtSize.value; // Update the radio button value with the selected size
+                                        }
+                                    </script>
+
+
+
+
 
                                     <div class="d-flex justify-content-between align-items-center mt-4">
                                         <p class="change_link">Already Alumni ?

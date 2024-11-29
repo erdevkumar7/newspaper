@@ -25,4 +25,6 @@ Route::prefix('organizer')->group(function(){
 
     Route::post('/update-user/status', [OrganizerController::class, 'apiUpdateUserStatus']);
 
+    // Route::get('/user-detail', [OrganizerController::class, 'getUserById']);
+
 });
