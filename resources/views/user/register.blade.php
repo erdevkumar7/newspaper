@@ -5,7 +5,7 @@
             <form action="{{ route('user.registerSubmit') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="col">
-                    <div class="card card-registration my-2">
+                    <div class="card card-registration my-4">
                         {{-- @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>

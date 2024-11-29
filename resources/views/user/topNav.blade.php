@@ -3,7 +3,7 @@
 
         <a href="{{ route('home') }}" class="logo d-flex align-items-center me-auto me-xl-0">
             <!-- Uncomment the line below if you also wish to use an image logo -->
-             <img src="{{asset('public/images/allumni_img/maan-logo.jpg')}}" alt="">
+            <img src="{{ asset('public/images/allumni_img/maan-logo.jpg') }}" alt="">
             <h1 class="sitename">MAAN(NAVOTSAV-3.0)</h1>
         </a>
 
@@ -18,11 +18,11 @@
                 @if (Auth::guard('web')->check())
                     <li><a href="{{ route('user.viewQR') }}" class="active">My-QR-Code</a></li>
                 @else
-                    <li><a href="{{route('user.login')}}" class="active">Alumni Login</a></li>
+                    <li><a href="{{ route('user.login') }}" class="active">Alumni Login</a></li>
                 @endif
 
                 {{-- <li><a href="#" class="active">Events</a></li> --}}
-                <li><a href="#" class="active">Contact</a></li>
+                <li><a href="{{ route('contactUs') }}" class="active">Contact</a></li>
                 @if (Auth::guard('web')->check())
                     <form action="{{ route('user.logout') }}" method="post">
                         @csrf

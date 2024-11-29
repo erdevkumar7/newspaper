@@ -37,6 +37,7 @@
                                 <h3>Call Us</h3>
                                 <p>+91 9594388811</p>
                                 <p>+91 9993776088</p>
+                                <p>+91 9826941425</p>
                             </div>
                         </div><!-- End Info Item -->
 
@@ -44,10 +45,9 @@
                             <i class="bi bi-envelope flex-shrink-0"></i>
                             <div>
                                 <h3>Email Us</h3>
-                                <p>votivedevendralaravel@gmail.com</p>
+                                <p>maanalumniassociation@gmail.com</p>
                             </div>
                         </div><!-- End Info Item -->
-
                     </div>
 
                     <div class="col-lg-8">
@@ -79,12 +79,12 @@
                                     <div class="error-message"></div>
                                     <div class="sent-message">Your message has been sent. Thank you!</div>
 
-                                    {{-- <button type="submit">Send Message</button> --}}
+                                    <!-- <button type="submit">Send Message</button> -->
                                 </div>
 
                             </div>
                         </form>
-                    </div><!-- End Contact Form -->
+                    </div>
 
                 </div>
 
