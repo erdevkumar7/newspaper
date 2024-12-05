@@ -24,6 +24,8 @@ Route::get('/payment/cancel', [PaymentController::class, 'cancelPayment'])->name
 Route::prefix('user')->group(function () {
     Route::get('/register', [UserController::class, 'register'])->name(('user.register'));
     Route::post('/register', [UserController::class, 'registerSubmit'])->name(('user.registerSubmit'));
+    
+    Route::get('/image-generate', [PageController::class, 'showMAANimageGenerate'])->name('user.imageGenerate');
 
     Route::get('/profile/{user_id}/view-detail', [UserController::class, 'showProfile'])->name('user.profile');
 
@@ -61,6 +63,8 @@ Route::prefix('admin')->group(function () {
     Route::middleware('admin')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
         Route::get('/all-user', [AdminController::class, 'allUser'])->name('admin.alluser');
+        Route::get('/all/{jnv_name}/user', [AdminController::class, 'jnvWiseUser'])->name('admin.jnvWiseUser');
+
         Route::get('/add-user', [AdminController::class, 'adduser'])->name('admin.adduser');
         Route::post('/add-user', [AdminController::class, 'adduserSubmit'])->name('admin.adduserSubmit');
 

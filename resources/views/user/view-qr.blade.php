@@ -38,6 +38,10 @@
                                         @csrf
                                         <button type="submit" class="btn btn-warning mt-4">QR Download</button>
                                     </form>
+                                    <div class="mt-4 text-center">
+                                        <button class="btn btn-default" style="background: #58cdd1" onclick="shareRegistration()">Share with other
+                                            Alumni</button>
+                                    </div>
                                 </div>
 
 
@@ -60,4 +64,22 @@
             });
         </script>
     @endif
+
+    <script>
+        function shareRegistration() {
+            if (navigator.share) {
+                navigator.share({
+                        title: 'Join NAVOTSAV-3.0!',
+                        text: 'I just registered as MAAN, you can also Register',
+                        url: '{{ url('https://www.iammaan.com/user/register') }}'
+                    })
+                    .then(() => console.log('Thanks for sharing!'))
+                    .catch(console.error);
+            } else {
+                // Fallback: Show modal with link
+                const shareModal = document.getElementById('shareModal');
+                shareModal.style.display = 'block';
+            }
+        }
+    </script>
 @endsection

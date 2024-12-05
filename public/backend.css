@@ -10,6 +10,38 @@ li.new-manage span.fa.fa-chevron-down {
     margin-top: -14px !important;
 }
 
+.mp-jnvs .x_title {
+    border: none;
+}
+.mp-jnvs .x_title h2 {
+    font-size: 20px;
+    padding-left: 24px;
+    color: #000;
+    font-family: system-ui;
+}
+
+
+.row.mp-jnvs h2 {
+    color: #000;
+    font-family: system-ui;
+}
+
+.jnv-sec {
+    padding-right: 3px !important;
+    padding-left: 3px !important;
+}
+
+.mp-jnvs .x_panel {
+    padding: 6px 0px;
+    margin-bottom: 1px !important;
+}
+
+.login-submit-btn {
+    background-color: #26B99A;
+    border-radius: 3px;
+    width: 100%;
+}
+
 .admin-escort-pics img {
     margin-top: -25px;
     width: -webkit-fill-available;
@@ -19,6 +51,12 @@ li.new-manage span.fa.fa-chevron-down {
     margin-right: 0;
     z-index: 1;
     position: relative;
+}
+li.new-manage.active span.fa.fa-chevron-down {
+    margin-top: -14px !important;
+}
+li.new-manage span.fa.fa-chevron-down {
+    margin-top: 6px !important;
 }
 
 .table-responsive a.btn.btn-default.buttons-copy.buttons-html5.btn-sm {

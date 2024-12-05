@@ -68,13 +68,36 @@ class AdminController extends Controller
     {
         $totalUsers = DB::table('users')->count();
         $totalOrgamizers = DB::table('organizers')->count();
-        return view('admin.dashboard', compact('totalUsers', 'totalOrgamizers'));
+
+        $state = 'Madhya Pradesh';
+
+        // District-wise user count
+        $districtStats = User::select('district', DB::raw('COUNT(*) as user_count'))
+            ->where('state', $state)
+            ->groupBy('district')
+            ->orderBy('user_count', 'desc')
+            ->get();
+
+        // Total users in Madhya Pradesh
+        $totalMPUsers = User::where('state', $state)->count();
+
+        return view('admin.dashboard', compact('totalUsers', 'totalOrgamizers', 'districtStats', 'totalMPUsers'));
     }
 
     public function allUser()
     {
         $allusers = DB::table('users')->orderBy('created_at', 'desc')->get();
         return view('admin-user-manage.all-user', compact('allusers'));
+    }
+
+    public function jnvWiseUser($jnv_name)
+    {
+        $allusers = DB::table('users')
+        ->where('district', $jnv_name)
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+        return view('admin-user-manage.jnv-wise-user', compact('allusers','jnv_name'));
     }
 
     public function viewUser($user_id)
