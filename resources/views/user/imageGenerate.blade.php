@@ -1,16 +1,26 @@
 @extends('user.layout')
 @section('page_content')
-
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card p-4 text-center" style="max-width: 500px">
             <div class="col-xl-12">
                 <h3 class="my-4">"MAAN" Image Creator</h3>
-                <canvas class="my-4" id="canvas" style="display: none; border: 1px solid #ccc;"></canvas>
-                <div>
+
+
+                <div id="tem-img-box">
+                    <div>
+                        <img src="{{ asset('public/images/allumni_img/temp_profile.png') }}"
+                            style="width: 200px; height:200px">
+                    </div>
+                    {{-- <button class="btn btn-primary">Select Image</button> --}}
                     <input type="file" id="uploadImage" accept="image/*" onchange="generateImage()" />
                 </div>
-                <button id="downloadBtn" class="btn btn-primary my-4" style="display: none;"
-                    onclick="downloadImage()">Download</button>
+
+                <div>
+                    <canvas id="canvas" style="display: none; border: 1px solid #ccc;"></canvas>
+                    <button id="downloadBtn" class="btn btn-primary" style="display: none;"
+                        onclick="downloadImage()">Download
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -71,12 +81,16 @@
                         // Show canvas, download button, and share button
                         canvas.style.display = 'block';
                         downloadBtn.style.display = 'inline-block';
+
+                        const tempBox = document.getElementById('tem-img-box');
+                        tempBox.style.display = 'none';
                     };
 
                     img.src = e.target.result;
                 };
 
                 reader.readAsDataURL(fileInput.files[0]);
+
             } else {
                 alert('Please select an image to upload.');
             }

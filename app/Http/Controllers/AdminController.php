@@ -93,11 +93,11 @@ class AdminController extends Controller
     public function jnvWiseUser($jnv_name)
     {
         $allusers = DB::table('users')
-        ->where('district', $jnv_name)
-        ->orderBy('created_at', 'desc')
-        ->get();
+            ->where('district', $jnv_name)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-        return view('admin-user-manage.jnv-wise-user', compact('allusers','jnv_name'));
+        return view('admin-user-manage.jnv-wise-user', compact('allusers', 'jnv_name'));
     }
 
     public function viewUser($user_id)
@@ -281,6 +281,12 @@ class AdminController extends Controller
         ]);
         $user = User::find($request->user_id);
         if ($user) {
+            if ($user->qr_code_image) {
+                $imagePath = public_path('qrcodes') . '/' . $user->qr_code_image;
+                if (file_exists($imagePath)) {
+                    unlink($imagePath);
+                }
+            }
             $user->delete();
             return response()->json(['success' => true, 'message' => 'User deleted successfully.']);
         }

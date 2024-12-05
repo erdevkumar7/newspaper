@@ -14,12 +14,13 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
-                                   <table id="datatable-buttons" class="table table-striped table-bordered"
+                                    <table id="datatable-buttons" class="table table-striped table-bordered"
                                         style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
                                                 <th>Name</th>
+                                                <th>Surname</th>
                                                 <th>Contact</th>
                                                 <th>State</th>
                                                 <th>District</th>
@@ -42,6 +43,7 @@
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>{{ $user->first_name ?? 'Not Available' }}</td>
+                                                        <td>{{ $user->last_name ?? 'Not Available' }}</td>
                                                         <td>{{ $user->phone_number ?? 'Not Available' }} </td>
                                                         <td>{{ $user->state ?? 'Not Available' }} </td>
                                                         <td>{{ $user->district ?? 'Not Available' }}</td>

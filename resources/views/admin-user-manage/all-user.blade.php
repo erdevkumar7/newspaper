@@ -27,10 +27,13 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Name</th>
-                                                <th>Email</th>
+                                                <th>Surname</th>
                                                 <th>Contact</th>
                                                 <th>State</th>
                                                 <th>District</th>
+                                                <th>City</th>
+                                                <th>Passout-Year</th>
+                                                <th>Profession</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                                 <th>View User</th>
@@ -47,10 +50,13 @@
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>{{ $user->first_name ?? 'Not Available' }}</td>
-                                                        <td>{{ $user->email ?? 'Not Available' }} </td>
+                                                        <td>{{ $user->last_name ?? 'Not Available' }}</td>
                                                         <td>{{ $user->phone_number ?? 'Not Available' }} </td>
                                                         <td>{{ $user->state ?? 'Not Available' }} </td>
                                                         <td>{{ $user->district ?? 'Not Available' }}</td>
+                                                        <td>{{ $user->city ?? 'Not Available' }}</td>
+                                                        <td>{{ $user->passout_batch ?? 'Not Available' }} </td>
+                                                        <td>{{ $user->profession ?? 'Not Available' }}</td>
                                                         <td>
                                                             @if ($user->status == 1)
                                                                 <button type="button"
@@ -101,7 +107,7 @@
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         {{-- sweetalert2 JS --}}
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
         <script>
@@ -109,7 +115,7 @@
                 e.preventDefault();
                 var userId = $(this).data('delete-id');
                 var row = $(this).closest('tr'); // Get the row of the clicked delete button
-        
+
                 // Show SweetAlert confirmation
                 Swal.fire({
                     title: "Are you sure?",
@@ -130,7 +136,7 @@
                             },
                             success: function(response) {
                                 if (response.success) {
-                                    row.remove(); 
+                                    row.remove();
                                     // Swal.fire({
                                     //     title: "Deleted!",
                                     //     text: "The user has been deleted.",
@@ -158,7 +164,7 @@
                 });
             });
         </script>
-        
+
 
         {{-- Update user status active/Inactive --}}
         {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
@@ -206,5 +212,7 @@
         </script>
 
     </div>
+
+
 
 @endsection

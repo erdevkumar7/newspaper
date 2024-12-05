@@ -1,29 +1,26 @@
 <header id="header" class="header d-flex align-items-center sticky-top">
     <div class="container position-relative d-flex align-items-center justify-content-between">
 
-        <a href="{{ route('organizer.home') }}" class="logo d-flex align-items-center me-auto me-xl-0">
+        <a href="{{ route('organizer.login') }}" class="logo d-flex align-items-center me-auto me-xl-0">
             <!-- Uncomment the line below if you also wish to use an image logo -->
-            <!-- <img src="assets/img/logo.png" alt=""> -->
-            <img src="{{asset('public/images/allumni_img/maan-logo.jpg')}}" alt="">
-            <h1 class="sitename">MAAN(NAVOTSAV-3.0)</h1>
+            <!--<img src="{{asset('public/images/allumni_img/maan-logo.jpg')}}" alt=""> -->
+              <h1 class="sitename">
+               NAVOTSAV 3.0 – A MAAN Initiative
+            </h1>
         </a>
 
         <nav id="navmenu" class="navmenu">
-            <ul>
-                @if (Auth::guard('organizer')->check())
-                    <li><a href="{{ route('organizer.dashboard') }}" class="active">My-Profile</a></li>
-                @else
-                    <li><a href="{{ route('organizer.home') }}" class="active">Home</a></li>
-                @endif
+            <ul>         
 
                 @if (Auth::guard('organizer')->check())
+                    {{-- <li><a href="{{ route('organizer.dashboard') }}" class="active">My-Profile</a></li> --}}
                     <li><a href="{{ route('organizer.QrScan') }}" class="active">QR-Scan</a></li>
                 @else
-                    <li><a href="{{route('organizer.login')}}" class="active">Organizer Login</a></li>
+                    {{-- <li><a href="{{ route('organizer.home') }}" class="active">Home</a></li> --}}
+                    <li><a href="#" class="active">Contact</a></li>
                 @endif
-
-                {{-- <li><a href="#" class="active">Events</a></li> --}}
-                <li><a href="#" class="active">Contact</a></li>
+            
+                
                 @if (Auth::guard('organizer')->check())
                     <form action="{{ route('organizer.logout') }}" method="post">
                         @csrf
@@ -33,8 +30,8 @@
                         </li>
                     </form>
                 @else
-                    <li><a href="{{ route('organizer.register') }}" class="active"><button
-                                class="btn btn-warning">Organizer Registration</button></a></li>
+                    <li><a href="{{ route('organizer.login') }}" class="active"><button
+                                class="btn btn-warning">Organizer Login</button></a></li>
                 @endif
             </ul>
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
