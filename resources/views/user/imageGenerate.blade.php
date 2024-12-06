@@ -4,24 +4,26 @@
         <div class="card p-4 text-center my-4" style="max-width: 500px">
             <div class="col-xl-12">
                 <h3 class="my-2">"MAAN" Image Creator</h3>
+
                 <div id="tem-img-box">
-                    <div class="my-2">
+                    <div class="my-4">
                         <img src="{{ asset('public/images/allumni_img/temp_profile.png') }}"
                             style="width: 200px; height:200px">
                     </div>
-                    <button class="btn btn-primary" onclick="triggerFileInput()">Select Image</button>
+                    <button class="btn btn-primary my-2" onclick="triggerFileInput()">Select Image</button>
                     <input type="file" id="uploadImage" accept="image/*" onchange="generateImage()"
                         style="display: none;" />
                 </div>
 
-                <div>
+                <div id="canvasImgBox" style="display: none">
                     <div class="my-4">
-                        <canvas id="canvas" style="display: none; border: 1px solid #ccc;"></canvas>
+                        <canvas id="canvas" style=" border: 1px solid #ccc;"></canvas>
                     </div>
-                    <button id="downloadBtn" class="btn btn-primary my-2" style="display: none;"
-                        onclick="downloadImage()">Download
+                    <button class="btn btn-primary my-2" id="downloadBtn" onclick="downloadImage()">Download
                     </button>
-                    <button id="back-btn" class="btn my-2" onclick="triggerFileInput()" style="display: none; background: #ffc107">Create New</button>
+                    <button id="back-btn" class="btn my-2" onclick="triggerFileInput()" style=" background: #ffc107">
+                        Create New
+                    </button>
                 </div>
             </div>
         </div>
@@ -34,9 +36,10 @@
         }
 
         function generateImage() {
+            const canvasImgBox = document.getElementById('canvasImgBox');
+            const tempBox = document.getElementById('tem-img-box');
             const fileInput = document.getElementById('uploadImage');
             const canvas = document.getElementById('canvas');
-            const downloadBtn = document.getElementById('downloadBtn');
 
             if (fileInput.files && fileInput.files[0]) {
                 const reader = new FileReader();
@@ -50,19 +53,15 @@
                         const textRadius = radius - 20; // Text radius (inside the circle)
                         canvas.width = size;
                         canvas.height = size;
-
                         // Clear the canvas
                         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
                         // Clip the canvas to make its content circular
                         ctx.beginPath();
                         ctx.arc(radius, radius, radius, 0, Math.PI * 2, true);
                         ctx.closePath();
                         ctx.clip();
-
                         // Draw the uploaded image onto the circular canvas
                         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
                         // Add text ("I am MAAN") along the circular path
                         ctx.font = 'bold 20px Arial';
                         ctx.fillStyle = '#ffc107';
@@ -84,16 +83,10 @@
                             ctx.restore();
                         });
 
-                        // Show canvas, download button, and share button
-                        const backBtn = document.getElementById('back-btn');
-                        canvas.style.display = 'inline-block';
-                        downloadBtn.style.display = 'inline-block';
-                        backBtn.style.display = 'inline-block';
-
-                        const tempBox = document.getElementById('tem-img-box');
+                        // Show canvas, and hide TempBox
+                        canvasImgBox.style.display = 'block'                      
                         tempBox.style.display = 'none';
                     };
-
                     img.src = e.target.result;
                 };
 
