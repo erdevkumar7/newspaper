@@ -1,6 +1,6 @@
 @extends('user.layout')
 @section('page_content')
-    <div class="container d-flex justify-content-center align-items-center  ">
+    {{-- <div class="container d-flex justify-content-center align-items-center  ">
         <div class="card p-4 text-center my-4" style="max-width: 500px">
             <div class="col-xl-12">
                 <h3 class="my-2">"MAAN" Image Creator</h3>
@@ -28,7 +28,6 @@
             </div>
         </div>
     </div>
-
 
     <script>
         function triggerFileInput() {
@@ -105,7 +104,7 @@
             link.href = canvas.toDataURL('image/png');
             link.click();
         }
-    </script>
+    </script> --}}
 
 
     {{-- <div class="container vh-100">
@@ -179,4 +178,100 @@
             link.click();
         }
     </script> --}}
+
+
+
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+
+        <div>
+            
+        </div>
+
+        <div class="card p-4 text-center">
+            <h3 class="my-4">"I AM MAAN" Image Creator</h3>
+            <canvas id="canvas" style="display: block; border: 1px solid #ccc;"></canvas>
+            <button class="btn btn-primary my-3" onclick="triggerFileInput()">Select Profile Image</button>
+            <input type="file" id="uploadProfile" accept="image/*" style="display: none;" onchange="replaceDummyProfile()" />
+            <button id="downloadBtn" class="btn btn-success" style="display: none;" onclick="downloadImage()">Download</button>
+        </div>
+    </div>
+    
+    <script>
+        const dummyProfileArea = { x: 215, y: 70, radius: 70 }; // Center and radius for the circular profile area
+    
+        function triggerFileInput() {
+            document.getElementById('uploadProfile').click();
+        }
+    
+        function replaceDummyProfile() {
+            const fileInput = document.getElementById('uploadProfile');
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            const bigImage = new Image();
+            const profileImage = new Image();
+    
+            bigImage.src = "{{ asset('public/images/allumni_img/maan_dummy.png') }}"; // Path to your bigger image with dummy profile
+            bigImage.onload = () => {
+                // Set canvas dimensions to match the bigger image
+                canvas.width = bigImage.width;
+                canvas.height = bigImage.height;
+    
+                // Draw the bigger image on the canvas
+                ctx.drawImage(bigImage, 0, 0);
+    
+                if (fileInput.files && fileInput.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        profileImage.onload = function () {
+                            // Save the current context state
+                            ctx.save();
+    
+                            // Create a circular clipping path
+                            ctx.beginPath();
+                            ctx.arc(
+                                dummyProfileArea.x + dummyProfileArea.radius, // Center X
+                                dummyProfileArea.y + dummyProfileArea.radius, // Center Y
+                                dummyProfileArea.radius, // Radius
+                                0,
+                                Math.PI * 2
+                            );
+                            ctx.closePath();
+                            ctx.clip();
+    
+                            // Draw the profile image inside the clipping path
+                            ctx.drawImage(
+                                profileImage,
+                                dummyProfileArea.x,
+                                dummyProfileArea.y,
+                                dummyProfileArea.radius * 2,
+                                dummyProfileArea.radius * 2
+                            );
+    
+                            // Restore the context to remove the clipping path
+                            ctx.restore();
+    
+                            // Show the download button
+                            document.getElementById('downloadBtn').style.display = 'inline-block';
+                        };
+                        profileImage.src = e.target.result;
+                    };
+                    reader.readAsDataURL(fileInput.files[0]);
+                }
+            };
+        }
+    
+        function downloadImage() {
+            const canvas = document.getElementById('canvas');
+            const link = document.createElement('a');
+            link.download = 'Updated_Profile_Image.png';
+            link.href = canvas.toDataURL('image/png'); // Convert canvas to an image URL
+            link.click();
+        }
+    </script>
+    
+    
+    
+    
+
+
 @endsection
