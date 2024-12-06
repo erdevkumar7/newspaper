@@ -1,25 +1,27 @@
 @extends('user.layout')
 @section('page_content')
-    <div class="container d-flex justify-content-center align-items-center vh-100">
-        <div class="card p-4 text-center" style="max-width: 500px">
+    <div class="container d-flex justify-content-center align-items-center  ">
+        <div class="card p-4 text-center my-4" style="max-width: 500px">
             <div class="col-xl-12">
-                <h3 class="my-4">"MAAN" Image Creator</h3>
-
-
+                <h3 class="my-2">"MAAN" Image Creator</h3>
                 <div id="tem-img-box">
-                    <div>
+                    <div class="my-2">
                         <img src="{{ asset('public/images/allumni_img/temp_profile.png') }}"
                             style="width: 200px; height:200px">
                     </div>
-                    {{-- <button class="btn btn-primary">Select Image</button> --}}
-                    <input type="file" id="uploadImage" accept="image/*" onchange="generateImage()" />
+                    <button class="btn btn-primary" onclick="triggerFileInput()">Select Image</button>
+                    <input type="file" id="uploadImage" accept="image/*" onchange="generateImage()"
+                        style="display: none;" />
                 </div>
 
                 <div>
-                    <canvas id="canvas" style="display: none; border: 1px solid #ccc;"></canvas>
-                    <button id="downloadBtn" class="btn btn-primary" style="display: none;"
+                    <div class="my-4">
+                        <canvas id="canvas" style="display: none; border: 1px solid #ccc;"></canvas>
+                    </div>
+                    <button id="downloadBtn" class="btn btn-primary my-2" style="display: none;"
                         onclick="downloadImage()">Download
                     </button>
+                    <button id="back-btn" class="btn my-2" onclick="triggerFileInput()" style="display: none; background: #ffc107">Create New</button>
                 </div>
             </div>
         </div>
@@ -27,6 +29,10 @@
 
 
     <script>
+        function triggerFileInput() {
+            document.getElementById('uploadImage').click(); // Programmatically click the hidden input
+        }
+
         function generateImage() {
             const fileInput = document.getElementById('uploadImage');
             const canvas = document.getElementById('canvas');
@@ -79,8 +85,10 @@
                         });
 
                         // Show canvas, download button, and share button
-                        canvas.style.display = 'block';
+                        const backBtn = document.getElementById('back-btn');
+                        canvas.style.display = 'inline-block';
                         downloadBtn.style.display = 'inline-block';
+                        backBtn.style.display = 'inline-block';
 
                         const tempBox = document.getElementById('tem-img-box');
                         tempBox.style.display = 'none';
