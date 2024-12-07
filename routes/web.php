@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/about-us', [PageController::class, 'aboutUs'])->name('aboutUs');
 Route::get('/contact-us', [PageController::class, 'contactUs'])->name('contactUs');
+Route::get('/create-dp', [PageController::class, 'showMAANimageGenerate'])->name('user.imageGenerate');
+
 Route::get('/subscribe', [PageController::class, 'subscribe'])->name('subscribe');
 
 Route::post('/payment/create', [PaymentController::class, 'createPayment'])->name('payment.create');
@@ -25,7 +27,6 @@ Route::prefix('user')->group(function () {
     Route::get('/register', [UserController::class, 'register'])->name(('user.register'));
     Route::post('/register', [UserController::class, 'registerSubmit'])->name(('user.registerSubmit'));
     
-    Route::get('/image-generate', [PageController::class, 'showMAANimageGenerate'])->name('user.imageGenerate');
 
     Route::get('/profile/{user_id}/view-detail', [UserController::class, 'showProfile'])->name('user.profile');
 
