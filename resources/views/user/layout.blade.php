@@ -14,7 +14,6 @@
 
         gtag('config', 'G-HM3ESLMDMH');
     </script>
-
     @include('user.headerCSS')
 </head>
 
