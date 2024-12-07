@@ -1,8 +1,10 @@
 @extends('user.layout')
 @section('page_content')
     <div class="container">
+           
         <div class="row d-flex justify-content-center align-items-center h-100">
-            <form action="{{ route('user.registerSubmit') }}" method="POST" enctype="multipart/form-data">
+             
+            <form action="{{ route('user.registerSubmit') }}" method="POST" enctype="multipart/form-data" class="alumani-form">
                 @csrf
                 <div class="col">
                     <div class="card card-registration my-4">
@@ -16,15 +18,22 @@
                         </div>
                     @endif --}}
 
-                        <div class="row g-0">
-                            <div class="col-xl-6 d-none d-xl-block">
-                                <img src="{{ asset('/public/images/allumni_img/welcome.png') }}" alt="Sample photo"
-                                    class="img-fluid"
-                                    style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem; height: 95%;" />
-                            </div>
-                            <div class="col-xl-6">
-                                <div class="card-body p-md-4 text-black">
-                                    <h3 class="mb-4 text-uppercase">Alumni Registration Form </h3>
+                        <div class="row g-0 alumni-top-inner">
+                            
+                              <div class="col-xl-6 alumni-left">
+                            <img src="{{ asset('/public/images/allumni_img/welcome.png') }}" alt="Sample photo"
+                                class="img-fluid"
+                                style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
+                        </div>
+                
+                            <div class="col-xl-6 alumni-right">
+                                <div class="card-body text-black">
+            <!--                          <div>-->
+            <!--    <p> Join us in celebrating the spirit of togetherness and nostalgia at Navodaya Garden, Indore, on 22nd December 2025."</p>-->
+            <!--</div>-->
+            <p class="incredible-text">Be part of an incredible gathering by Madhya Pradesh Alumni Association of Navodaya! Let’s connect, reminisce, and create new memories. See you all on 22nd Dec 2024 at Navodaya Garden, Indore.</p>
+                                    <h5 class="mb-2 text-uppercase reminisce-text text-center">Alumni Registration</h5>
+           
 
                                     <div class="row">
                                         <div class="col-md-6 mb-4">
@@ -189,9 +198,48 @@
                                         @enderror
                                     </div>
 
+                                    {{-- <div class="d-md-flex justify-content-start align-items-center mb-2 py-2">
+                                        <p class="mb-0 me-4">Do you want MAAN T-Shirt ?</p>
+                                        <div class="form-check form-check-inline mb-0 me-4">
+                                            <input class="form-check-input" type="radio" name="t_shirt"
+                                                id="tshirtYes" value="Yes" onchange="toggleSizeOptions()"
+                                                {{ old('t_shirt') == 'Yes' ? 'checked' : '' }} />
+                                            <label class="form-check-label" for="malet_shirt">Yes</label>
+                                        </div>
+                                        <div class="form-check form-check-inline mb-0 me-4">
+                                            <input class="form-check-input" type="radio" name="t_shirt"
+                                                id="tshirtNo" value="No" onchange="toggleSizeOptions()"
+                                                {{ old('t_shirt') == 'No' ? 'checked' : '' }} />
+                                            <label class="form-check-label" for="not_shirt">No</label>
+                                        </div>
+
+                                        <div id="sizeOptions" style="display: none;">
+                                            <select id="tshirtSize" name="tshirt_size" class="form-select">
+                                                <option value="">Choose Size</option>
+                                                <option value="S">S</option>
+                                                <option value="M">M</option>
+                                                <option value="L">L</option>
+                                                <option value="XL">XL</option>
+                                                <option value="XXL">XXL</option>
+                                            </select>
+                                        </div>
+
+                                        <script>
+                                            function toggleSizeOptions() {
+                                                const tshirtYes = document.getElementById('tshirtYes');
+                                                const sizeOptions = document.getElementById('sizeOptions');
+    
+                                                if (tshirtYes.checked) {
+                                                    sizeOptions.style.display = 'block'; 
+                                                } else {
+                                                    sizeOptions.style.display = 'none';
+                                                }
+                                            }
+                                        </script>
+                                    </div> --}}
 
 
-                                    <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                                    <div class="d-md-flex justify-content-start align-items-center mb-2 py-2">
                                         <p class="mb-0 me-4">Do you want MAAN T-Shirt?</p>
                                         <div class="form-check form-check-inline mb-0 me-4">
                                             <input class="form-check-input" type="radio" name="t_shirt" id="tshirtYes"
@@ -253,38 +301,11 @@
                                     </script>
 
 
-                                    {{-- <div class="row">                                        
-                                        <div class="col-md-6 mb-4">
-                                            <label for="job_searchId" class="form-label">I'm looking for Job? (optional)</label>
-                                            <select id="job_searchId" class="form-select" name="job_search">
-                                                <option value="" selected> --- Select Job Title --- </option>
-                                                <option value="Banking/Insurance & Finance">Banking/Insurance & Finance</option>
-                                                <option value="Chemicals & Pharmaceuticals">Chemicals & Pharmaceuticals</option>
-                                                <option value="Education/Skill Development">Education/Skill Development</option>
-                                                <option value="Engineering & Technology">Engineering & Technology</option>
-                                                <option value="Medical & Healthcare">Medical & Healthcare</option>
-                                                <option value="Management & Marketing">Management & Marketing</option>
-                                                <option value="Public Admin & Government">Public Admin & Government</option>
-                                                <option value="Other">Other</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-md-6 mb-4">
-                                            <label class="form-label" for="job_offerId">I'm offering Job? (optional)</label>
-                                            <select id="job_offerId" class="form-select" name="job_offer" >
-                                                <option value="" selected> ---Select Job Title</option>
-                                            </select>
-                                            @error('job_offer')
-                                                <span class="text-danger" id="job_offerErr">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                        <p>Additional offerings for Navodayans Or expectation from event.</p>
-                                    </div> --}}
 
 
 
-                                    <div class="d-flex justify-content-between align-items-center mt-2">
-                                        <p class="change_link">Already an account ?
+                                    <div class="d-flex justify-content-between align-items-center mt-4">
+                                        <p class="change_link">Already have an account?
                                             <a href="{{ route('user.login') }}" class="to_register"> Login </a>
                                         </p>
                                         <button type="submit" data-mdb-button-init data-mdb-ripple-init
@@ -340,9 +361,5 @@
 
 
         </div>
-
-    
-
-
     </div>
 @endsection

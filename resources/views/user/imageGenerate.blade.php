@@ -180,41 +180,48 @@
     </script> --}}
 
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
-    
+    <link rel="stylesheet" href="{{ asset('/public/mytheme/assets/vendor/preview-croper/cropper.min.css') }}" />
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" /> --}}
+    <script src="{{ asset('/public/mytheme/assets/vendor/preview-croper/cropper.min.js') }}"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script> --}}
+
     <div class="container d-flex justify-content-center align-items-center">
         <div class="card p-4 text-center my-4 select-profile">
             <div class="col-xl-12">
                 <h3 class="my-2">"NAVOTSAV-3.0" Image Creator</h3>
-    
+
                 <!-- Temp Image Box -->
                 <div id="tempBox" class="my-2" style="border: 1px solid #ccc;">
                     <img src="{{ asset('public/images/allumni_img/maan_dummy.png') }}" width="100%" height="100%">
                 </div>
-    
+
                 <!-- Cropper Section -->
                 <div id="cropperBox" class="my-2" style="display: none;">
                     <img id="previewImage" style="max-width: 100%;" />
                     <button class="btn btn-success my-2" onclick="cropImage()">Crop and Apply</button>
                 </div>
-    
+
                 <!-- Canvas Section -->
                 <div id="canvasBox" style="display: none;">
-                    <canvas id="canvas" style="display: block; border: 1px solid #ccc; width: 100%; height: 100%"></canvas>
+                    <canvas id="canvas"
+                        style="display: block; border: 1px solid #ccc; width: 100%; height: 100%"></canvas>
                 </div>
-    
+
                 <div class="profiles-sec">
-                    <button id="selectBtn" class="btn btn-primary my-2" onclick="triggerFileInput()">Select Profile Image</button>
-                    <a href="{{route('user.imageGenerate')}}"><button id="createNewBtn" class="btn btn-primary my-2" style="display: none;">Create New</button></a>
-                    <button id="downloadBtn" class="btn btn-success" style="display: none;" onclick="downloadImage()">Download</button>
+                    <button id="selectBtn" class="btn btn-primary my-2" onclick="triggerFileInput()">Select Profile
+                        Image</button>
+                    <a href="{{ route('user.imageGenerate') }}"><button id="createNewBtn" class="btn btn-primary my-2"
+                            style="display: none;">Create New</button></a>
+                    <button id="downloadBtn" class="btn btn-success" style="display: none;"
+                        onclick="downloadImage()">Download</button>
                 </div>
-    
-                <input type="file" id="uploadProfile" accept="image/*" style="display: none;" onchange="previewProfileImage()" />
+
+                <input type="file" id="uploadProfile" accept="image/*" style="display: none;"
+                    onchange="previewProfileImage()" />
             </div>
         </div>
     </div>
-    
+
     <script>
         let cropper; // To hold the cropper instance
         const dummyProfileArea = {
@@ -222,20 +229,20 @@
             y: 70,
             radius: 70, // Adjusted for circular profile area
         };
-    
+
         function triggerFileInput() {
             document.getElementById("uploadProfile").click();
         }
-    
+
         function previewProfileImage() {
             const fileInput = document.getElementById("uploadProfile");
             const previewImage = document.getElementById("previewImage");
             const cropperBox = document.getElementById("cropperBox");
             const tempBox = document.getElementById("tempBox");
-    
+
             if (fileInput.files && fileInput.files[0]) {
                 const reader = new FileReader();
-                reader.onload = function (e) {
+                reader.onload = function(e) {
                     previewImage.src = e.target.result;
                     cropperBox.style.display = "block";
                     tempBox.style.display = "none";
@@ -249,18 +256,18 @@
                 reader.readAsDataURL(fileInput.files[0]);
             }
         }
-    
+
         function cropImage() {
             const canvas = document.getElementById("canvas");
             const ctx = canvas.getContext("2d");
             const bigImage = new Image();
-    
+
             // Get cropped image data
             const croppedDataURL = cropper.getCroppedCanvas({
                 width: dummyProfileArea.radius * 2, // Ensure the cropped image fits the dummy profile area
                 height: dummyProfileArea.radius * 2,
             }).toDataURL();
-    
+
             // Load the dummy background image
             bigImage.src = "{{ asset('public/images/allumni_img/maan_dummy.png') }}";
             bigImage.onload = () => {
@@ -270,16 +277,16 @@
                 canvas.style.width = `${bigImage.width}px`;
                 canvas.style.height = `${bigImage.height}px`;
                 ctx.scale(2, 2);
-    
+
                 // Draw the bigger image
                 ctx.drawImage(bigImage, 0, 0, bigImage.width, bigImage.height);
-    
+
                 const profileImage = new Image();
                 profileImage.src = croppedDataURL;
                 profileImage.onload = () => {
                     // Save the current context state
                     ctx.save();
-    
+
                     // Create a circular clipping path
                     ctx.beginPath();
                     ctx.arc(
@@ -291,7 +298,7 @@
                     );
                     ctx.closePath();
                     ctx.clip();
-    
+
                     // Draw the cropped profile image
                     ctx.drawImage(
                         profileImage,
@@ -300,10 +307,10 @@
                         dummyProfileArea.radius * 2,
                         dummyProfileArea.radius * 2
                     );
-    
+
                     // Restore the context
                     ctx.restore();
-    
+
                     // Show canvas and download button
                     document.getElementById("canvasBox").style.display = "inline-block";
                     document.getElementById("downloadBtn").style.display = "inline-block";
@@ -312,7 +319,7 @@
                 };
             };
         }
-    
+
         function downloadImage() {
             const canvas = document.getElementById("canvas");
             const link = document.createElement("a");
@@ -321,5 +328,4 @@
             link.click();
         }
     </script>
-    
 @endsection

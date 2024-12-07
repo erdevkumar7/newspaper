@@ -151,8 +151,8 @@
 
                                     <div class="form-outline mb-4">
                                         <div class="separator">
-                                            <p class="change_link">Don't have Alumni ?
-                                                <a href="{{ route('user.register') }}" class="to_register"> Register
+                                            <p class="change_link">Don't have an account?
+                                                <a href="{{ route('home') }}" class="to_register"> Register
                                                 </a>
                                             </p>
                                         </div>
