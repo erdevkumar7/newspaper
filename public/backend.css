@@ -1,7 +1,7 @@
-.eye-icon-position{
+.eye-icon-position {
     position: absolute;
-    top: 60%; 
-    right: 6%; 
+    top: 60%;
+    right: 6%;
     cursor: pointer;
     font-size: 14px;
 }
@@ -13,6 +13,7 @@ li.new-manage span.fa.fa-chevron-down {
 .mp-jnvs .x_title {
     border: none;
 }
+
 .mp-jnvs .x_title h2 {
     font-size: 20px;
     padding-left: 24px;
@@ -46,15 +47,18 @@ li.new-manage span.fa.fa-chevron-down {
     margin-top: -25px;
     width: -webkit-fill-available;
 }
+
 .admin-escort-pics button.btn {
     float: right;
     margin-right: 0;
     z-index: 1;
     position: relative;
 }
+
 li.new-manage.active span.fa.fa-chevron-down {
     margin-top: -14px !important;
 }
+
 li.new-manage span.fa.fa-chevron-down {
     margin-top: 6px !important;
 }
@@ -94,7 +98,9 @@ div#datatable-buttons_filter {
     margin-top: -48px;
     margin-bottom: 14px;
 }
-.table-responsive .table td, .table th {
+
+.table-responsive .table td,
+.table th {
     padding-bottom: 0px;
 }
 
@@ -116,10 +122,23 @@ p.add-photo-admin {
 button {
     box-shadow: none !important;
 }
+
 .adm-sbmit-btn {
     background-color: #26B99A;
     border-radius: 3px;
 }
+
 .adm-sbmit-btn button.btn.btn-default {
     color: #fff;
+}
+
+
+@media only screen and (max-width: 768px) {
+
+    div#datatable-buttons_filter {
+        margin-top: 0;
+        margin-bottom: 14px;
+    }
+
+
 }

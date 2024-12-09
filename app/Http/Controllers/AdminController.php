@@ -80,8 +80,9 @@ class AdminController extends Controller
 
         // Total users in Madhya Pradesh
         $totalMPUsers = User::where('state', $state)->count();
+        $verifiedUsers = User::where('status', 1)->count();
 
-        return view('admin.dashboard', compact('totalUsers', 'totalOrgamizers', 'districtStats', 'totalMPUsers'));
+        return view('admin.dashboard', compact('totalUsers', 'totalOrgamizers', 'districtStats', 'totalMPUsers', 'verifiedUsers'));
     }
 
     public function allUser()

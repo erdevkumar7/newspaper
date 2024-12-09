@@ -1,13 +1,25 @@
 <header id="header" class="header d-flex align-items-center sticky-top">
     <div class="container position-relative d-flex align-items-center justify-content-between">
 
-        <a href="{{ route('home') }}" class="logo d-flex align-items-center me-auto me-xl-0">
-            <!-- Uncomment the line below if you also wish to use an image logo -->
-            <!--<img src="{{ asset('public/images/allumni_img/maan-logo.jpg') }}" alt="">-->
-            <h1 class="sitename">
-                NAVOTSAV 3.0 – A MAAN Initiative
-            </h1>
-        </a>
+        @if (Auth::guard('web')->check())
+            <a href="{{ route('user.viewQR') }}" class="logo d-flex align-items-center me-auto me-xl-0">
+                <!-- Uncomment the line below if you also wish to use an image logo -->
+                <!--<img src="{{ asset('public/images/allumni_img/maan-logo.jpg') }}" alt="">-->
+                <h1 class="sitename">
+                    NAVOTSAV 3.0 – A MAAN Initiative
+                </h1>
+            </a>
+        @else
+            <a href="{{ route('home') }}" class="logo d-flex align-items-center me-auto me-xl-0">
+                <!-- Uncomment the line below if you also wish to use an image logo -->
+                <!--<img src="{{ asset('public/images/allumni_img/maan-logo.jpg') }}" alt="">-->
+                <h1 class="sitename">
+                    NAVOTSAV 3.0 – A MAAN Initiative
+                </h1>
+            </a>
+        @endif
+
+
 
         <nav id="navmenu" class="navmenu">
             <ul>
