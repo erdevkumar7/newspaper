@@ -21,6 +21,27 @@ li.new-manage span.fa.fa-chevron-down {
     font-family: system-ui;
 }
 
+ul.dt-button-collection.dropdown-menu li.dt-button.buttons-columnVisibility {
+    border: solid 1px #d3d3d34a;
+    padding: 4px 8px;
+}
+
+ul.dt-button-collection.dropdown-menu li.dt-button.buttons-columnVisibility:hover {
+    background-color: #1b3749 !important;
+}
+
+ul.dt-button-collection.dropdown-menu li.dt-button.buttons-columnVisibility:hover a {
+    color: #fff;
+}
+
+ul.dt-button-collection.dropdown-menu li.dt-button.buttons-columnVisibility.active a {
+    color: #fff;
+}
+
+ul.dt-button-collection.dropdown-menu li.dt-button.buttons-columnVisibility.active {
+    background-color: #00ba9b;
+}
+
 
 .row.mp-jnvs h2 {
     color: #000;

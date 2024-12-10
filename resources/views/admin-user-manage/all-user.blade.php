@@ -25,7 +25,7 @@
                                         style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
+                                                <th class="inner-value-find">#</th>
                                                 <th>Name</th>
                                                 <th>Surname</th>
                                                 <th>Contact</th>

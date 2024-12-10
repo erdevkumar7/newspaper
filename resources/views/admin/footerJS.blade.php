@@ -51,6 +51,7 @@
     <script src="{{ asset('public/vendors/jszip/dist/jszip.min.js') }}"></script>
     <script src="{{ asset('public/vendors/pdfmake/build/pdfmake.min.js') }}"></script>
     <script src="{{ asset('public/vendors/pdfmake/build/vfs_fonts.js') }}"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.colVis.min.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('public/build/js/custom.min.js') }}"></script>
     <!-- bootstrap-daterangepicker -->
