@@ -92,6 +92,16 @@ class AdminController extends Controller
         return view('admin-user-manage.all-user', compact('allusers'));
     }
 
+    public function otherStateUser()
+    {
+        $allusers = DB::table('users')
+            ->where('state', '!=', 'Madhya Pradesh')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('admin-user-manage.other-state-user', compact('allusers'));
+    }
+
     public function jnvWiseUser($jnv_name)
     {
         $allusers = DB::table('users')
