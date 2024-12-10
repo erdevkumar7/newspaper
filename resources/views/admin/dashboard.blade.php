@@ -41,16 +41,14 @@
             <div class="col-md-4 col-sm-4">
                 <div class="x_panel tile fixed_height_200">
                     <div class="x_title">
-                        <h2>Total Organizer</h2>
+                        <h2>Total Registration of other Navodaya</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content tile_count">
                         <div class=" tile_stats_count">
-                            <span class="count_top"><i class="fa fa-sitemap green"></i> Registered Organizer</span>
-                            <div class="count green">{{ $totalOrgamizers }}</div>
-                            <span class="count_bottom"><a href="{{ route('admin.allOrganizer') }}"><i class="green">All
-                                        organizer
-                                    </i></a> that supoorts Events</span>
+                            <span class="count_top"><i class="fa fa-users green"></i> Registration From Other Navodaya</span>
+                            <div class="count green">{{ $totalOthertUsers }}</div>
+                            <span class="count_bottom"><i class="green"> Other State</i> Alumni</span>
                         </div>
                     </div>
                 </div>

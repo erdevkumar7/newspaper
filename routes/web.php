@@ -64,6 +64,7 @@ Route::prefix('admin')->group(function () {
     Route::middleware('admin')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
         Route::get('/all-user', [AdminController::class, 'allUser'])->name('admin.alluser');
+        Route::get('/other-state-user', [AdminController::class, 'otherStateUser'])->name('admin.otherStateUser');
         Route::get('/all/{jnv_name}/user', [AdminController::class, 'jnvWiseUser'])->name('admin.jnvWiseUser');
 
         Route::get('/add-user', [AdminController::class, 'adduser'])->name('admin.adduser');
