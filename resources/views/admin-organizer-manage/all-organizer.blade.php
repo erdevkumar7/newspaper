@@ -7,87 +7,55 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>All Organizers<small>(registered)</small></h2>
+                        <h2>All Volunteer<small>(registered)</small></h2>
                         <div class="nav navbar-right panel_toolbox">
 
                             <a href="{{ route('admin.addOrganizer') }}">
-
                                 <button class="btn btn-success" data-toggle="tooltip" data-placement="top"
                                     title="Add Organizer">
-
-                                    Add Organizer
-
+                                    Add Volunteer
                                 </button>
-
                             </a>
-
                         </div>
-
                         <div class="clearfix"></div>
-
                     </div>
 
                     <div class="x_content">
-
                         <div class="row">
-
                             <div class="col-sm-12">
-
                                 <div class="card-box table-responsive">
-
                                     <table id="datatable-buttons" class="table table-striped table-bordered"
                                         style="width:100%">
-
                                         <thead>
-
                                             <tr>
-
                                                 <th>#</th>
-
                                                 <th>Name</th>
-
+                                                <th>Surname</th>
                                                 <th>Email</th>
-
                                                 <th>Contact</th>
-
-                                                <th>Team Role</th>
-
+                                                {{-- <th>Team Role</th> --}}
                                                 <th>Status</th>
-
                                                 <th>Action</th>
-
                                                 <th>View User</th>
-
                                             </tr>
-
                                         </thead>
 
-
-
                                         <tbody>
-
                                             @if ($allorganizer->isEmpty())
                                                 <tr>
-
                                                     <td colspan="8" class="text-center">No organizer available</td>
 
                                                 </tr>
                                             @else
                                                 @foreach ($allorganizer as $user)
                                                     <tr>
-
                                                         <td>{{ $loop->iteration }}</td>
-
                                                         <td>{{ $user->first_name ?? 'Not Available' }}</td>
-
+                                                        <td>{{ $user->last_name ?? 'Not Available' }}</td>
                                                         <td>{{ $user->email ?? 'Not Available' }} </td>
-
                                                         <td>{{ $user->phone_number ?? 'Not Available' }} </td>
-
-                                                        <td>{{ $user->role ?? 'Not Available' }} </td>
-
+                                                        {{-- <td>{{ $user->role ?? 'Not Available' }} </td> --}}
                                                         <td>
-
                                                             @if ($user->status == 1)
                                                                 <button type="button"
                                                                     class="btn btn-success btn-sm update-status"
@@ -99,83 +67,47 @@
                                                                     data-id="{{ $user->id }}"
                                                                     data-status="0">Inactive</button>
                                                             @endif
-
                                                         </td>
-
                                                         <td>
-
                                                             <a href="{{ route('admin.orgUpdateForm', $user->id) }}">
-
                                                                 <button class="btn btn-info btn-sm" data-toggle="tooltip"
                                                                     data-placement="top" title="Edit">
-
                                                                     <i class="fa fa-edit"></i>
-
                                                                 </button>
-
                                                             </a>
-
-
 
                                                             <button class="btn btn-danger btn-sm delete-user"
                                                                 data-toggle="tooltip" data-placement="top"
                                                                 data-delete-id="{{ $user->id }}" title="Delete">
-
                                                                 <i class="fa fa-minus-circle"></i>
-
                                                             </button>
-
-
-
-
-
                                                         </td>
-
-
 
                                                         <td>
-
                                                             <a href="{{ route('admin.viewOrganizer', $user->id) }}">
-
                                                                 <button type="button"
                                                                     class="btn btn-primary">view</button></a>
-
                                                         </td>
-
                                                     </tr>
                                                 @endforeach
                                             @endif
-
                                         </tbody>
-
                                     </table>
-
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
         </div>
 
 
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
         {{-- sweetalert2 JS --}}
-
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
-
         {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
-
         <script>
             $(document).on('click', '.delete-user', function(e) {
 

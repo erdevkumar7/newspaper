@@ -58,16 +58,16 @@
             </div>
         </div>
 
-        {{-- <div class="row">
+        <div class="row">
             <div class="col-md-4 col-sm-4">
                 <div class="x_panel tile fixed_height_200">
                     <div class="x_title">
-                        <h2>Total Verified Navodaya</h2>
+                        <h2>Total Verified Alumni</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content tile_count">
                         <div class=" tile_stats_count">
-                            <span class="count_top"><i class="fa fa-check-square-o green"></i> Verified by organiser</span>
+                            <span class="count_top"><i class="fa fa-check-square-o green"></i> Verified alumni</span>
                             <div class="count green">{{ $verifiedUsers }}</div>
                             <span class="count_bottom"><i class="green">Verified alumni
                                 </i> on the portal</span>
@@ -75,7 +75,42 @@
                     </div>
                 </div>
             </div>
-        </div> --}}
+
+            <div class="col-md-4 col-sm-4">
+                <div class="x_panel tile fixed_height_200">
+                    <div class="x_title">
+                        <h2>Not-Verified Alumni</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content tile_count">
+                        <div class=" tile_stats_count">
+                            <span class="count_top"><i class="fa fa-user-times green"></i> Not-verified alumni</span>
+                            <div class="count green">{{ $NotVerifiedUsers }}</div>
+                            <span class="count_bottom"><i class="green">Not-verified alumni
+                                </i> on the portal</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4">
+                <div class="x_panel tile fixed_height_200">
+                    <div class="x_title">
+                        <h2>Total Registered Volunteer</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content tile_count">
+                        <div class=" tile_stats_count">
+                            <span class="count_top"><i class="fa fa-sitemap green"></i> Registered Volunteer</span>
+                            <div class="count green">{{ $totalOrgamizers }}</div>
+                            <span class="count_bottom"><a href="{{ route('admin.allOrganizer') }}"><i class="green">All
+                                        volunteer
+                                    </i></a> that supoorts Events</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="row mp-jnvs">
             <div class="col-md-12 col-sm-12 m-2">

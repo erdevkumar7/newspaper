@@ -71,77 +71,40 @@ Route::prefix('admin')->group(function () {
         Route::get('/all/{jnv_name}/user', [AdminController::class, 'jnvWiseUser'])->name('admin.jnvWiseUser');
 
         Route::get('/add-user', [AdminController::class, 'adduser'])->name('admin.adduser');
-
         Route::post('/add-user', [AdminController::class, 'adduserSubmit'])->name('admin.adduserSubmit');
 
-
-
         Route::get('/user/{user_id}/view', [AdminController::class, 'viewUser'])->name('admin.viewuser');
-
-
-
         Route::get('/user/{user_id}/edit-user', [AdminController::class, 'editUser'])->name('admin.edituser');
-
         Route::put('/user/{user_id}/edit-user', [AdminController::class, 'editUserSubmit'])->name('admin.editusersubmit');
-
-
-
         Route::post('/user/update-status', [AdminController::class, 'updateUserStatus'])->name('admin.updateuserstatus');
 
         Route::delete('/delete-user', [AdminController::class, 'deleteUser'])->name('admin.deleteuser');
-
         Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
     });
 
 
 
     // Admin Organizer Functionality
-
     Route::middleware('admin')->group(function () {
+        Route::get('/all-volunteer', [OrganizerController::class, 'allOrganizer'])->name('admin.allOrganizer');
+        Route::get('/volunteer/{org_id}/view', [OrganizerController::class, 'viewOrganizer'])->name('admin.viewOrganizer');
 
-        Route::get('/all-organizer', [OrganizerController::class, 'allOrganizer'])->name('admin.allOrganizer');
+        Route::get('/add-volunteer', [OrganizerController::class, 'addOrganizer'])->name('admin.addOrganizer');
+        Route::post('/add-volunteer', [OrganizerController::class, 'addOrganizerSubmit'])->name('admin.addOrganizerSubmit');
 
-        Route::get('/organizer/{org_id}/view', [OrganizerController::class, 'viewOrganizer'])->name('admin.viewOrganizer');
+        Route::get('/volunteer/{org_id}/edit-volunteer', [OrganizerController::class, 'AdminOrgUpdateForm'])->name('admin.orgUpdateForm');
+        Route::put('/volunteer/{org_id}/update-volunteer', [OrganizerController::class, 'AdminOrgUpdateSubmit'])->name('admin.OrgUpdateSubmit');
 
-
-
-        Route::get('/add-organizer', [OrganizerController::class, 'addOrganizer'])->name('admin.addOrganizer');
-
-        Route::post('/add-organizer', [OrganizerController::class, 'addOrganizerSubmit'])->name('admin.addOrganizerSubmit');
-
-
-
-        Route::get('/organizer/{org_id}/edit-organizer', [OrganizerController::class, 'AdminOrgUpdateForm'])->name('admin.orgUpdateForm');
-
-        Route::put('/organizer/{org_id}/update-organizer', [OrganizerController::class, 'AdminOrgUpdateSubmit'])->name('admin.OrgUpdateSubmit');
-
-
-
-        Route::post('/organizer/update-status', [OrganizerController::class, 'updateOrganizerStatus'])->name('admin.updateOrganizerStatus');
-
-
-
+        Route::post('/volunteer/update-status', [OrganizerController::class, 'updateOrganizerStatus'])->name('admin.updateOrganizerStatus');
         Route::delete('/delete-organizer', [OrganizerController::class, 'deleteOrganizer'])->name('admin.deleteOrganizer');
     });
 
-
-
-
-
     // Admin Newspaper Functionality
-
     Route::middleware('admin')->group(function () {
-
         Route::get('/all-newspaper', [AdminNewspaperController::class, 'allNewsPaper'])->name('admin.allnewspaper');
-
         Route::get('/newspaper/{paper_id}/view', [AdminNewspaperController::class, 'viewNewsPaper'])->name('admin.viewnewspaper');
-
-
-
         Route::get('/add-newspaper', [AdminNewspaperController::class, 'addNewsPaper'])->name('admin.addnewspaper');
-
         Route::post('/add-newspaper', [AdminNewspaperController::class, 'addNewsPaperSubmit'])->name('admin.addnewspapersubmit');
-
 
 
         Route::get('/newspaper/{paper_id}/edit-paper', [AdminNewspaperController::class, 'editNewsPaper'])->name('admin.editnewspaper');
@@ -206,44 +169,23 @@ Route::prefix('admin')->group(function () {
 
 
 Route::prefix('organizer')->group(function () {
-
     Route::get('/', [OrganizerController::class, 'organizerHome'])->name('organizer.home');
-
     Route::get('/register', [OrganizerController::class, 'organizerRegForm'])->name('organizer.register');
-
     Route::post('/register', [OrganizerController::class, 'organizerRegisterSubmit'])->name('organizer.registerSubmit');
 
-
-
-
-
     Route::get('/login', [OrganizerController::class, 'showLoginForm'])->name('organizer.login');
-
     Route::post('/login', [OrganizerController::class, 'loginSubmit'])->name('organizer.loginSubmit');
-
     Route::post('/logout', [OrganizerController::class, 'logout'])->name('organizer.logout');
 
-
-
     Route::group(['middleware' => 'organizer.auth'], function () {
-
         Route::get('/dashboard', [OrganizerController::class, 'dashboard'])->name('organizer.dashboard');
-
         Route::get('/view-user/{user_id}', [OrganizerController::class, 'showUserProfile'])->name('organizer.showUserProfile');
 
-
-
         Route::get('/edit-user/{user_id}/details', [OrganizerController::class, 'showEditUser'])->name('organizer.showEditUser');
-
         Route::put('/edit-user/{user_id}/details', [OrganizerController::class, 'updateUser'])->name('organizer.updateUser');
 
-
-
         Route::post('/update-status', [AdminController::class, 'updateUserStatus'])->name('organizer.updateuserstatus');
-
         Route::get('/qr-scan', [OrganizerController::class, 'QrScan'])->name('organizer.QrScan');
-
-
 
         Route::post('/logout', [OrganizerController::class, 'logout'])->name('organizer.logout');
     });

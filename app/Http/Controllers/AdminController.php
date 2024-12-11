@@ -82,8 +82,11 @@ class AdminController extends Controller
         $totalMPUsers = User::where('state', $state)->count();
         // Total users in all districts other than Madhya Pradesh
         $totalOthertUsers = User::where('state', '!=', $state)->count();
-
-        return view('admin.dashboard', compact('totalUsers', 'totalOrgamizers', 'districtStats', 'totalMPUsers', 'totalOthertUsers'));
+        // Verified Users
+        $verifiedUsers = User::where('status', 1)->count();
+        // Not-verified users
+        $NotVerifiedUsers = User::where('status', 0)->count();
+        return view('admin.dashboard', compact('totalUsers', 'totalOrgamizers', 'districtStats', 'totalMPUsers', 'totalOthertUsers', 'verifiedUsers', 'NotVerifiedUsers'));
     }
 
     public function allUser()
