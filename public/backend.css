@@ -1,165 +1,297 @@
-.eye-icon-position {
+.eye-icon-position{
+
     position: absolute;
-    top: 60%;
-    right: 6%;
+
+    top: 60%; 
+
+    right: 6%; 
+
     cursor: pointer;
+
     font-size: 14px;
+
 }
 
-li.new-manage span.fa.fa-chevron-down {
-    margin-top: -14px !important;
-}
+
+
+
 
 .mp-jnvs .x_title {
+
     border: none;
+
 }
 
 .mp-jnvs .x_title h2 {
+
     font-size: 20px;
+
     padding-left: 24px;
+
     color: #000;
+
     font-family: system-ui;
+
 }
 
 ul.dt-button-collection.dropdown-menu li.dt-button.buttons-columnVisibility {
+
     border: solid 1px #d3d3d34a;
+
     padding: 4px 8px;
+
 }
 
 ul.dt-button-collection.dropdown-menu li.dt-button.buttons-columnVisibility:hover {
+
     background-color: #1b3749 !important;
+
 }
 
 ul.dt-button-collection.dropdown-menu li.dt-button.buttons-columnVisibility:hover a {
+
     color: #fff;
+
 }
+
+
 
 ul.dt-button-collection.dropdown-menu li.dt-button.buttons-columnVisibility.active a {
+
     color: #fff;
+
 }
 
+
+
 ul.dt-button-collection.dropdown-menu li.dt-button.buttons-columnVisibility.active {
+
     background-color: #00ba9b;
+
 }
+
+
+
 
 
 .row.mp-jnvs h2 {
+
     color: #000;
+
     font-family: system-ui;
+
 }
+
+
 
 .jnv-sec {
+
     padding-right: 3px !important;
+
     padding-left: 3px !important;
+
 }
+
+
 
 .mp-jnvs .x_panel {
+
     padding: 6px 0px;
+
     margin-bottom: 1px !important;
+
 }
+
+
 
 .login-submit-btn {
+
     background-color: #26B99A;
+
     border-radius: 3px;
+
     width: 100%;
+
 }
 
+
+
 .admin-escort-pics img {
+
     margin-top: -25px;
+
     width: -webkit-fill-available;
+
 }
 
 .admin-escort-pics button.btn {
+
     float: right;
+
     margin-right: 0;
+
     z-index: 1;
+
     position: relative;
+
 }
 
-li.new-manage.active span.fa.fa-chevron-down {
-    margin-top: -14px !important;
-}
 
-li.new-manage span.fa.fa-chevron-down {
-    margin-top: 6px !important;
-}
+
 
 .table-responsive a.btn.btn-default.buttons-copy.buttons-html5.btn-sm {
+
     display: none;
+
 }
+
+
 
 .table-responsive a.btn {
+
     border: solid 2px #80808036;
+
     display: flex;
+
     margin-bottom: 12px;
+
     border-radius: 5px;
+
 }
+
+
 
 .table-responsive .dt-buttons.btn-group {
+
     gap: 11px;
+
 }
+
+
 
 .table-responsive a.btn.btn-default.buttons-csv.buttons-html5.btn-sm {
+
     border-radius: 5px;
+
 }
+
+
 
 a.btn.btn-default.buttons-excel.buttons-html5.btn-sm {
+
     border-radius: 5px;
+
 }
+
+
 
 a.btn.btn-default.buttons-pdf.buttons-html5.btn-sm {
+
     border-radius: 5px;
+
 }
+
+
 
 a.btn.btn-default.buttons-print.btn-sm {
+
     border-radius: 5px;
+
 }
+
+
 
 div#datatable-buttons_filter {
+
     margin-top: -48px;
+
     margin-bottom: 14px;
+
 }
 
-.table-responsive .table td,
-.table th {
+.table-responsive .table td, .table th {
+
     padding-bottom: 0px;
+
 }
+
+
 
 .table-responsive .dt-buttons.btn-group a.btn {
+
     box-shadow: none;
+
 }
+
+
 
 p.add-photo-admin {
+
     border: solid 1px;
+
     padding: 8px;
+
     margin-top: 15px;
+
     border-radius: 4px;
+
     cursor: pointer;
+
     background-color: #26B99A;
+
     color: #fff;
+
     font-size: 15px;
+
 }
 
+
+
 button {
+
     box-shadow: none !important;
+
 }
 
 .adm-sbmit-btn {
+
     background-color: #26B99A;
+
     border-radius: 3px;
+
 }
 
 .adm-sbmit-btn button.btn.btn-default {
+
     color: #fff;
-}
-
-
-@media only screen and (max-width: 768px) {
-
-    div#datatable-buttons_filter {
-        margin-top: 0;
-        margin-bottom: 14px;
-    }
-
 
 }
+
+
+
+
+
+       @media only screen and (max-width: 768px) {
+
+           
+
+           div#datatable-buttons_filter {
+
+    margin-top: 0;
+
+    margin-bottom: 14px;
+
+}
+
+           
+
+           
+
+       }
+
+
+
+
+
+
+

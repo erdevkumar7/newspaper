@@ -278,7 +278,7 @@ class AdminController extends Controller
             'state' => 'required|string|max:50',
             'district' => 'required|string|max:50',
             'passout_batch' => 'required|string|max:10',
-            'profession' => 'required|string|max:50',
+            'profession' => 'required|string|max:25',
         ], [
             'first_name.regex' => 'The first name must contain only letters and spaces.',
             'last_name.regex' => 'The last name must contain only letters and spaces.',

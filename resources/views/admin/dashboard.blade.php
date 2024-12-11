@@ -107,7 +107,7 @@
                             <div class="count green">{{ $totalOrgamizers }}</div>
                             <span class="count_bottom"><a href="{{ route('admin.allOrganizer') }}"><i class="green">All
                                         volunteer
-                                    </i></a> that supoorts Events</span>
+                                    </i></a> that suport Event</span>
                         </div>
                     </div>
                 </div>
