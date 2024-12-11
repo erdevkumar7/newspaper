@@ -1,6 +1,5 @@
 @extends('admin.layout')
 @section('page_content')
-
     <!-- page content -->
     <div class="right_col" role="main">
         <div class="row">
@@ -54,9 +53,9 @@
                                                         <td>{{ $user->phone_number ?? 'Not Available' }} </td>
                                                         <td>{{ $user->state ?? 'Not Available' }} </td>
                                                         <td>{{ $user->district ?? 'Not Available' }}</td>
-                                                        <td>{{ $user->city ?? 'Not Available'}}</td>
+                                                        <td>{{ $user->city ?? 'Not Available' }}</td>
                                                         <td>{{ $user->passout_batch ?? 'Not Available' }} </td>
-                                                        <td>{{ $user->profession ?? 'Not Available'}}</td>
+                                                        <td>{{ $user->profession ?? 'Not Available' }}</td>
                                                         <td>
                                                             @if ($user->status == 1)
                                                                 <button type="button"
@@ -107,7 +106,7 @@
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         {{-- sweetalert2 JS --}}
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
         <script>
@@ -115,7 +114,7 @@
                 e.preventDefault();
                 var userId = $(this).data('delete-id');
                 var row = $(this).closest('tr'); // Get the row of the clicked delete button
-        
+
                 // Show SweetAlert confirmation
                 Swal.fire({
                     title: "Are you sure?",
@@ -136,7 +135,7 @@
                             },
                             success: function(response) {
                                 if (response.success) {
-                                    row.remove(); 
+                                    row.remove();
                                     // Swal.fire({
                                     //     title: "Deleted!",
                                     //     text: "The user has been deleted.",
@@ -164,7 +163,7 @@
                 });
             });
         </script>
-        
+
 
         {{-- Update user status active/Inactive --}}
         {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
@@ -210,8 +209,25 @@
                 });
             });
         </script>
-
     </div>
-
-
 @endsection
+
+@push('js')
+<script src="{{ asset('public/vendors/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('public/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+<script src="{{ asset('public/vendors/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('public/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js') }}"></script>
+<script src="{{ asset('public/vendors/datatables.net-buttons/js/buttons.flash.min.js') }}"></script>
+<script src="{{ asset('public/vendors/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('public/vendors/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
+<script src="{{ asset('public/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js') }}"></script>
+<script src="{{ asset('public/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js') }}"></script>
+<script src="{{ asset('public/vendors/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('public/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js') }}"></script>
+<script src="{{ asset('public/vendors/datatables.net-scroller/js/dataTables.scroller.min.js') }}"></script>
+<script src="{{ asset('public/vendors/jszip/dist/jszip.min.js') }}"></script>
+<script src="{{ asset('public/vendors/pdfmake/build/pdfmake.min.js') }}"></script>
+<script src="{{ asset('public/vendors/pdfmake/build/vfs_fonts.js') }}"></script>
+<!--<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.colVis.min.js"></script>-->
+<script src="{{ asset('public/build/js/colVis.min.js') }}"></script>
+@endpush

@@ -12,7 +12,7 @@
                     </div>
                     <div class="x_content tile_count">
                         <div class=" tile_stats_count">
-                            <span class="count_top"><i class="fa fa-users green"></i> Registration Completed</span>
+                            <span class="count_top"><i class="fa fa-users green"></i> All Registration Completed</span>
                             <div class="count green">{{ $totalUsers }}</div>
                             <span class="count_bottom"><a href="{{ route('admin.alluser') }}"><i class="green">All alumni
                                     </i></a> that registerd on the portal</span>
