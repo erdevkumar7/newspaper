@@ -41,7 +41,9 @@
 
                         <ul class="nav child_menu">
                             <li><a href="{{ route('admin.alluser') }}">All Alumni</a></li>
-                            <li><a href="{{ route('admin.otherStateUser') }}">Other State Alumni</a></li>
+                            <li><a href="{{ route('admin.mpUser') }}"> Madhya Pradesh Alumni</a></li>
+                            <li><a href="{{ route('admin.verifiedUser') }}">Verified Alumni</a></li>
+                            <li><a href="{{ route('admin.NotVerifiedUser') }}">Not-verified Alumni</a></li>
                             <li><a href="{{ route('admin.adduser') }}">Add Alumni</a></li>
                         </ul>
                     </li>

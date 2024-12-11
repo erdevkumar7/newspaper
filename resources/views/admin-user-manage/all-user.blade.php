@@ -42,7 +42,7 @@
                                         <tbody>
                                             @if ($allusers->isEmpty())
                                                 <tr>
-                                                    <td colspan="9" class="text-center">No Alumni Available</td>
+                                                    <td colspan="12" class="text-center">No Alumni Available</td>
                                                 </tr>
                                             @else
                                                 @foreach ($allusers as $user)

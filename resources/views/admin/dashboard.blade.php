@@ -32,8 +32,8 @@
                             <span class="count_top"><i class="fa fa-registered green"></i> Registration From Madhya
                                 Pradesh</span>
                             <div class="count green">{{ $totalMPUsers }}</div>
-                            <span class="count_bottom"><i class="green">MP alumni
-                                </i> that registerd on the portal</span>
+                            <span class="count_bottom"><a href="{{ route('admin.mpUser') }}"><i class="green">MP alumni
+                                    </i></a> that registerd on the portal</span>
                         </div>
                     </div>
                 </div>
@@ -69,8 +69,9 @@
                         <div class=" tile_stats_count">
                             <span class="count_top"><i class="fa fa-check-square-o green"></i> Verified alumni</span>
                             <div class="count green">{{ $verifiedUsers }}</div>
-                            <span class="count_bottom"><i class="green">Verified alumni
-                                </i> on the portal</span>
+                            <span class="count_bottom"><a href="{{ route('admin.verifiedUser') }}"><i
+                                        class="green">Verified alumni
+                                    </i></a> on the portal</span>
                         </div>
                     </div>
                 </div>
@@ -86,8 +87,9 @@
                         <div class=" tile_stats_count">
                             <span class="count_top"><i class="fa fa-user-times green"></i> Not-verified alumni</span>
                             <div class="count green">{{ $NotVerifiedUsers }}</div>
-                            <span class="count_bottom"><i class="green">Not-verified alumni
-                                </i> on the portal</span>
+                            <span class="count_bottom"><a href="{{ route('admin.NotVerifiedUser') }}"><i
+                                        class="green">Not-verified alumni
+                                    </i></a> on the portal</span>
                         </div>
                     </div>
                 </div>

@@ -95,6 +95,30 @@ class AdminController extends Controller
         return view('admin-user-manage.all-user', compact('allusers'));
     }
 
+    public function mpUsers()
+    {
+        $allusers = DB::table('users')
+            ->where('state', 'Madhya Pradesh')
+            ->orderBy('created_at', 'desc')->get();
+        return view('admin-user-manage.all-user', compact('allusers'));
+    }
+
+    public function verifiedUser()
+    {
+        $allusers = DB::table('users')
+            ->where('status', 1)
+            ->orderBy('created_at', 'desc')->get();
+        return view('admin-user-manage.all-user', compact('allusers'));
+    }
+
+    public function NotVerifiedUser()
+    {
+        $allusers = DB::table('users')
+            ->where('status', 0)
+            ->orderBy('created_at', 'desc')->get();
+        return view('admin-user-manage.all-user', compact('allusers'));
+    }
+
     public function otherStateUser()
     {
         $allusers = DB::table('users')
@@ -102,7 +126,7 @@ class AdminController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('admin-user-manage.other-state-user', compact('allusers'));
+        return view('admin-user-manage.all-user', compact('allusers'));
     }
 
     public function jnvWiseUser($jnv_name)

@@ -43,7 +43,7 @@
                                         <tbody>
                                             @if ($allorganizer->isEmpty())
                                                 <tr>
-                                                    <td colspan="8" class="text-center">No organizer available</td>
+                                                    <td colspan="8" class="text-center">No volunteer available</td>
 
                                                 </tr>
                                             @else
