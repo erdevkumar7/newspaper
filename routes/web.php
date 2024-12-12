@@ -79,7 +79,7 @@ Route::prefix('admin')->group(function () {
 
 
 
-    // Admin Organizer Functionality
+    // Admin Volunteer Functionality
     Route::middleware('admin')->group(function () {
         Route::get('/all-volunteer', [OrganizerController::class, 'allOrganizer'])->name('admin.allOrganizer');
         Route::get('/volunteer/{org_id}/view', [OrganizerController::class, 'viewOrganizer'])->name('admin.viewOrganizer');
@@ -93,25 +93,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/volunteer/update-status', [OrganizerController::class, 'updateOrganizerStatus'])->name('admin.updateOrganizerStatus');
         Route::delete('/delete-organizer', [OrganizerController::class, 'deleteOrganizer'])->name('admin.deleteOrganizer');
     });
-
-    // Admin Newspaper Functionality
-    Route::middleware('admin')->group(function () {
-        Route::get('/all-newspaper', [AdminNewspaperController::class, 'allNewsPaper'])->name('admin.allnewspaper');
-        Route::get('/newspaper/{paper_id}/view', [AdminNewspaperController::class, 'viewNewsPaper'])->name('admin.viewnewspaper');
-        Route::get('/add-newspaper', [AdminNewspaperController::class, 'addNewsPaper'])->name('admin.addnewspaper');
-        Route::post('/add-newspaper', [AdminNewspaperController::class, 'addNewsPaperSubmit'])->name('admin.addnewspapersubmit');
-
-
-        Route::get('/newspaper/{paper_id}/edit-paper', [AdminNewspaperController::class, 'editNewsPaper'])->name('admin.editnewspaper');
-
-        Route::put('/newspaper/{paper_id}/edit-paper', [AdminNewspaperController::class, 'editNewsPaperSubmit'])->name('admin.editNewsPaperSubmit');
-
-
-
-        Route::delete('/delete-newspaper', [AdminNewspaperController::class, 'deleteNeswPaper'])->name('admin.deleteNeswPaper');
-
-        Route::get('/newspaper/{paper_id}/download', [AdminNewspaperController::class, 'downloadPDF'])->name('admin.newspaper.download');
-    });
+ 
 
     // page(content) management functionality
     Route::middleware('admin')->group(function () {
