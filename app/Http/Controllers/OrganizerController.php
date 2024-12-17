@@ -25,31 +25,19 @@ use Illuminate\Support\Facades\File;
 
 
 class OrganizerController extends Controller
-
 {
-
     public function organizerHome()
-
     {
-
         return view('organizer.home');
-
     }
 
     public function organizerRegForm()
-
     {
-
         return view('organizer.register');
-
     }
 
-
-
     public function organizerRegisterSubmit(Request $request)
-
     {
-
         $validatedData = $request->validate([
 
             'first_name' => [
@@ -108,7 +96,6 @@ class OrganizerController extends Controller
 
         ]);
 
-
         try {
             // Hash the password and add it to the validated data
             $validatedData['original_password'] = $validatedData['password'];
@@ -117,121 +104,48 @@ class OrganizerController extends Controller
             $organizer = Organizer::create($validatedData);
 
             return redirect()->route('organizer.login')->with('success', 'Your Registration Successful!');
-
         } catch (\Exception $e) {
-
             return redirect()->back()->with('error', 'Failed to create alumni: ' . $e->getMessage());
-
         }
-
     }
 
 
 
     public function showLoginForm()
-
     {
-
         return view('organizer.login');
-
     }
 
 
-
-    // public function loginSubmit(Request $request)
-
-    // {
-
-    //     $request->validate([
-
-    //         'email' => 'required|email',
-
-    //         'password' => 'required|min:6',
-
-    //     ]);
-
-
-
-    //     $credentials = $request->only('email', 'password');
-
-
-
-    //     if (Auth::guard('organizer')->attempt($credentials)) {
-
-    //         return redirect()->route('organizer.dashboard')->with('success', 'Logged in successfully!');
-
-    //     }
-
-
-
-    //     return back()->withErrors([
-
-    //         'email' => 'Invalid email or password.',
-
-    //     ]);
-
-    // }
-
-
-
     public function loginSubmit(Request $request)
-
     {
-
         $request->validate([
-
             'email' => 'required|email',
-
             'password' => 'required|min:6',
-
         ]);
-
-
 
         $credentials = $request->only('email', 'password');
-
         $organizer = Organizer::where('email', $credentials['email'])->first();
 
-
-
         if (!$organizer) {
-
             return back()->withErrors([
-
                 'email' => 'Invalid email or password.',
-
             ]);
-
         }
-
-
 
         if ($organizer->status == 0) {
-
             return back()->withErrors([
-
                 'email' => 'Your account is not verified. Please contact the admin.',
-
             ]);
-
         }
-
-
 
         if (Auth::guard('organizer')->attempt($credentials)) {
-
             return redirect()->route('organizer.QrScan')->with('success', 'Logged in successfully!');
-
         }
 
-
-
         return back()->withErrors([
-
             'email' => 'Invalid email or password.',
-
         ]);
-
     }
 
 
@@ -239,49 +153,29 @@ class OrganizerController extends Controller
 
 
     public function dashboard()
-
     {
-
         $organizer = Organizer::find(Auth::guard('organizer')->user()->id);
-
         if (!$organizer) {
-
             return redirect()->back()->with('error', 'No Organizer Found!');
-
         }
-
         return view('organizer.dashboard', compact('organizer'));
-
     }
 
-
-
     public function QrScan()
-
     {
-
         $organizer = Organizer::find(Auth::guard('organizer')->user()->id);
-
         if (!$organizer) {
-
             return redirect()->back()->with('error', 'No Organizer Found!');
-
         }
-
         return view('organizer.qr-scan', compact('organizer'));
-
     }
 
 
 
     public function logout()
-
     {
-
         Auth::guard('organizer')->logout();
-
         return redirect()->route('organizer.login')->with('success', 'Logged out successfully!');
-
     }
 
 
@@ -293,7 +187,6 @@ class OrganizerController extends Controller
         $allorganizer = DB::table('organizers')->orderBy('created_at', 'desc')->get();
 
         return view('admin-organizer-manage.all-organizer', compact('allorganizer'));
-
     }
 
 
@@ -307,11 +200,9 @@ class OrganizerController extends Controller
         if (!$organizer) {
 
             return redirect()->back()->with('error', 'No Organizer Found!');
-
         }
 
         return view('admin-organizer-manage.view-organizer', compact('organizer'));
-
     }
 
 
@@ -339,11 +230,9 @@ class OrganizerController extends Controller
 
 
             return response()->json(['success' => true, 'message' => 'Status updated successfully!']);
-
         }
 
         return response()->json(['success' => false, 'message' => 'User not found!']);
-
     }
 
 
@@ -365,13 +254,11 @@ class OrganizerController extends Controller
             $user->delete();
 
             return response()->json(['success' => true, 'message' => 'Organizer deleted successfully.']);
-
         }
 
 
 
         return response()->json(['success' => false, 'message' => 'Organizer not found.']);
-
     }
 
 
@@ -379,21 +266,34 @@ class OrganizerController extends Controller
 
 
     public function showUserProfile($user_id)
-
     {
-
         $user = User::find($user_id);
-
         if (!$user) {
-
             return redirect()->back()->with('error', 'No Allumni Found!');
-
         }
-
         return view('organizer.view-user', compact('user'));
-
     }
 
+    public function userByPhoneNumber(Request $request)
+    {
+        $request->validate([
+            'phone_number' => [
+                'required',
+                'regex:/^(?!.*(\d)\1{5})[6-9]\d{9}$/',
+            ],
+        ], [
+            'phone_number.regex' => 'Mobile number must be a valid number.',
+        ]);
+        $phone_number = $request->input('phone_number');
+        $user = User::where('phone_number', $phone_number)->first();
+
+        if (!$user) {
+            return back()->withErrors([
+                'phone_number' => 'Record Not Found from this Mobile Number!',
+            ]);
+        }
+        return view('organizer.view-user', compact('user'));
+    }
 
 
     public function showEditUser($user_id)
@@ -405,7 +305,6 @@ class OrganizerController extends Controller
         if (!$user) {
 
             return redirect()->back()->with('error', 'No Allumni Found!');
-
         }
 
         $jsonPath = public_path('jnv_schools.json');
@@ -413,7 +312,6 @@ class OrganizerController extends Controller
         $jnvSchools = json_decode(File::get($jsonPath), true);
 
         return view('organizer.edit-user', compact('user', 'jnvSchools'));
-
     }
 
 
@@ -427,7 +325,6 @@ class OrganizerController extends Controller
         if (!$user) {
 
             return redirect()->back()->with('error', 'No Allumni Found!');
-
         }
 
 
@@ -517,15 +414,12 @@ class OrganizerController extends Controller
 
 
             return redirect()->route('organizer.showUserProfile', $user->id)->with('success', 'Alumni updated successfully!');
-
         } catch (\Exception $e) {
 
             // Handle errors during update
 
             return redirect()->back()->with('error', 'Failed to update Alumni: ' . $e->getMessage());
-
         }
-
     }
 
 
@@ -553,11 +447,9 @@ class OrganizerController extends Controller
 
 
             return response()->json(['success' => true, 'message' => 'Status updated successfully!']);
-
         }
 
         return response()->json(['success' => false, 'message' => 'User not found!']);
-
     }
 
 
@@ -567,7 +459,6 @@ class OrganizerController extends Controller
     {
 
         return view('admin-organizer-manage.add-organizer');
-
     }
 
 
@@ -651,13 +542,10 @@ class OrganizerController extends Controller
 
 
             return redirect()->route('admin.allOrganizer')->with('success', 'Organizer added Successful!');
-
         } catch (\Exception $e) {
 
             return redirect()->back()->with('error', 'Failed to create alumni: ' . $e->getMessage());
-
         }
-
     }
 
 
@@ -671,11 +559,9 @@ class OrganizerController extends Controller
         if (!$organizer) {
 
             return redirect()->back()->with('error', 'No Organizer Found!');
-
         }
 
         return view('admin-organizer-manage.edit-organizer', compact('organizer'));
-
     }
 
 
@@ -689,7 +575,6 @@ class OrganizerController extends Controller
         if (!$organizer) {
 
             return redirect()->back()->with('error', 'No Organizer Found!');
-
         }
 
 
@@ -775,13 +660,10 @@ class OrganizerController extends Controller
             $organizer->update($validatedData);
 
             return redirect()->route('admin.allOrganizer')->with('success', 'organizer Update Successful!');
-
         } catch (\Exception $e) {
 
             return redirect()->back()->with('error', 'Failed to update organizer: ' . $e->getMessage());
-
         }
-
     }
 
     //Organizer APIs --------------------------------------------------------------------------------
@@ -815,7 +697,6 @@ class OrganizerController extends Controller
                 'message' => 'Invalid email or password.',
 
             ], 401);
-
         }
 
 
@@ -829,7 +710,6 @@ class OrganizerController extends Controller
                 'message' => 'Your account is not verified. Please contact the admin.',
 
             ], 403);
-
         }
 
 
@@ -855,7 +735,6 @@ class OrganizerController extends Controller
                 ],
 
             ]);
-
         }
 
 
@@ -867,7 +746,6 @@ class OrganizerController extends Controller
             'message' => 'Invalid email or password.',
 
         ], 401);
-
     }
 
 
@@ -891,13 +769,11 @@ class OrganizerController extends Controller
         $user = User::when($request->filled('id'), function ($query) use ($request) {
 
             return $query->where('id', $request->id);
-
         })
 
             ->when($request->filled('phone_number'), function ($query) use ($request) {
 
                 return $query->orWhere('phone_number', $request->phone_number);
-
             })
 
             ->first();
@@ -915,7 +791,6 @@ class OrganizerController extends Controller
                 'message' => 'User not found',
 
             ], 404);
-
         }
 
 
@@ -931,7 +806,6 @@ class OrganizerController extends Controller
             'data' => $user,
 
         ], 200);
-
     }
 
 
@@ -954,13 +828,13 @@ class OrganizerController extends Controller
 
         ]);
 
-    
 
-        try {           
+
+        try {
 
             $user = User::find($validatedData['id']);
 
-          
+
 
             if (!$user) {
 
@@ -971,16 +845,15 @@ class OrganizerController extends Controller
                     'message' => 'User not found',
 
                 ], 404);
-
             }
 
-    
+
 
             $user->status = $validatedData['status'];
 
             $user->save();
 
-    
+
 
             return response()->json([
 
@@ -997,7 +870,6 @@ class OrganizerController extends Controller
                 ],
 
             ], 200);
-
         } catch (\Exception $e) {
 
             return response()->json([
@@ -1009,9 +881,7 @@ class OrganizerController extends Controller
                 'error' => $e->getMessage(),
 
             ], 500);
-
         }
-
     }
 
 
@@ -1022,7 +892,6 @@ class OrganizerController extends Controller
 
     // }
 
-    
+
 
 }
-

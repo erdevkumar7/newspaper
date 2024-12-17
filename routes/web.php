@@ -77,8 +77,6 @@ Route::prefix('admin')->group(function () {
         Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
     });
 
-
-
     // Admin Volunteer Functionality
     Route::middleware('admin')->group(function () {
         Route::get('/all-volunteer', [OrganizerController::class, 'allOrganizer'])->name('admin.allOrganizer');
@@ -97,45 +95,26 @@ Route::prefix('admin')->group(function () {
 
     // page(content) management functionality
     Route::middleware('admin')->group(function () {
-
         Route::get('/all-page', [AdminPageController::class, 'allPage'])->name('admin.allpage');
-
         Route::get('/page/{page_id}/view', [AdminPageController::class, 'viewPage'])->name('admin.viewpage');
 
-
-
         Route::get('/add-page', [AdminPageController::class, 'addPage'])->name('admin.addpage');
-
         Route::post('/add-page', [AdminPageController::class, 'addPageSubmit'])->name('admin.addPageSubmit');
 
-
-
         Route::get('/page/{page_id}/edit-page', [AdminPageController::class, 'editPage'])->name('admin.editpage');
-
         Route::post('/page/{page_id}/edit-page', [AdminPageController::class, 'updatePage'])->name('admin.updatepagesubmit');
 
-
-
         Route::get('/add-banner', [AdminPageController::class, 'AddBanner'])->name('admin.addBanner');
-
         Route::post('/add-banner', [AdminPageController::class, 'AddBannerSubmit'])->name('admin.AddBannerSubmit');
 
         Route::delete('/delete/{banner_id}/banner', [AdminPageController::class, 'DeleteBanner'])->name('admin.DeleteBanner');
 
-
-
         Route::post('/page/update-status', [AdminPageController::class, 'updatePageStatus'])->name('admin.updatepagestatus');
 
-
-
         Route::get('/all-page-setting', [AdminPageController::class, 'allPageSetting'])->name('admin.allPageSetting');
-
         Route::put('/all-page-setting', [AdminPageController::class, 'upadteAllPageSetting'])->name('admin.upadteAllPageSetting');
 
-
-
         Route::get('/add-page-setting', [AdminPageController::class, 'addPageSetting'])->name('admin.addPageSetting');
-
         Route::post('/add-page-setting', [AdminPageController::class, 'addPageSettingSubmit'])->name('admin.addPageSettingSubmit');
     });
 });
@@ -156,6 +135,7 @@ Route::prefix('volunteer')->group(function(){
 
         Route::post('/update-status', [AdminController::class, 'updateUserStatus'])->name('organizer.updateuserstatus');
         Route::get('/qr-scan', [OrganizerController::class, 'QrScan'])->name('organizer.QrScan');
+        Route::get('/user-by-phonenumber', [OrganizerController::class, 'userByPhoneNumber'])->name('organizer.userByPhoneNumber');
         Route::post('/logout', [OrganizerController::class, 'logout'])->name('organizer.logout');
     });
 });
