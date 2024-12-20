@@ -116,19 +116,46 @@
 
         <div class="row mp-jnvs">
             <div class="col-md-12 col-sm-12 m-2">
-                <h2>Madhya Pradesh JNV-wise Registration Statistics :-</h2>
+                <h2 style="color: #17a2b8; font-size:1.5em">Madhya Pradesh JNV-wise Registration Statistics :-</h2>
             </div>
             @foreach ($districtStats as $stat)
                 <div class="col-md-3 col-sm-3 jnv-sec">
                     <div class="x_panel">
                         <div class="x_title">
-                            <a href="{{ route('admin.jnvWiseUser', $stat->district) }}">
+                            <a href="{{ route('admin.jnvWiseUser', [$stat->district, 'all']) }}">
                                 <h2>{{ $stat->district }} - {{ $stat->user_count }}</h2>
                             </a>
                         </div>
                     </div>
                 </div>
             @endforeach
+        </div>
+
+        <div class="row mp-jnvs">
+            <div class="col-md-12 col-sm-12 m-2">
+                <h2 style="color: #17a2b8; font-size:1.5em">District-wise Verified Registration Statistics:-</h2>
+            </div>
+            @if ($districtVerifiedUserCount->isEmpty())
+                <div class="col-md-12 col-sm-12 jnv-sec">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <p class="text-center">Verified Alumni Not Found</p>
+                        </div>
+                    </div>
+                </div>
+            @else
+                @foreach ($districtVerifiedUserCount as $stat)
+                    <div class="col-md-3 col-sm-3 jnv-sec">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <a href="{{ route('admin.jnvWiseUser', [$stat->district, 1]) }}">
+                                    <h2>{{ $stat->district }} - {{ $stat->verified_user_count }}</h2>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
         </div>
     </div>
     <!-- /page content -->

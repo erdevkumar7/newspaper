@@ -78,6 +78,13 @@ class AdminController extends Controller
             ->orderBy('user_count', 'desc')
             ->get();
 
+        $districtVerifiedUserCount = User::select('district', DB::raw('COUNT(*) as verified_user_count'))
+            ->where('state', $state)
+            ->where('status', 1)
+            ->groupBy('district')
+            ->orderBy('verified_user_count', 'desc')
+            ->get();
+
         // Total users in Madhya Pradesh
         $totalMPUsers = User::where('state', $state)->count();
         // Total users in all districts other than Madhya Pradesh
@@ -86,7 +93,7 @@ class AdminController extends Controller
         $verifiedUsers = User::where('status', 1)->count();
         // Not-verified users
         $NotVerifiedUsers = User::where('status', 0)->count();
-        return view('admin.dashboard', compact('totalUsers', 'totalOrgamizers', 'districtStats', 'totalMPUsers', 'totalOthertUsers', 'verifiedUsers', 'NotVerifiedUsers'));
+        return view('admin.dashboard', compact('totalUsers', 'totalOrgamizers', 'districtStats', 'districtVerifiedUserCount', 'totalMPUsers', 'totalOthertUsers', 'verifiedUsers', 'NotVerifiedUsers'));
     }
 
     public function allUser()
@@ -129,12 +136,20 @@ class AdminController extends Controller
         return view('admin-user-manage.all-user', compact('allusers'));
     }
 
-    public function jnvWiseUser($jnv_name)
+    public function jnvWiseUser($jnv_name, $status)
     {
-        $allusers = DB::table('users')
-            ->where('district', $jnv_name)
-            ->orderBy('created_at', 'desc')
-            ->get();
+        if ($status === 'all') {
+            $allusers = DB::table('users')
+                ->where('district', $jnv_name)
+                ->orderBy('created_at', 'desc')
+                ->get();
+        } else {
+            $allusers = DB::table('users')
+                ->where('district', $jnv_name)
+                ->where('status', $status)
+                ->orderBy('created_at', 'desc')
+                ->get();
+        }
 
         return view('admin-user-manage.jnv-wise-user', compact('allusers', 'jnv_name'));
     }

@@ -63,7 +63,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/other-state-user', [AdminController::class, 'otherStateUser'])->name('admin.otherStateUser');
         Route::get('/verified-user', [AdminController::class, 'verifiedUser'])->name('admin.verifiedUser');
         Route::get('/not-verified-user', [AdminController::class, 'NotVerifiedUser'])->name('admin.NotVerifiedUser');
-        Route::get('/all/{jnv_name}/user', [AdminController::class, 'jnvWiseUser'])->name('admin.jnvWiseUser');
+        Route::get('/{jnv_name}/user/{status}', [AdminController::class, 'jnvWiseUser'])->name('admin.jnvWiseUser');
         
         Route::get('/add-user', [AdminController::class, 'adduser'])->name('admin.adduser');
         Route::post('/add-user', [AdminController::class, 'adduserSubmit'])->name('admin.adduserSubmit');
